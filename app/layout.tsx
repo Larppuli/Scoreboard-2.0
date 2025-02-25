@@ -1,19 +1,17 @@
 import '@mantine/core/styles.css';
-
 import React from 'react';
-import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core';
-import { theme } from '../theme';
+import { mantineHtmlProps, MantineProvider } from '@mantine/core';
+import AppShellWrapper from '@/components/AppShellWrapper/AppShellWrapper';
 
 export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+  title: 'Poikainscore 2.0',
+  description: 'PWA to keep track of scores',
 };
 
 export default function RootLayout({ children }: { children: any }) {
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
-        <ColorSchemeScript />
         <link rel="shortcut icon" href="/favicon.svg" />
         <meta
           name="viewport"
@@ -21,7 +19,9 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider>
+          <AppShellWrapper>{children}</AppShellWrapper>
+        </MantineProvider>
       </body>
     </html>
   );
