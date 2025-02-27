@@ -11,12 +11,15 @@ function Header() {
     '/': 'Stats',
     '/new-game': 'New game',
     '/games': 'Games',
+    '/login': 'Login',
+    '/signup' : 'Sign up',
+    '/profile': 'Profile',
   }
 
   return (
     <AppShell.Header bg="#08141c" style={{ borderBottom: '1px solid #081c2c' }}>
       <Group h="100%" px="md" justify="center">
-        <Title order={3} c="white">
+        <Title order={4} c="white">
           {pageNames[pathname]}
         </Title>
       </Group>
