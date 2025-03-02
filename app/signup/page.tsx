@@ -4,6 +4,8 @@ import { useRef, useState } from 'react';
 import { Button, Container, Fieldset, PasswordInput, Stack, Text, TextInput } from '@mantine/core';
 import Link from 'next/link';
 import { IconAt, IconLock, IconUser, IconUserPlus } from '@tabler/icons-react';
+import { useAppContext } from '@/app/lib/AppContext';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const [isFormValid, setIsFormValid] = useState(false);
@@ -11,6 +13,9 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const { refetchUser } = useAppContext();
+
+  const router = useRouter();
 
   const handleFormChange = () => {
     setIsFormValid(formRef.current?.checkValidity() ?? false);
@@ -54,6 +59,8 @@ export default function Page() {
       }
 
       console.log('User created successfully');
+      router.push('/profile');
+      refetchUser();
     } catch (error) {
       setSubmitError('An error occurred. Please try again.');
     } finally {

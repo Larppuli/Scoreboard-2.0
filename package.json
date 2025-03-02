@@ -21,15 +21,18 @@
   },
   "dependencies": {
     "@mantine/core": "7.17.0",
+    "@mantine/dropzone": "^7.17.0",
     "@mantine/hooks": "7.17.0",
     "@next/bundle-analyzer": "^15.1.5",
     "@tabler/icons-react": "^3.28.1",
     "@types/mongodb": "^4.0.7",
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.5.1",
     "jose": "^6.0.7",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.1",
     "next": "15.1.5",
+    "next-cloudinary": "^6.16.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "zod": "^3.24.2"

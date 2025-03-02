@@ -7,6 +7,7 @@ export async function POST(request: NextRequest) {
     const response = await signup({}, formData);
 
     if (response.errors) {
+      console.log(response.errors);
       return NextResponse.json({ errors: response.errors }, { status: 400 });
     }
 
