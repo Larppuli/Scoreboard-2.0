@@ -5,13 +5,14 @@ import { Button, Container, Fieldset, PasswordInput, Stack, Text, TextInput, Not
 import { IconLock, IconLogin2, IconUser, IconX } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
+import { useAppContext } from '@/app/lib/AppContext';
 
 export default function Page() {
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { refetchUser } = useAppContext();
 
   const xIcon = <IconX size={20} />;
 
@@ -37,6 +38,7 @@ export default function Page() {
       const data = await response.json();
   
       router.push('/profile');
+      refetchUser();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

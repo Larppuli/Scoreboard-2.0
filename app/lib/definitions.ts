@@ -42,3 +42,25 @@ export type LoginFormState =
       message?: string;
     }
   | undefined;
+
+export interface User {
+  _id: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface ImageUploadProps {
+  setSelectedImage: (image: string) => void;
+  setLoading: (loading: boolean) => void;
+}
+
+export interface AppContextType {
+  user: User | null;
+  loading: boolean;
+  setUser: (user: User | null) => void;
+  clearContext: () => void;
+  refetchUser: () => void;
+}

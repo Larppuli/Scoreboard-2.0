@@ -2,13 +2,14 @@ import '@mantine/core/styles.css';
 import React from 'react';
 import { mantineHtmlProps, MantineProvider } from '@mantine/core';
 import AppShellWrapper from '@/components/AppShellWrapper/AppShellWrapper';
+import { AppProvider } from '@/app/lib/AppContext';
 
 export const metadata = {
   title: 'Poikainscore 2.0',
   description: 'PWA to keep track of scores',
 };
 
-export default function RootLayout({ children }: { children: any }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
@@ -20,7 +21,9 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <MantineProvider>
-          <AppShellWrapper>{children}</AppShellWrapper>
+          <AppProvider>
+            <AppShellWrapper>{children}</AppShellWrapper>
+          </AppProvider>
         </MantineProvider>
       </body>
     </html>
