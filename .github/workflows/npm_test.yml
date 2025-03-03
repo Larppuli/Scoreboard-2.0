@@ -20,11 +20,21 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
           cache-dependency-path: '**/yarn.lock'
+
       - name: Install dependencies
         run: yarn
+
+      - name: Debug Environment Variables
+        run: echo "MONGODB_URI is set"
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
       - name: Run build
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: npm run build
+
       - name: Run tests
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: npm test
