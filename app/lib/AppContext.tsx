@@ -39,6 +39,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const users = await response.json();
 
         const userArray = users.map((user: User) => ({
+          _id: user._id,
           userName: user.userName,
           firstName: user.firstName,
           lastName: user.lastName,
