@@ -1,6 +1,6 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient, ObjectId } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || "";
+const uri = process.env.MONGODB_URI || '';
 const client = new MongoClient(uri);
 let isConnected = false;
 
@@ -9,15 +9,12 @@ export async function connectDB() {
     await client.connect();
     isConnected = true;
   }
-  return client.db("Poikainscore");
+  return client.db('Poikainscore');
 }
 
-export async function findUserByEmailOrUsername(
-  email: string,
-  userName: string
-) {
+export async function findUserByEmailOrUsername(email: string, userName: string) {
   const db = await connectDB();
-  return db.collection("users").findOne({ $or: [{ email }, { userName }] });
+  return db.collection('users').findOne({ $or: [{ email }, { userName }] });
 }
 
 export async function createUser(userData: {
@@ -28,18 +25,14 @@ export async function createUser(userData: {
   password: string;
 }) {
   const db = await connectDB();
-  const result = await db.collection("users").insertOne(userData);
+  const result = await db.collection('users').insertOne(userData);
   return { ...userData, _id: result.insertedId };
 }
 
-export async function updateUserAttribute(
-  userId: string,
-  attribute: string,
-  value: any
-) {
+export async function updateUserAttribute(userId: string, attribute: string, value: any) {
   const db = await connectDB();
   const result = await db
-    .collection("users")
+    .collection('users')
     .updateOne({ _id: new ObjectId(userId) }, { $set: { [attribute]: value } });
 
   return result.modifiedCount > 0;

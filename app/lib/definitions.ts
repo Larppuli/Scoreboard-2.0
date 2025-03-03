@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { JWTPayload } from "jose";
+import { JWTPayload } from 'jose';
+import { z } from 'zod';
 
 // Session Payload for JWT
 export interface SessionPayload extends JWTPayload {
@@ -9,14 +9,12 @@ export interface SessionPayload extends JWTPayload {
 
 // Signup Form Schema
 export const SignupFormSchema = z.object({
-  userName: z.string().min(1, "Username is required"),
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
-  confirmPassword: z
-    .string()
-    .min(6, "Confirm password must be at least 6 characters long"),
+  userName: z.string().min(1, 'Username is required'),
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters long'),
+  confirmPassword: z.string().min(6, 'Confirm password must be at least 6 characters long'),
 });
 
 // Signup Form State

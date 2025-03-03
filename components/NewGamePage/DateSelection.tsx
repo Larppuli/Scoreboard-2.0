@@ -1,16 +1,13 @@
-import { DateSelectProps } from "@/app/lib/definitions";
-import { DateInput } from "@mantine/dates";
-import { IconCalendar } from "@tabler/icons-react";
+import { IconCalendar } from '@tabler/icons-react';
+import { DateInput } from '@mantine/dates';
+import { DateSelectProps } from '@/app/lib/definitions';
 
-export default function DateSelection({
-  selectedDate,
-  handleDateChange,
-}: DateSelectProps) {
+export default function DateSelection({ selectedDate, handleDateChange }: DateSelectProps) {
   const icon = <IconCalendar size={20} />;
 
   return (
     <DateInput
-      w={"100%"}
+      w={'100%'}
       leftSection={icon}
       value={selectedDate}
       onChange={(value) => value && handleDateChange(value)}
@@ -20,13 +17,13 @@ export default function DateSelection({
       onFocus={(e) => e.target.blur()}
       styles={{
         input: {
-          backgroundColor: "#1e1e2e",
-          color: "#ffffff",
-          fontSize: "16px",
-          textAlign: "center",
-          border: "1px solid #363636",
-          borderRadius: "5px",
-          height: "50px",
+          backgroundColor: '#1e1e2e',
+          color: '#ffffff',
+          fontSize: '16px',
+          textAlign: 'center',
+          border: '1px solid #363636',
+          borderRadius: '5px',
+          height: '50px',
         },
       }}
     />

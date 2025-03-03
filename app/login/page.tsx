@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { IconLock, IconLogin2, IconUser, IconX } from '@tabler/icons-react';
 import {
   Button,
   Container,
   Fieldset,
+  Notification,
   PasswordInput,
   Stack,
   Text,
   TextInput,
-  Notification,
-} from "@mantine/core";
-import { IconLock, IconLogin2, IconUser, IconX } from "@tabler/icons-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useAppContext } from "@/app/lib/AppContext";
+} from '@mantine/core';
+import { useAppContext } from '@/app/lib/AppContext';
 
 export default function Page() {
-  const [emailOrUsername, setEmailOrUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailOrUsername, setEmailOrUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { refetchUser } = useAppContext();
@@ -33,23 +33,23 @@ export default function Page() {
     setError(null);
 
     try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ emailOrUsername, password }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.errors?.error || "Login failed");
+        throw new Error(errorData.errors?.error || 'Login failed');
       }
 
       const data = await response.json();
 
-      router.push("/profile");
+      router.push('/profile');
       refetchUser();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
@@ -70,13 +70,7 @@ export default function Page() {
     <Container size="xs" px="md" py="xl">
       <Stack align="stretch">
         <Stack>
-          <Fieldset
-            radius="md"
-            pt="md"
-            bg="#252525"
-            bd="1px solid #333"
-            disabled={loading}
-          >
+          <Fieldset radius="md" pt="md" bg="#252525" bd="1px solid #333" disabled={loading}>
             <form onSubmit={handleSubmit}>
               <Stack gap="lg">
                 <TextInput
@@ -119,14 +113,12 @@ export default function Page() {
                   my="xs"
                   radius="md"
                   loading={loading}
-                  loaderProps={{ type: "dots" }}
+                  loaderProps={{ type: 'dots' }}
                   disabled={!password || !emailOrUsername}
                   style={{
                     backgroundColor:
-                      !password || !emailOrUsername
-                        ? "rgba(128, 128, 128, 0.1)"
-                        : "#3493d3",
-                    color: !password || !emailOrUsername ? "" : "#363636",
+                      !password || !emailOrUsername ? 'rgba(128, 128, 128, 0.1)' : '#3493d3',
+                    color: !password || !emailOrUsername ? '' : '#363636',
                   }}
                 >
                   Login
@@ -138,18 +130,11 @@ export default function Page() {
             <Text size="md" c="#f0f0f0">
               No account yet? <br />
               <Link href="/signup">
-                <span style={{ color: "#0070f3", textDecoration: "underline" }}>
-                  Sign up
-                </span>
+                <span style={{ color: '#0070f3', textDecoration: 'underline' }}>Sign up</span>
               </Link>
             </Text>
             {error && (
-              <Notification
-                icon={xIcon}
-                color="red"
-                title="Oh dear!"
-                withCloseButton={false}
-              >
+              <Notification icon={xIcon} color="red" title="Oh dear!" withCloseButton={false}>
                 {error}
               </Notification>
             )}

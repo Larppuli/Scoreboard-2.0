@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React from "react";
-import { AppShell } from "@mantine/core";
-import Header from "./Header";
-import BottomNavigation from "./BottomNavigation";
+import React from 'react';
+import { AppShell } from '@mantine/core';
+import BottomNavigation from './BottomNavigation';
+import Header from './Header';
 
 function AppShellWrapper({ children }: { children: any }) {
   return (
