@@ -1,5 +1,5 @@
-import type { MetadataRoute } from 'next'
- 
+import type { MetadataRoute } from "next";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Poikainscore 2.0",
@@ -10,5 +10,5 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "portrait",
     scope: "/",
     start_url: "/",
-  }
+  };
 }

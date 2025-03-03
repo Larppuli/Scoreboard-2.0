@@ -1,16 +1,20 @@
-import '@mantine/core/styles.css';
-import React from 'react';
-import { mantineHtmlProps, MantineProvider } from '@mantine/core';
-import AppShellWrapper from '@/components/AppShellWrapper/AppShellWrapper';
-import { AppProvider } from '@/app/lib/AppContext';
-import '@mantine/dates/styles.css';
+import "@mantine/core/styles.css";
+import React from "react";
+import { mantineHtmlProps, MantineProvider } from "@mantine/core";
+import AppShellWrapper from "@/components/AppShellWrapper/AppShellWrapper";
+import { AppProvider } from "@/app/lib/AppContext";
+import "@mantine/dates/styles.css";
 
 export const metadata = {
-  title: 'Poikainscore 2.0',
-  description: 'PWA to keep track of scores',
+  title: "Poikainscore 2.0",
+  description: "PWA to keep track of scores",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>

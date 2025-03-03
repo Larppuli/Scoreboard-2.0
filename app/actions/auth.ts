@@ -1,7 +1,11 @@
-import { createSession, deleteSession } from '@/app/lib/session';
-import { SignupFormSchema, SignupFormState, LoginFormState } from '@/app/lib/definitions';
-import { findUserByEmailOrUsername, createUser } from '@/app/lib/db';
-import bcrypt from 'bcryptjs';
+import { createSession, deleteSession } from "@/app/lib/session";
+import {
+  SignupFormSchema,
+  SignupFormState,
+  LoginFormState,
+} from "@/app/lib/definitions";
+import { findUserByEmailOrUsername, createUser } from "@/app/lib/db";
+import bcrypt from "bcryptjs";
 
 export async function signup(state: SignupFormState, formData: any) {
   // Validate form fields
@@ -18,18 +22,19 @@ export async function signup(state: SignupFormState, formData: any) {
     return { errors: validatedFields.error.flatten().fieldErrors };
   }
 
-  const { userName, firstName, lastName, email, password, confirmPassword } = validatedFields.data;
+  const { userName, firstName, lastName, email, password, confirmPassword } =
+    validatedFields.data;
 
   // Check if passwords match
   if (password !== confirmPassword) {
-    return { errors: { confirmPassword: 'Passwords do not match' } };
+    return { errors: { confirmPassword: "Passwords do not match" } };
   }
 
   try {
     // Check if user already exists
     const existingUser = await findUserByEmailOrUsername(email, userName);
     if (existingUser) {
-      return { errors: { email: 'Email or username already in use' } };
+      return { errors: { email: "Email or username already in use" } };
     }
 
     // Hash the password
@@ -49,36 +54,39 @@ export async function signup(state: SignupFormState, formData: any) {
 
     return { success: true };
   } catch (error) {
-    console.error('Signup error:', error);
-    return { errors: { general: 'Something went wrong, please try again.' } };
+    console.error("Signup error:", error);
+    return { errors: { general: "Something went wrong, please try again." } };
   }
 }
 
 export async function login(state: LoginFormState, formData: any) {
-    const { emailOrUsername, password } = formData;
-  
-    try {
-      // Find the user by email or username
-      const user = await findUserByEmailOrUsername(emailOrUsername, emailOrUsername);
-      // If no user is found, return an error
-      if (!user) {
-        return { errors: { error: 'Invalid email or username' } };
-      }
-  
-      // Verify the password
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        return { errors: { error: 'Incorrect password' } };
-      }
-  
-      // Create a session for the authenticated user
-      await createSession(user._id.toString());
-  
-      return { success: true };
-    } catch (error) {
-      console.error('Login error:', error);
-      return { errors: { general: 'Something went wrong, please try again.' } };
+  const { emailOrUsername, password } = formData;
+
+  try {
+    // Find the user by email or username
+    const user = await findUserByEmailOrUsername(
+      emailOrUsername,
+      emailOrUsername
+    );
+    // If no user is found, return an error
+    if (!user) {
+      return { errors: { error: "Invalid email or username" } };
     }
+
+    // Verify the password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return { errors: { error: "Incorrect password" } };
+    }
+
+    // Create a session for the authenticated user
+    await createSession(user._id.toString());
+
+    return { success: true };
+  } catch (error) {
+    console.error("Login error:", error);
+    return { errors: { general: "Something went wrong, please try again." } };
+  }
 }
 
 export async function logout() {

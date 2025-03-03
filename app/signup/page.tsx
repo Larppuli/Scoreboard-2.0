@@ -1,11 +1,19 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { Button, Container, Fieldset, PasswordInput, Stack, Text, TextInput } from '@mantine/core';
-import Link from 'next/link';
-import { IconAt, IconLock, IconUser, IconUserPlus } from '@tabler/icons-react';
-import { useAppContext } from '@/app/lib/AppContext';
-import { useRouter } from 'next/navigation';
+import { useRef, useState } from "react";
+import {
+  Button,
+  Container,
+  Fieldset,
+  PasswordInput,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
+import Link from "next/link";
+import { IconAt, IconLock, IconUser, IconUserPlus } from "@tabler/icons-react";
+import { useAppContext } from "@/app/lib/AppContext";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [isFormValid, setIsFormValid] = useState(false);
@@ -30,39 +38,39 @@ export default function Page() {
 
     const formData = new FormData(formRef.current);
     const data = {
-      userName: formData.get('userName') as string,
-      firstName: formData.get('firstName') as string,
-      lastName: formData.get('lastName') as string,
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-      confirmPassword: formData.get('confirmPassword') as string,
+      userName: formData.get("userName") as string,
+      firstName: formData.get("firstName") as string,
+      lastName: formData.get("lastName") as string,
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+      confirmPassword: formData.get("confirmPassword") as string,
     };
 
     if (data.password !== data.confirmPassword) {
-      setFieldErrors({ confirmPassword: 'Passwords do not match' });
+      setFieldErrors({ confirmPassword: "Passwords do not match" });
       setLoading(false);
       return;
     }
 
     try {
-      const response = await fetch('/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
         setFieldErrors(errorData.errors || {});
-        setSubmitError(errorData.message || 'Signup failed');
+        setSubmitError(errorData.message || "Signup failed");
         return;
       }
 
-      console.log('User created successfully');
-      router.push('/profile');
+      console.log("User created successfully");
+      router.push("/profile");
       refetchUser();
     } catch (error) {
-      setSubmitError('An error occurred. Please try again.');
+      setSubmitError("An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -72,13 +80,24 @@ export default function Page() {
     <Container size="xs" px="md" py="xl">
       <Stack align="stretch">
         <Stack>
-          <Fieldset variant="default" radius="md" pt="md" bg="#252525" bd="1px solid #333" disabled={loading}>
-            <form onChange={handleFormChange} onSubmit={handleSubmit} ref={formRef}>
+          <Fieldset
+            variant="default"
+            radius="md"
+            pt="md"
+            bg="#252525"
+            bd="1px solid #333"
+            disabled={loading}
+          >
+            <form
+              onChange={handleFormChange}
+              onSubmit={handleSubmit}
+              ref={formRef}
+            >
               <Stack gap="md">
-              <TextInput
+                <TextInput
                   size="md"
                   name="userName"
-                  placeholder='Username'
+                  placeholder="Username"
                   required
                   leftSection={<IconUser size={20} />}
                   leftSectionPointerEvents="none"
@@ -93,7 +112,7 @@ export default function Page() {
                 <TextInput
                   size="md"
                   name="firstName"
-                  placeholder='First Name'
+                  placeholder="First Name"
                   required
                   leftSection={<IconUser size={20} />}
                   leftSectionPointerEvents="none"
@@ -108,7 +127,7 @@ export default function Page() {
                 <TextInput
                   size="md"
                   name="lastName"
-                  placeholder='Last Name'
+                  placeholder="Last Name"
                   required
                   leftSection={<IconUser size={20} />}
                   leftSectionPointerEvents="none"
@@ -123,7 +142,7 @@ export default function Page() {
                 <TextInput
                   size="md"
                   name="email"
-                  placeholder='Email'
+                  placeholder="Email"
                   required
                   leftSection={<IconAt size={20} />}
                   leftSectionPointerEvents="none"
@@ -138,7 +157,7 @@ export default function Page() {
                 <PasswordInput
                   size="md"
                   name="password"
-                  placeholder='Password'
+                  placeholder="Password"
                   required
                   error={fieldErrors.password}
                   leftSection={<IconLock size={20} />}
@@ -154,7 +173,7 @@ export default function Page() {
                 <PasswordInput
                   size="md"
                   name="confirmPassword"
-                  placeholder='Confirm Password'
+                  placeholder="Confirm Password"
                   required
                   error={fieldErrors.confirmPassword}
                   leftSection={<IconLock size={20} />}
@@ -174,10 +193,10 @@ export default function Page() {
                   type="submit"
                   size="md"
                   loading={loading}
-                  loaderProps={{ type: 'dots' }}
+                  loaderProps={{ type: "dots" }}
                   style={{
-                    backgroundColor: '#3493d3',
-                    color: 'undefined',
+                    backgroundColor: "#3493d3",
+                    color: "undefined",
                   }}
                 >
                   Sign up
@@ -194,7 +213,9 @@ export default function Page() {
             <Text size="md" c="#f0f0f0">
               Do you already have an account? <br />
               <Link href="/login">
-                <span style={{ color: '#0070f3', textDecoration: 'underline' }}>Login here</span>
+                <span style={{ color: "#0070f3", textDecoration: "underline" }}>
+                  Login here
+                </span>
               </Link>
             </Text>
           </Stack>

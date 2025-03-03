@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { signup } from '@/app/actions/auth';
+import { NextRequest, NextResponse } from "next/server";
+import { signup } from "@/app/actions/auth";
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,9 +11,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ errors: response.errors }, { status: 400 });
     }
 
-    return NextResponse.json({ message: 'User created' }, { status: 201 });
+    return NextResponse.json({ message: "User created" }, { status: 201 });
   } catch (error) {
-    console.error('Signup error:', error);
-    return NextResponse.json({ message: 'Server error' }, { status: 500 });
+    console.error("Signup error:", error);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

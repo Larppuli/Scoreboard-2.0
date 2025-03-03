@@ -9,7 +9,10 @@ export async function GET() {
     return NextResponse.json(games);
   } catch (error) {
     console.error("Error fetching games:", error);
-    return NextResponse.json({ error: "Failed to fetch games" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch games" },
+      { status: 500 }
+    );
   }
 }
 
@@ -19,12 +22,18 @@ export async function POST(request: NextRequest) {
     const gameData = await request.json();
 
     if (!gameData.date || !gameData.participants || !gameData.sport) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
     const result = await db.collection("games").insertOne(gameData);
 
-    return NextResponse.json({ success: true, message: "Game saved", insertedId: result.insertedId }, { status: 201 });
+    return NextResponse.json(
+      { success: true, message: "Game saved", insertedId: result.insertedId },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("Error saving game:", error);
     return NextResponse.json({ error: "Failed to save game" }, { status: 500 });
