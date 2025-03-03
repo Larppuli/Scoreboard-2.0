@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@mantine/core": "7.17.0",
+    "@mantine/dates": "^7.17.1",
     "@mantine/dropzone": "^7.17.0",
     "@mantine/hooks": "7.17.0",
     "@next/bundle-analyzer": "^15.1.5",
@@ -28,6 +29,7 @@
     "@types/mongodb": "^4.0.7",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.5.1",
+    "dayjs": "^1.11.13",
     "jose": "^6.0.7",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.1",
