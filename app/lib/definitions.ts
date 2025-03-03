@@ -57,10 +57,46 @@ export interface ImageUploadProps {
   setLoading: (loading: boolean) => void;
 }
 
+export interface DateSelectProps {
+  selectedDate: Date | null;
+  handleDateChange: (date: Date) => void;
+}
+
+export interface ParticipantsSelectProps {
+  participants: string[];
+  selectedParticipants: string[];
+  handleParticipantsChange: (participants: string[]) => void;
+}
+
+export interface WinnerSelectProps {
+  participants: string[];
+  handleWinnerChange: (winner: string) => void;
+}
+
+export interface SportSelectProps {
+  sports: { value: string; label: string }[];
+  selectedSport: string | null;
+  handleSportChange: (value: string | null) => void;
+}
+
+export interface Game {
+  _id: string;
+  date: string;
+  participants: string[];
+  winner: string;
+  sport: string;
+}
+
 export interface AppContextType {
   user: User | null;
   loading: boolean;
+  users: User[] | null;
+  sports: string[] | null;
+  games: Game[] | null;
+  addGame: (game: Game) => void;
   setUser: (user: User | null) => void;
   clearContext: () => void;
   refetchUser: () => void;
+  setSports: (sports: string[] | null) => void;
+  setUsers: (users: User[] | null) => void;
 }
