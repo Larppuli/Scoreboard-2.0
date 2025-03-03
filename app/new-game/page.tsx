@@ -34,9 +34,9 @@ export default function Page() {
     }
   }, [selectedDate, selectedParticipants, selectedWinner, selectedSport]);
 
-  const handleDateChange = (date: Date) => {
+  const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
-  }
+  };  
 
   const handleParticipantsChange = (participants: string[]) => {
     setSelectedParticipants(participants);

@@ -10,7 +10,7 @@ export default function DateSelection({ selectedDate, handleDateChange }: DateSe
         w={'100%'}
         leftSection={icon}
         value={selectedDate}
-        onChange={(value) => handleDateChange(value)}
+        onChange={(value) => value && handleDateChange(value)}
         placeholder="Give the game a date"
         size="md"
         radius="md"
