@@ -37,6 +37,18 @@ export default function WinnerSelection({ participants, handleWinnerChange }: Wi
           minHeight: '50px',
           textAlign: 'center',
         },
+        dropdown: {
+          backgroundColor: '#2e2e3e',
+          color: '#ffffff',
+          border: '1px solid #363636',
+          borderRadius: '5px',
+        },
+        option: {
+          color: '#ffffff',
+          '&:hover': {
+            backgroundColor: '#313142',
+          },
+        },
       }}
     />
   );
