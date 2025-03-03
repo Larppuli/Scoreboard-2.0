@@ -131,7 +131,6 @@ export default function Page() {
           sports={sportsArray}
           handleSportChange={handleSportChange}
         />
-
         <Button
           disabled={disabled}
           variant="light"
@@ -140,6 +139,15 @@ export default function Page() {
           h={'50px'}
           onClick={handleSaveGame}
           loading={buttonLoading}
+          styles={{
+            root: {
+              backgroundColor: disabled ? '#2c2c2c' : undefined,
+              color: disabled ? '#5f5f5f' : undefined,
+              '&:disabled': {
+                backgroundColor: '#4a4a4',
+              }
+            },
+          }}
         >
           Save game
         </Button>
@@ -147,12 +155,24 @@ export default function Page() {
       <Transition mounted={showTransition} transition="fade" duration={400} timingFunction="ease">
         {(styles) => (
           <Notification
+            bg={'#2e2d2d'}
             w={'70vw'}
             style={styles}
             icon={checkIcon}
             color="teal"
             title="All good!"
             withCloseButton={false}
+            styles={{
+              root: {
+                backgroundColor: '#2e2d2d',
+              },
+              title: {
+                color: '#ffffff',
+              },
+              description: {
+                color: '#ffffff',
+              },
+            }}
           >
             Game saved successfully!
           </Notification>
