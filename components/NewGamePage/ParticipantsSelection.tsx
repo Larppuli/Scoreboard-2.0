@@ -1,8 +1,12 @@
+import { IconUsersGroup } from '@tabler/icons-react';
 import { MultiSelect } from '@mantine/core';
 import { ParticipantsSelectProps } from '@/app/lib/definitions';
-import { IconUsersGroup } from '@tabler/icons-react';
 
-export default function ParticipantsSelect({ participants, selectedParticipants, handleParticipantsChange }: ParticipantsSelectProps) {
+export default function ParticipantsSelect({
+  participants,
+  selectedParticipants,
+  handleParticipantsChange,
+}: ParticipantsSelectProps) {
   return (
     <MultiSelect
       w={'100%'}
@@ -11,7 +15,7 @@ export default function ParticipantsSelect({ participants, selectedParticipants,
       data={participants}
       value={selectedParticipants}
       onChange={handleParticipantsChange}
-      placeholder={selectedParticipants.length === 0 ? "Select participants" : ""}
+      placeholder={selectedParticipants.length === 0 ? 'Select participants' : ''}
       styles={{
         input: {
           backgroundColor: '#1e1e2e',
@@ -23,7 +27,7 @@ export default function ParticipantsSelect({ participants, selectedParticipants,
           minHeight: '65px',
           textAlignLast: 'center',
           justifyItems: 'center',
-        }
+        },
       }}
     />
   );

@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Stack } from '@mantine/core';
 import { useState } from 'react';
+import { Button, Stack } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 import { ImageUploadProps } from '@/app/lib/definitions';
 
@@ -38,7 +38,6 @@ export default function ImageUpload({ setSelectedImage, setLoading }: ImageUploa
       );
 
       const deleteData = await deleteResponse.json();
-
     } catch (err) {
       console.error('Error deleting existing image:', err);
     }
@@ -88,12 +87,8 @@ export default function ImageUpload({ setSelectedImage, setLoading }: ImageUploa
         disabled={uploading}
       />
       <label htmlFor="fileInput">
-        <Button
-          variant="subtle"
-          component="span"
-          c={'#9c9c9c'}
-        >
-            Choose Picture
+        <Button variant="subtle" component="span" c={'#9c9c9c'}>
+          Choose Picture
         </Button>
       </label>
     </Stack>

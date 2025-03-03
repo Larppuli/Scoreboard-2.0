@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Stack, LoadingOverlay, Text } from '@mantine/core';
 import { IconLogout } from '@tabler/icons-react';
 import { CldImage } from 'next-cloudinary';
+import { Button, LoadingOverlay, Stack, Text } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 import ImageUpload from '@/components/ImageUpload/ImageUpload';
 
@@ -29,7 +29,7 @@ export default function Page() {
     try {
       const timestamp = new Date().getTime();
       const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/v${timestamp}/${userImageBase}`;
-      
+
       const response = await fetch(imageUrl, { cache: 'no-store' });
 
       if (response.ok) {
@@ -91,7 +91,7 @@ export default function Page() {
 
       <Stack align="center">
         <div style={{ position: 'relative', width: 150, height: 150 }}>
-          {(imageLoading) ? (
+          {imageLoading ? (
             <LoadingOverlay
               visible
               zIndex={10}
@@ -109,7 +109,6 @@ export default function Page() {
                 onLoad={() => setImageLoading(false)}
                 style={{ borderRadius: '50%', objectFit: 'cover' }}
               />
-
             )
           )}
         </div>

@@ -1,5 +1,5 @@
-import { z } from 'zod';
 import { JWTPayload } from 'jose';
+import { z } from 'zod';
 
 // Session Payload for JWT
 export interface SessionPayload extends JWTPayload {

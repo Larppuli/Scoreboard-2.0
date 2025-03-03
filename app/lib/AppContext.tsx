@@ -1,8 +1,7 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { User } from './definitions';
-import { AppContextType, Game } from './definitions';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { AppContextType, Game, User } from './definitions';
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -38,13 +37,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const response = await fetch('/api/users');
       if (response.ok) {
         const users = await response.json();
-  
+
         const userArray = users.map((user: User) => ({
           userName: user.userName,
           firstName: user.firstName,
           lastName: user.lastName,
         }));
-  
+
         setUsers(userArray);
       } else {
         return null;
@@ -53,14 +52,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
       console.error('Error fetching users:', error);
       return null;
     }
-  }
+  };
 
   const fetchSports = async () => {
     try {
       const response = await fetch('/api/sports');
       if (response.ok) {
         const sports = await response.json();
-  
+
         setSports(sports[0].sports);
       } else {
         return null;
@@ -69,14 +68,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
       console.error('Error fetching sports:', error);
       return null;
     }
-  }
+  };
 
   const fetchGames = async () => {
     try {
       const response = await fetch('/api/games');
       if (response.ok) {
         const games = await response.json();
-  
+
         setGames(games);
       } else {
         return null;
@@ -85,7 +84,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       console.error('Error fetching games:', error);
       return null;
     }
-  }
+  };
 
   // Initial fetch on app open
   useEffect(() => {
@@ -116,19 +115,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setFetchTrigger((prev) => prev + 1);
   };
 
-  const value: AppContextType = 
-    { user, 
-      loading, 
-      setUser, 
-      clearContext, 
-      refetchUser, 
-      sports, 
-      setSports, 
-      users, 
-      setUsers, 
-      games, 
-      addGame 
-    };
+  const value: AppContextType = {
+    user,
+    loading,
+    setUser,
+    clearContext,
+    refetchUser,
+    sports,
+    setSports,
+    users,
+    setUsers,
+    games,
+    addGame,
+  };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

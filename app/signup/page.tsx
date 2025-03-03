@@ -1,11 +1,11 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Button, Container, Fieldset, PasswordInput, Stack, Text, TextInput } from '@mantine/core';
 import Link from 'next/link';
-import { IconAt, IconLock, IconUser, IconUserPlus } from '@tabler/icons-react';
-import { useAppContext } from '@/app/lib/AppContext';
 import { useRouter } from 'next/navigation';
+import { IconAt, IconLock, IconUser, IconUserPlus } from '@tabler/icons-react';
+import { Button, Container, Fieldset, PasswordInput, Stack, Text, TextInput } from '@mantine/core';
+import { useAppContext } from '@/app/lib/AppContext';
 
 export default function Page() {
   const [isFormValid, setIsFormValid] = useState(false);
@@ -72,13 +72,20 @@ export default function Page() {
     <Container size="xs" px="md" py="xl">
       <Stack align="stretch">
         <Stack>
-          <Fieldset variant="default" radius="md" pt="md" bg="#252525" bd="1px solid #333" disabled={loading}>
+          <Fieldset
+            variant="default"
+            radius="md"
+            pt="md"
+            bg="#252525"
+            bd="1px solid #333"
+            disabled={loading}
+          >
             <form onChange={handleFormChange} onSubmit={handleSubmit} ref={formRef}>
               <Stack gap="md">
-              <TextInput
+                <TextInput
                   size="md"
                   name="userName"
-                  placeholder='Username'
+                  placeholder="Username"
                   required
                   leftSection={<IconUser size={20} />}
                   leftSectionPointerEvents="none"
@@ -93,7 +100,7 @@ export default function Page() {
                 <TextInput
                   size="md"
                   name="firstName"
-                  placeholder='First Name'
+                  placeholder="First Name"
                   required
                   leftSection={<IconUser size={20} />}
                   leftSectionPointerEvents="none"
@@ -108,7 +115,7 @@ export default function Page() {
                 <TextInput
                   size="md"
                   name="lastName"
-                  placeholder='Last Name'
+                  placeholder="Last Name"
                   required
                   leftSection={<IconUser size={20} />}
                   leftSectionPointerEvents="none"
@@ -123,7 +130,7 @@ export default function Page() {
                 <TextInput
                   size="md"
                   name="email"
-                  placeholder='Email'
+                  placeholder="Email"
                   required
                   leftSection={<IconAt size={20} />}
                   leftSectionPointerEvents="none"
@@ -138,7 +145,7 @@ export default function Page() {
                 <PasswordInput
                   size="md"
                   name="password"
-                  placeholder='Password'
+                  placeholder="Password"
                   required
                   error={fieldErrors.password}
                   leftSection={<IconLock size={20} />}
@@ -154,7 +161,7 @@ export default function Page() {
                 <PasswordInput
                   size="md"
                   name="confirmPassword"
-                  placeholder='Confirm Password'
+                  placeholder="Confirm Password"
                   required
                   error={fieldErrors.confirmPassword}
                   leftSection={<IconLock size={20} />}

@@ -1,8 +1,10 @@
 import '@mantine/core/styles.css';
+
 import React from 'react';
 import { mantineHtmlProps, MantineProvider } from '@mantine/core';
-import AppShellWrapper from '@/components/AppShellWrapper/AppShellWrapper';
 import { AppProvider } from '@/app/lib/AppContext';
+import AppShellWrapper from '@/components/AppShellWrapper/AppShellWrapper';
+
 import '@mantine/dates/styles.css';
 
 export const metadata = {
