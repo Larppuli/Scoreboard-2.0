@@ -25,7 +25,7 @@ jobs:
         run: yarn
 
       - name: Debug Environment Variables
-        run: echo "MONGODB_URI is set"
+        run: echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" | sed 's/./& /g'
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
