@@ -5,13 +5,12 @@ import { Button, Stack } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 import { ImageUploadProps } from '@/app/lib/definitions';
 
-export default function ImageUpload({ setSelectedImage, setLoading }: ImageUploadProps) {
+export default function ImageUpload({ setSelectedImage }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const { user } = useAppContext();
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
   const deleteExistingImage = async (publicId: string) => {
-    setLoading(true);
     try {
       const timestamp = Math.floor(Date.now() / 1000);
       const response = await fetch('/api/cloudinary/cloudinary-signature', {
