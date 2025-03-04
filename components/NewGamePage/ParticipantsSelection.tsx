@@ -1,53 +1,8 @@
 import { MultiSelect, MultiSelectProps, Avatar, Group, Text } from '@mantine/core';
 import { ParticipantsSelectProps } from '@/app/lib/definitions';
-import { useAppContext } from '@/app/lib/AppContext';
-import { useState, useEffect } from 'react';
 import { IconUsersGroup } from '@tabler/icons-react';
 
-export default function ParticipantsSelect({ selectedParticipants, handleParticipantsChange }: ParticipantsSelectProps) {
-  const [userObjects, setUserObjects] = useState<Record<string, { image: string; fullName: string }>>({});
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const { users } = useAppContext();
-  const timestamp = new Date().getTime();
-
-  useEffect(() => {
-    if (users) {
-      const defaultPfpUrl = `https://res.cloudinary.com/${cloudName}/image/upload/v1741022251265/DefaultPFP`;
-
-      const updatedUsers: Record<string, { image: string; fullName: string }> = {};
-
-      users.forEach((user) => {
-        const primaryUrl = `https://res.cloudinary.com/${cloudName}/image/upload/v${timestamp}/profilepictures/profile_picture_${user._id}`;
-
-        updatedUsers[user.userName] = {
-          image: primaryUrl,
-          fullName: `${user.firstName} ${user.lastName}`,
-        };
-      });
-
-      const checkImageValidity = async (url: string): Promise<boolean> => {
-        try {
-          const response = await fetch(url, { method: 'HEAD' });
-          return response.ok;
-        } catch {
-          return false;
-        }
-      };
-
-      const finalizeUsers = async () => {
-        const validatedUsers = await Promise.all(
-          Object.entries(updatedUsers).map(async ([name, data]) => {
-            const isValid = await checkImageValidity(data.image);
-            return [name, { ...data, image: isValid ? data.image : defaultPfpUrl }];
-          })
-        );
-
-        setUserObjects(Object.fromEntries(validatedUsers));
-      };
-
-      finalizeUsers();
-    }
-  }, [users, cloudName]);
+export default function ParticipantsSelect({ selectedParticipants, handleParticipantsChange, userObjects }: ParticipantsSelectProps) {
 
   const renderMultiSelectOption: MultiSelectProps['renderOption'] = ({ option }) => (
     <Group gap="sm">
