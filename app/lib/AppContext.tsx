@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { AppContextType, Game, User } from './definitions';
+import { AppContextType, Game, User, UserObject } from './definitions';
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -12,6 +12,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sports, setSports] = useState<string[] | null>(null);
   const [users, setUsers] = useState<User[] | null>(null);
   const [games, setGames] = useState<Game[] | null>(null);
+  const [userObjects, setUserObjects] = useState<Record<string, { image: string; fullName: string }>>({});
+
+  const timestamp = new Date().getTime();
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
   // Fetch user function
   const fetchUser = async () => {
@@ -86,6 +90,42 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return null;
     }
   };
+  
+  const fetchUserObjects = async () => {
+    if (!users || users.length === 0 || !cloudName) return;
+  
+    const defaultPfpUrl = `https://res.cloudinary.com/${cloudName}/image/upload/v1741022251265/DefaultPFP`;
+  
+    const updatedUsers: Record<string, UserObject> = {};
+  
+    users.forEach((user) => {
+      const primaryUrl = `https://res.cloudinary.com/${cloudName}/image/upload/v${timestamp}/profilepictures/profile_picture_${user._id}`;
+  
+      updatedUsers[user.userName] = {
+        image: primaryUrl,
+        fullName: `${user.firstName} ${user.lastName}`,
+        _id: user._id,
+      };
+    });
+  
+    const checkImageValidity = async (url: string): Promise<boolean> => {
+      try {
+        const response = await fetch(url, { method: "HEAD" });
+        return response.ok;
+      } catch {
+        return false;
+      }
+    };
+  
+    const validatedUsers = await Promise.all(
+      Object.entries(updatedUsers).map(async ([name, data]) => {
+        const isValid = await checkImageValidity(data.image);
+        return [name, { ...data, image: isValid ? data.image : defaultPfpUrl }];
+      })
+    );
+    
+    setUserObjects(Object.fromEntries(validatedUsers));
+  };  
 
   // Initial fetch on app open
   useEffect(() => {
@@ -93,6 +133,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     fetchUsers();
     fetchSports();
     fetchGames();
+    fetchUserObjects();
   }, []);
 
   useEffect(() => {
@@ -116,6 +157,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setFetchTrigger((prev) => prev + 1);
   };
 
+  useEffect(() => {
+  if (users) {
+    fetchUserObjects();
+  }
+}, [users]);
+
   const value: AppContextType = {
     user,
     loading,
@@ -128,6 +175,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setUsers,
     games,
     addGame,
+    userObjects
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
