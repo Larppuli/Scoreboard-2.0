@@ -54,7 +54,6 @@ export interface User {
 
 export interface ImageUploadProps {
   setSelectedImage: (image: string) => void;
-  setLoading: (loading: boolean) => void;
 }
 
 export interface DateSelectProps {
@@ -102,6 +101,7 @@ export interface AppContextType {
   refetchUser: () => void;
   setSports: (sports: string[] | null) => void;
   setUsers: (users: User[] | null) => void;
+  fetchUserObjects: () => void;
 }
 
 export interface UserObject {
