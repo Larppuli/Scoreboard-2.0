@@ -175,7 +175,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setUsers,
     games,
     addGame,
-    userObjects
+    userObjects,
+    fetchUserObjects,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
