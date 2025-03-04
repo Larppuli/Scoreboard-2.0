@@ -1,60 +1,20 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { IconLogout } from '@tabler/icons-react';
-import { CldImage } from 'next-cloudinary';
-import { Button, LoadingOverlay, Stack, Text } from '@mantine/core';
+import { Button, LoadingOverlay, Stack, Text, Image, AspectRatio } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 import ImageUpload from '@/components/ImageUpload/ImageUpload';
 
 export default function Page() {
   const router = useRouter();
-  const { user, loading, clearContext } = useAppContext();
-  const [currentImagePublicId, setCurrentImagePublicId] = useState<string | null>(null);
-  const [imageLoading, setImageLoading] = useState<boolean>(true);
+  const { user, loading, userObjects, clearContext, fetchUserObjects } = useAppContext();
+  const userAvatar = user?._id ? userObjects[user.userName]?.image : null;
 
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const defaultImage = 'DefaultPFP';
-  const userImageBase = user?._id ? `profilepictures/profile_picture_${user._id}` : null;
 
-  const fetchImage = useCallback(async () => {
-    setImageLoading(true);
-    if (!userImageBase) {
-      setCurrentImagePublicId(defaultImage);
-      setImageLoading(false);
-      return;
-    }
 
-    try {
-      const timestamp = new Date().getTime();
-      const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/v${timestamp}/${userImageBase}`;
-
-      const response = await fetch(imageUrl, { cache: 'no-store' });
-
-      if (response.ok) {
-        setCurrentImagePublicId(userImageBase);
-      } else {
-        setCurrentImagePublicId(defaultImage);
-      }
-    } catch (error) {
-      console.error('Error checking image existence:', error);
-      setCurrentImagePublicId(defaultImage);
-    } finally {
-      setImageLoading(false);
-    }
-  }, [userImageBase, cloudName]);
-
-  useEffect(() => {
-    if (user?._id) {
-      fetchImage();
-    }
-  }, [user, fetchImage]);
-
-  const handleImageUpload = (newImageUrl: string) => {
-    setImageLoading(true);
-    setCurrentImagePublicId(newImageUrl);
-    setImageLoading(false);
+  const handleImageUpload = () => {
+    fetchUserObjects();
   };
 
   const handleLogout = async () => {
@@ -90,30 +50,17 @@ export default function Page() {
       </Stack>
 
       <Stack align="center">
-        <div style={{ position: 'relative', width: 150, height: 150 }}>
-          {imageLoading ? (
-            <LoadingOverlay
-              visible
-              zIndex={10}
-              overlayProps={{ radius: '50%', color: 'gray', blur: 2 }}
-              loaderProps={{ color: 'blue', type: 'dots' }}
-            />
-          ) : (
-            currentImagePublicId && (
-              <CldImage
-                width="150"
-                height="150"
-                src={`https://res.cloudinary.com/dles09a71/image/upload/v${new Date().getTime()}/${currentImagePublicId}`}
-                alt="Profile Picture"
-                priority
-                onLoad={() => setImageLoading(false)}
-                style={{ borderRadius: '50%', objectFit: 'cover' }}
-              />
-            )
-          )}
-        </div>
-
-        <ImageUpload setSelectedImage={handleImageUpload} setLoading={setImageLoading} />
+        <AspectRatio>
+          <Image
+            src={userAvatar}
+            alt="Profile Picture"
+            h={150}
+            w={150}
+            radius="50%"
+            style={{ objectFit: "cover" }}
+          />
+        </AspectRatio>
+        <ImageUpload setSelectedImage={handleImageUpload} />
         <Text mt={'-10px'} size="35px" fw={'bold'} c={'white'}>
           {user?.userName}
         </Text>
