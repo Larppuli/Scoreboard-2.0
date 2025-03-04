@@ -10,7 +10,7 @@ import SportSelection from '@/components/NewGamePage/SportSelection';
 import WinnerSelection from '@/components/NewGamePage/WinnerSelection';
 
 export default function Page() {
-  const { users, sports, addGame } = useAppContext();
+  const { users, sports, userObjects, addGame } = useAppContext();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedParticipants, setSelectedParticipants] = useState<string[]>([]);
   const [selectedWinner, setSelectedWinner] = useState<string>('');
@@ -119,11 +119,13 @@ export default function Page() {
         <ParticipantsSelection
           participants={userArray}
           selectedParticipants={selectedParticipants}
+          userObjects={userObjects}
           handleParticipantsChange={handleParticipantsChange}
         />
 
         <WinnerSelection
           participants={selectedParticipants}
+          userObjects={userObjects}
           handleWinnerChange={handleWinnerChange}
         />
         <SportSelection
