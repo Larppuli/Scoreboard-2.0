@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { AppShell, Group, Title } from '@mantine/core';
+import { AppShell, Container, Title, Avatar } from '@mantine/core';
+import { useAppContext } from '@/app/lib/AppContext';
 
 function Header() {
   const pathname = usePathname();
+  const { userObjects, user } = useAppContext();
 
   const pageNames: { [key: string]: string } = {
     '/': 'Stats',
@@ -16,13 +18,16 @@ function Header() {
     '/profile': 'Profile',
   };
 
+  const userAvatar = user?._id ? userObjects[user.userName]?.image : null;
+
   return (
     <AppShell.Header bg="#08141c" style={{ borderBottom: '1px solid #081c2c' }}>
-      <Group h="100%" px="md" justify="center">
+      <Container size="sm" p="md" bg="#08141c" style={{ textAlign: 'center', borderBottom: '1px solid #081c2c'}}>
+        <Avatar src={userAvatar} style={{ position: 'absolute', top: 10, left: 10 }}/>
         <Title order={4} c="white">
           {pageNames[pathname]}
         </Title>
-      </Group>
+      </Container>
     </AppShell.Header>
   );
 }
