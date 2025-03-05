@@ -1,34 +1,35 @@
 'use client';
 
 import { useMemo } from 'react';
-import { LoadingOverlay, Stack, Text, Image, AspectRatio } from '@mantine/core';
+import { AspectRatio, Image, LoadingOverlay, Stack, Text } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 import ImageUpload from '@/components/ProfilePage/ImageUpload';
-import ProfileCard from '@/components/ProfilePage/ProfileCard';
 import PointsCard from '@/components/ProfilePage/PointsCard';
+import ProfileCard from '@/components/ProfilePage/ProfileCard';
 
 export default function Page() {
   const { user, loading, userObjects, games, fetchUserObjects } = useAppContext();
 
-  const userAvatar = user?._id && userObjects && userObjects[user.userName] 
-    ? userObjects[user.userName].image 
-    : null;
+  const userAvatar =
+    user?._id && userObjects && userObjects[user.userName]
+      ? userObjects[user.userName].image
+      : null;
 
   const gameCount = useMemo(() => {
     if (!user?.userName || !Array.isArray(games)) return 0;
-    return games.filter(game => game.participants.includes(user.userName)).length || 0;
+    return games.filter((game) => game.participants.includes(user.userName)).length || 0;
   }, [games, user]);
 
   const winCount = useMemo(() => {
     if (!user?.userName || !Array.isArray(games)) return 0;
-    return games.filter(game => game.winner.includes(user.userName)).length || 0;
+    return games.filter((game) => game.winner.includes(user.userName)).length || 0;
   }, [games, user]);
 
   const daysSinceLastGame = useMemo(() => {
     if (!user?.userName || !Array.isArray(games)) return null;
 
     const userGames = games
-      .filter(game => game.participants.includes(user.userName))
+      .filter((game) => game.participants.includes(user.userName))
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     if (!userGames[0]) return null;
@@ -47,17 +48,24 @@ export default function Page() {
   let cumulativePoints = 0;
 
   if (user?.userName && Array.isArray(games)) {
-    games.slice().reverse().forEach((game) => {
-      if (game.participants.includes(user.userName)) {
-        if (Array.isArray(game.winner) ? game.winner.includes(user.userName) : game.winner === user.userName) {
-          cumulativePoints += game.participants.length * 2;
-        } else {
-          cumulativePoints -= (5 - game.participants.length);
-          cumulativePoints = Math.max(0, cumulativePoints);
+    games
+      .slice()
+      .reverse()
+      .forEach((game) => {
+        if (game.participants.includes(user.userName)) {
+          if (
+            Array.isArray(game.winner)
+              ? game.winner.includes(user.userName)
+              : game.winner === user.userName
+          ) {
+            cumulativePoints += game.participants.length * 2;
+          } else {
+            cumulativePoints -= 5 - game.participants.length;
+            cumulativePoints = Math.max(0, cumulativePoints);
+          }
+          pointsArray.push(cumulativePoints);
         }
-        pointsArray.push(cumulativePoints);
-      }
-    });
+      });
   }
 
   if (loading || !user || !games) {
@@ -80,7 +88,7 @@ export default function Page() {
             h={150}
             w={150}
             radius="50%"
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: 'cover' }}
           />
         </AspectRatio>
         <ImageUpload setSelectedImage={handleImageUpload} />
@@ -93,7 +101,10 @@ export default function Page() {
           lossCount={gameCount - winCount}
           daysSinceLastGame={daysSinceLastGame || 0}
         />
-        <PointsCard pointsArray={pointsArray.length ? pointsArray : [0]} userObjects={userObjects || {}} />
+        <PointsCard
+          pointsArray={pointsArray.length ? pointsArray : [0]}
+          userObjects={userObjects || {}}
+        />
       </Stack>
     </Stack>
   );

@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
-import { usePathname } from 'next/navigation';
-import { AppShell, Container, Title, Avatar, Button, Stack } from '@mantine/core';
-import { useAppContext } from '@/app/lib/AppContext';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { IconLogout } from '@tabler/icons-react';
+import { AppShell, Avatar, Button, Container, Stack, Title } from '@mantine/core';
+import { useAppContext } from '@/app/lib/AppContext';
 
 function Header() {
   const pathname = usePathname();
@@ -36,8 +35,8 @@ function Header() {
 
   return (
     <AppShell.Header bg="#08141c" style={{ borderBottom: '1px solid #081c2c' }}>
-      <Container size="sm" p="md" style={{ textAlign: 'center'}}>
-        <Avatar src={userAvatar} style={{ position: 'absolute', top: 6, left: 15 }}/>
+      <Container size="sm" p="md" style={{ textAlign: 'center' }}>
+        <Avatar src={userAvatar} style={{ position: 'absolute', top: 6, left: 15 }} />
         <Title order={4} c="white" mt={'-3px'}>
           {pageNames[pathname]}
         </Title>
