@@ -40,6 +40,7 @@ export default function WinnerSelection({ participants, handleWinnerChange, user
       value={selectedWinner}
       onChange={handleChange}
       placeholder="Select winner"
+      comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
       styles={{
         input: {
           backgroundColor: '#1e1e2e',

@@ -4,6 +4,7 @@ import { DateSelectProps } from '@/app/lib/definitions';
 
 export default function DateSelection({ selectedDate, handleDateChange }: DateSelectProps) {
   const icon = <IconCalendar size={20} />;
+  const today = new Date();
 
   return (
     <DateInput
@@ -14,6 +15,7 @@ export default function DateSelection({ selectedDate, handleDateChange }: DateSe
       placeholder="Give the game a date"
       size="md"
       radius="md"
+      maxDate={today}
       onFocus={(e) => e.target.blur()}
       styles={{
         input: {
