@@ -79,8 +79,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try {
       const response = await fetch('/api/games');
       if (response.ok) {
-        const games = await response.json();
-
+        let games = await response.json();
+  
+        games.sort((a: Game, b: Game) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  
         setGames(games);
       } else {
         return null;
@@ -90,6 +92,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return null;
     }
   };
+  
   
   const fetchUserObjects = async () => {
     if (!users || users.length === 0 || !cloudName) return;
@@ -149,9 +152,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const addGame = (newGame: Game) => {
-    setGames((prevGames) => (prevGames ? [...prevGames, newGame] : [newGame]));
+    setGames((prevGames) => {
+      const updatedGames = prevGames ? [...prevGames, newGame] : [newGame];
+  
+      return updatedGames.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    });
   };
-
+  
   // Function to trigger refetch after login
   const refetchUser = () => {
     setFetchTrigger((prev) => prev + 1);
