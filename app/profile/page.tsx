@@ -9,16 +9,19 @@ import PointsCard from '@/components/ProfilePage/PointsCard';
 
 export default function Page() {
   const { user, loading, userObjects, games, fetchUserObjects } = useAppContext();
-  const userAvatar = user?._id ? userObjects[user.userName]?.image : null;
+
+  const userAvatar = user?._id ? userObjects?.[user.userName]?.image || null : null;
+
   // Count games and wins
-  const gameCount = useMemo(() => 
-    games?.filter(game => user?.userName && game.participants.includes(user.userName)).length || 0,
-    [games, user]
-  );
-  const winCount = useMemo(() => 
-    games?.filter(game => user?.userName && game.winner.includes(user.userName)).length || 0,
-    [games, user]
-  );
+  const gameCount = useMemo(() => {
+    if (!games || !user?.userName) return 0;
+    return games.filter(game => game.participants.includes(user.userName)).length || 0;
+  }, [games, user]);
+
+  const winCount = useMemo(() => {
+    if (!games || !user?.userName) return 0;
+    return games.filter(game => game.winner.includes(user.userName)).length || 0;
+  }, [games, user]);
 
   // Calculate days since last game
   const daysSinceLastGame = useMemo(() => {
@@ -40,22 +43,22 @@ export default function Page() {
     fetchUserObjects();
   };
 
-  
-
   const pointsArray: number[] = [];
   let cumulativePoints = 0;
-  
-  games?.slice().reverse().forEach((game) => {
+
+  if (games) {
+    games.slice().reverse().forEach((game) => {
       if (user?.userName && game.participants.includes(user.userName)) {
-          if (game.winner === user.userName) {
-              cumulativePoints += game.participants.length * 2;
-          } else {
-              cumulativePoints -= (5 - game.participants.length);
-              cumulativePoints = Math.max(0, cumulativePoints);
-          }
-          pointsArray.push(cumulativePoints);
+        if (game.winner === user.userName) {
+          cumulativePoints += game.participants.length * 2;
+        } else {
+          cumulativePoints -= (5 - game.participants.length);
+          cumulativePoints = Math.max(0, cumulativePoints);
+        }
+        pointsArray.push(cumulativePoints);
       }
-  });
+    });
+  }
 
   return (
     <Stack>
@@ -80,13 +83,13 @@ export default function Page() {
         <Text mt={'-10px'} size="35px" fw={'bold'} c={'white'}>
           {user?.userName}
         </Text>
-        <ProfileCard 
-          gameCount={gameCount} 
-          winCount={winCount} 
-          lossCount={gameCount - winCount} 
-          daysSinceLastGame={daysSinceLastGame}
+        <ProfileCard
+          gameCount={gameCount}
+          winCount={winCount}
+          lossCount={gameCount - winCount}
+          daysSinceLastGame={daysSinceLastGame || 0}
         />
-        <PointsCard pointsArray={pointsArray} userObjects={userObjects} />
+        <PointsCard pointsArray={pointsArray.length ? pointsArray : [0]} userObjects={userObjects || {}} />
       </Stack>
     </Stack>
   );
