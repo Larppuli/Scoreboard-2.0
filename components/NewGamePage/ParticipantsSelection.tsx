@@ -26,6 +26,7 @@ export default function ParticipantsSelect({ selectedParticipants, handlePartici
       value={selectedParticipants}
       onChange={handleParticipantsChange}
       placeholder={selectedParticipants.length === 0 ? 'Select participants' : ''}
+      comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
       styles={{
         input: {
           backgroundColor: '#1e1e2e',

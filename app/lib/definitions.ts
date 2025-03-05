@@ -109,3 +109,29 @@ export interface UserObject {
   fullName: string;
   _id: string;
 }
+
+export interface ProfileCardProps {
+  gameCount: number;
+  winCount: number;
+  lossCount: number;
+  daysSinceLastGame: number | null;
+}
+
+export interface PointsCardProps {
+  pointsArray: number[];
+  userObjects : Record<string, { image: string; fullName: string }>;
+}
+
+export interface CompareModalProps {
+  opened: boolean;
+  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  onUserSelect: (user: User) => void;
+}
+
+export interface SparklineLengthModalProps {
+  opened: boolean;
+  maxLength: number;
+  setDisplayMax: (display: boolean) => void;
+  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  onLengthSelect: (length: number) => void;
+}

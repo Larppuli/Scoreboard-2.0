@@ -22,6 +22,7 @@ export default function SportSelection({
       onChange={handleChange}
       placeholder="Select sport"
       data={sports}
+      comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
       styles={{
         input: {
           backgroundColor: '#1e1e2e',
