@@ -33,9 +33,9 @@ export async function createSession(userId: string) {
 
   cookieStore.set('session', session, {
     httpOnly: true,
-    secure: false,
+    secure: true,
     expires: expiresAt,
-    sameSite: 'lax',
+    sameSite: 'none',
     path: '/',
   });
 }

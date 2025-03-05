@@ -20,7 +20,7 @@
       "@components/*": ["./components/*"],
       "@lib/*": ["./lib/*"],
       "@public/*": ["./public/*"],
-      "@services/*": ["./services/*"],
+      "@services/*": ["./services/*"]
     },
     "plugins": [{ "name": "next" }]
   },

@@ -1,9 +1,12 @@
-import { MultiSelect, MultiSelectProps, Avatar, Group, Text } from '@mantine/core';
-import { ParticipantsSelectProps } from '@/app/lib/definitions';
 import { IconUsersGroup } from '@tabler/icons-react';
+import { Avatar, Group, MultiSelect, MultiSelectProps, Text } from '@mantine/core';
+import { ParticipantsSelectProps } from '@/app/lib/definitions';
 
-export default function ParticipantsSelect({ selectedParticipants, handleParticipantsChange, userObjects }: ParticipantsSelectProps) {
-
+export default function ParticipantsSelect({
+  selectedParticipants,
+  handleParticipantsChange,
+  userObjects,
+}: ParticipantsSelectProps) {
   const renderMultiSelectOption: MultiSelectProps['renderOption'] = ({ option }) => (
     <Group gap="sm">
       <Avatar src={userObjects[option.value]?.image} size={36} radius="xl" />

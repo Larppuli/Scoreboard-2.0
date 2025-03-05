@@ -119,7 +119,7 @@ export interface ProfileCardProps {
 
 export interface PointsCardProps {
   pointsArray: number[];
-  userObjects : Record<string, { image: string; fullName: string }>;
+  userObjects: Record<string, { image: string; fullName: string }>;
 }
 
 export interface CompareModalProps {

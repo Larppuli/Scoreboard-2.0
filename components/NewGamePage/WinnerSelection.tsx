@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { IconLaurelWreath1 } from '@tabler/icons-react';
-import { Select, SelectProps, Avatar, Group, Text } from '@mantine/core';
+import { Avatar, Group, Select, SelectProps, Text } from '@mantine/core';
 import { WinnerSelectProps } from '@/app/lib/definitions';
 
-export default function WinnerSelection({ participants, handleWinnerChange, userObjects }: WinnerSelectProps) {
+export default function WinnerSelection({
+  participants,
+  handleWinnerChange,
+  userObjects,
+}: WinnerSelectProps) {
   const [selectedWinner, setSelectedWinner] = useState<string | null>(null);
 
   useEffect(() => {

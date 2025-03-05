@@ -147,7 +147,7 @@ export default function Page() {
               color: disabled ? '#5f5f5f' : undefined,
               '&:disabled': {
                 backgroundColor: '#4a4a4',
-              }
+              },
             },
           }}
         >
