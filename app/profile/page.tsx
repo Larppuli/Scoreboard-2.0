@@ -10,22 +10,25 @@ import PointsCard from '@/components/ProfilePage/PointsCard';
 export default function Page() {
   const { user, loading, userObjects, games, fetchUserObjects } = useAppContext();
 
-  const userAvatar = user?._id ? userObjects?.[user.userName]?.image || null : null;
+  // Check for user and userObjects to prevent errors when undefined
+  const userAvatar = user?._id && userObjects && userObjects[user.userName] 
+    ? userObjects[user.userName].image 
+    : null;
 
-  // Count games and wins
+  // Count games and wins, with checks to ensure games is an array and user is defined
   const gameCount = useMemo(() => {
-    if (!games || !user?.userName) return 0;
+    if (!Array.isArray(games) || !user?.userName) return 0;
     return games.filter(game => game.participants.includes(user.userName)).length || 0;
   }, [games, user]);
 
   const winCount = useMemo(() => {
-    if (!games || !user?.userName) return 0;
+    if (!Array.isArray(games) || !user?.userName) return 0;
     return games.filter(game => game.winner.includes(user.userName)).length || 0;
   }, [games, user]);
 
-  // Calculate days since last game
+  // Calculate days since last game with checks for undefined games and user
   const daysSinceLastGame = useMemo(() => {
-    if (!games || !user?.userName) return null;
+    if (!Array.isArray(games) || !user?.userName) return null;
 
     const userGames = games
       .filter(game => game.participants.includes(user.userName))
@@ -46,7 +49,8 @@ export default function Page() {
   const pointsArray: number[] = [];
   let cumulativePoints = 0;
 
-  if (games) {
+  // Check for games and accumulate points
+  if (Array.isArray(games)) {
     games.slice().reverse().forEach((game) => {
       if (user?.userName && game.participants.includes(user.userName)) {
         if (game.winner === user.userName) {
