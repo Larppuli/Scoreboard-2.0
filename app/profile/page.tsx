@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useMemo } from 'react';
 import { LoadingOverlay, Stack, Text, Image, AspectRatio } from '@mantine/core';
@@ -10,31 +10,28 @@ import PointsCard from '@/components/ProfilePage/PointsCard';
 export default function Page() {
   const { user, loading, userObjects, games, fetchUserObjects } = useAppContext();
 
-  // Check for user and userObjects to prevent errors when undefined
   const userAvatar = user?._id && userObjects && userObjects[user.userName] 
     ? userObjects[user.userName].image 
     : null;
 
-  // Count games and wins, with checks to ensure games is an array and user is defined
   const gameCount = useMemo(() => {
-    if (!Array.isArray(games) || !user?.userName) return 0;
+    if (!user?.userName || !Array.isArray(games)) return 0;
     return games.filter(game => game.participants.includes(user.userName)).length || 0;
   }, [games, user]);
 
   const winCount = useMemo(() => {
-    if (!Array.isArray(games) || !user?.userName) return 0;
+    if (!user?.userName || !Array.isArray(games)) return 0;
     return games.filter(game => game.winner.includes(user.userName)).length || 0;
   }, [games, user]);
 
-  // Calculate days since last game with checks for undefined games and user
   const daysSinceLastGame = useMemo(() => {
-    if (!Array.isArray(games) || !user?.userName) return null;
+    if (!user?.userName || !Array.isArray(games)) return null;
 
     const userGames = games
-        .filter(game => game.participants.includes(user.userName))
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      .filter(game => game.participants.includes(user.userName))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-    if (!userGames[0]) return null; // Replace length check with element access
+    if (!userGames[0]) return null;
 
     const lastGameDate = new Date(userGames[0].date);
     const today = new Date();
@@ -49,11 +46,10 @@ export default function Page() {
   const pointsArray: number[] = [];
   let cumulativePoints = 0;
 
-  // Check for games and accumulate points
-  if (Array.isArray(games)) {
+  if (user?.userName && Array.isArray(games)) {
     games.slice().reverse().forEach((game) => {
-      if (user?.userName && game.participants.includes(user.userName)) {
-        if (game.winner === user.userName) {
+      if (game.participants.includes(user.userName)) {
+        if (Array.isArray(game.winner) ? game.winner.includes(user.userName) : game.winner === user.userName) {
           cumulativePoints += game.participants.length * 2;
         } else {
           cumulativePoints -= (5 - game.participants.length);
@@ -62,6 +58,10 @@ export default function Page() {
         pointsArray.push(cumulativePoints);
       }
     });
+  }
+
+  if (loading || !user || !games) {
+    return <LoadingOverlay visible={true} />;
   }
 
   return (
