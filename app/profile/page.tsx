@@ -1,32 +1,61 @@
-'use client';
+'use client'
 
-import { useRouter } from 'next/navigation';
-import { IconLogout } from '@tabler/icons-react';
-import { Button, LoadingOverlay, Stack, Text, Image, AspectRatio } from '@mantine/core';
+import { useMemo } from 'react';
+import { LoadingOverlay, Stack, Text, Image, AspectRatio } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
-import ImageUpload from '@/components/ImageUpload/ImageUpload';
+import ImageUpload from '@/components/ProfilePage/ImageUpload';
+import ProfileCard from '@/components/ProfilePage/ProfileCard';
+import PointsCard from '@/components/ProfilePage/PointsCard';
 
 export default function Page() {
-  const router = useRouter();
-  const { user, loading, userObjects, clearContext, fetchUserObjects } = useAppContext();
+  const { user, loading, userObjects, games, fetchUserObjects } = useAppContext();
   const userAvatar = user?._id ? userObjects[user.userName]?.image : null;
+  // Count games and wins
+  const gameCount = useMemo(() => 
+    games?.filter(game => user?.userName && game.participants.includes(user.userName)).length || 0,
+    [games, user]
+  );
+  const winCount = useMemo(() => 
+    games?.filter(game => user?.userName && game.winner.includes(user.userName)).length || 0,
+    [games, user]
+  );
 
+  // Calculate days since last game
+  const daysSinceLastGame = useMemo(() => {
+    if (!games || !user?.userName) return null;
 
+    const userGames = games
+      .filter(game => game.participants.includes(user.userName))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    if (userGames.length === 0) return null;
+
+    const lastGameDate = new Date(userGames[0].date);
+    const today = new Date();
+    const diffTime = Math.abs(today.getTime() - lastGameDate.getTime());
+    return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  }, [games, user]);
 
   const handleImageUpload = () => {
     fetchUserObjects();
   };
 
-  const handleLogout = async () => {
-    try {
-      const res = await fetch('/api/logout', { method: 'POST' });
-      if (!res.ok) throw new Error('Logout failed');
-      router.push('/login');
-      clearContext();
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
+  
+
+  const pointsArray: number[] = [];
+  let cumulativePoints = 0;
+  
+  games?.slice().reverse().forEach((game) => {
+      if (user?.userName && game.participants.includes(user.userName)) {
+          if (game.winner === user.userName) {
+              cumulativePoints += game.participants.length * 2;
+          } else {
+              cumulativePoints -= (5 - game.participants.length);
+              cumulativePoints = Math.max(0, cumulativePoints);
+          }
+          pointsArray.push(cumulativePoints);
+      }
+  });
 
   return (
     <Stack>
@@ -36,21 +65,8 @@ export default function Page() {
         overlayProps={{ color: 'black', radius: 'sm', blur: 4 }}
         loaderProps={{ color: 'red', type: 'bars' }}
       />
-      <Stack align="flex-end">
-        <Button
-          onClick={handleLogout}
-          c={'#9c9c9c'}
-          w={'130px'}
-          variant="subtle"
-          size="md"
-          rightSection={<IconLogout />}
-        >
-          Logout
-        </Button>
-      </Stack>
-
       <Stack align="center">
-        <AspectRatio>
+        <AspectRatio pt={'35px'}>
           <Image
             src={userAvatar}
             alt="Profile Picture"
@@ -64,6 +80,13 @@ export default function Page() {
         <Text mt={'-10px'} size="35px" fw={'bold'} c={'white'}>
           {user?.userName}
         </Text>
+        <ProfileCard 
+          gameCount={gameCount} 
+          winCount={winCount} 
+          lossCount={gameCount - winCount} 
+          daysSinceLastGame={daysSinceLastGame}
+        />
+        <PointsCard pointsArray={pointsArray} userObjects={userObjects} />
       </Stack>
     </Stack>
   );
