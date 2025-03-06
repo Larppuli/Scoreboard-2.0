@@ -68,7 +68,7 @@ export default function Page() {
 
   return (
     <Container size="xs" px="md" py="xl">
-      <Text ta={'center'} size='35px' fw={700}>
+      <Text c={'white'} ta={'center'} size='35px' fw={700}>
         Sign up
       </Text>
       <Stack align="stretch" mt={'5vh'}>
