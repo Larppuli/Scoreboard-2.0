@@ -1,26 +1,26 @@
-import '@mantine/core/styles.css';
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
 
-import React from 'react';
-import { mantineHtmlProps, MantineProvider } from '@mantine/core';
-import { AppProvider } from '@/app/lib/AppContext';
-import AppShellWrapper from '@/components/AppShellWrapper/AppShellWrapper';
-
-import '@mantine/dates/styles.css';
+import React from "react";
+import { mantineHtmlProps, MantineProvider } from "@mantine/core";
+import { AppProvider } from "@/app/lib/AppContext";
+import AppShellWrapper from "@/components/AppShellWrapper/AppShellWrapper";
 
 export const metadata = {
-  title: 'Poikainscore 2.0',
-  description: 'PWA to keep track of scores',
+  title: "Poikainscore 2.0",
+  description: "PWA to keep track of scores",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
-        <link rel="shortcut icon" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/poikainscoreFavicon.png" />
         <meta
           name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body>
         <MantineProvider>
