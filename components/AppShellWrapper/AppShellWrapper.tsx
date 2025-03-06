@@ -1,16 +1,23 @@
-'use client';
+"use client";
+import React from "react";
+import { AppShell } from "@mantine/core";
+import BottomNavigation from "./BottomNavigation";
+import Header from "./Header";
+import { useAppContext } from "@/app/lib/AppContext";
 
-import React from 'react';
-import { AppShell } from '@mantine/core';
-import BottomNavigation from './BottomNavigation';
-import Header from './Header';
+function AppShellWrapper({ children }: { children: React.ReactNode }) {
+  const { user } = useAppContext();
+  const isAuthenticated = user !== null;
 
-function AppShellWrapper({ children }: { children: any }) {
   return (
-    <AppShell header={{ height: 55 }} footer={{ height: 90 }} padding="md">
-      <Header />
+    <AppShell
+      header={{ height: isAuthenticated ? 55 : 0 }}
+      footer={{ height: isAuthenticated ? 90 : 0 }}
+      padding="md"
+    >
+      {isAuthenticated && <Header />}
       <AppShell.Main bg="#080c0c">{children}</AppShell.Main>
-      <BottomNavigation />
+      {isAuthenticated && <BottomNavigation />}
     </AppShell>
   );
 }
