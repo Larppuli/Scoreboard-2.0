@@ -9,15 +9,6 @@ import AppShellWrapper from "@/components/AppShellWrapper/AppShellWrapper";
 export const metadata = {
   title: "Poikainscore 2.0",
   description: "Kovaa ajoa ja hurjaa peliä",
-  icons: {
-    apple: [
-      {
-        url: "/poiainscoreFavicon.png",
-        sizes: '192x192',
-        type: "image/png"
-      }
-    ]
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -25,6 +16,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" {...mantineHtmlProps}>
       <head>
         <link rel="shortcut icon" href="/poikainscoreFavicon.png" />
+
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/poikainscoreFavicon.png"
+        />
+        
+        <link rel="manifest" href="/manifest.ts" />
+        
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
