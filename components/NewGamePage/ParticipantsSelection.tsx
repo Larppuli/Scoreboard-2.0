@@ -32,20 +32,20 @@ export default function ParticipantsSelect({
       comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
       styles={{
         input: {
-          backgroundColor: '#1e1e2e',
+          backgroundColor: '#1e1e1e',
           color: '#ffffff',
           fontSize: '16px',
           alignContent: 'center',
-          border: '1px solid #363636',
+          border: 0,
           borderRadius: '5px',
           minHeight: '65px',
           textAlignLast: 'center',
           justifyItems: 'center',
         },
         dropdown: {
-          backgroundColor: '#2e2e3e',
+          backgroundColor: '#1e1e1e',
           color: '#ffffff',
-          border: '1px solid #363636',
+          border: 0,
           borderRadius: '5px',
         },
         option: {
