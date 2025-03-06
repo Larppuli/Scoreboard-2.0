@@ -69,17 +69,15 @@ export default function Page() {
   }
 
   if (loading || !user || !games) {
-    return <LoadingOverlay visible={true} />;
+    return <LoadingOverlay  
+      visible={true}         
+      overlayProps={{ radius: 'sm', blur: 2, color: 'rgba(14, 14, 14, 0.6)' }}
+      loaderProps={{ color: 'red', type: 'bars' }}  
+    />;
   }
 
   return (
     <Stack>
-      <LoadingOverlay
-        visible={loading}
-        zIndex={1000}
-        overlayProps={{ color: '#3a3a3a', radius: 'sm', blur: 4 }}
-        loaderProps={{ color: 'red', type: 'bars' }}
-      />
       <Stack align="center">
         <AspectRatio pt={'35px'}>
           <Image

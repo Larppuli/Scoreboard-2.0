@@ -5,22 +5,40 @@ import React from "react";
 import { mantineHtmlProps, MantineProvider } from "@mantine/core";
 import { AppProvider } from "@/app/lib/AppContext";
 import AppShellWrapper from "@/components/AppShellWrapper/AppShellWrapper";
+import { Metadata, Viewport } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Poikainscore 2.0",
-  description: "PWA to keep track of scores",
+  description: "Kovaa ajoa ja hurjaa peliä",
+  icons: {
+    icon: [
+      {
+        url: "/poikainscoreFavicon.png",
+        sizes: "192x192",
+        type: "image/png",
+      }
+    ],
+    apple: [
+      {
+        url: "/poikainscoreFavicon.png",
+        sizes: "192x192", 
+        type: "image/png",
+      }
+    ]
+  }
 };
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
-        <link rel="shortcut icon" href="/poikainscoreFavicon.png" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-        <link rel="manifest" href="/manifest.ts" />
       </head>
       <body>
         <MantineProvider>

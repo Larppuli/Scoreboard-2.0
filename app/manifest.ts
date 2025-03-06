@@ -9,6 +9,6 @@ export default function manifest(): MetadataRoute.Manifest {
     display: 'standalone',
     orientation: 'portrait',
     scope: '/',
-    start_url: '/',
+    start_url: '/profile',
   };
 }
