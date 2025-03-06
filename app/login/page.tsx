@@ -37,6 +37,7 @@ export default function Page() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ emailOrUsername, password }),
+        credentials: 'include',
       });
 
       if (!response.ok) {
