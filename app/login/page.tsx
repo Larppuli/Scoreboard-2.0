@@ -68,7 +68,9 @@ export default function Page() {
   }, [error]);
 
   useEffect(() => {
+    console.log('1 user', user);
     if (user) {
+      console.log('2 user', user);
       router.replace('/profile');
     }
   }, [user, router]);
