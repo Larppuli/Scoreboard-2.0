@@ -9,24 +9,22 @@ import AppShellWrapper from "@/components/AppShellWrapper/AppShellWrapper";
 export const metadata = {
   title: "Poikainscore 2.0",
   description: "Kovaa ajoa ja hurjaa peliä",
-  icons: {
-    icon: [
-      {
-        url: "/poikainscoreFavicon.png",
-        sizes: '192x192',
-        type: "image/png"
-      }
-    ],
-    apple: 
-    [
-      {
-      url: "/poikainscoreFavicon.png",
-      sizes: '192x192',
-      type: "image/png"
-      }
-    ],
-  }
+  icons: [
+    {
+      src: "/poikainscoreFavicon.png",
+      sizes: "192x192",
+      type: "image/png",
+      purpose: "any"
+    },
+    {
+      src: "/poikainscoreFavicon.png",
+      sizes: "180x180", 
+      type: "image/png",
+      purpose: "apple-touch-icon"
+    }
+  ]
 };
+
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
