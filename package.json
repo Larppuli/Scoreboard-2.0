@@ -31,6 +31,7 @@
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.5.1",
     "dayjs": "^1.11.13",
+    "framer-motion": "^12.4.10",
     "jose": "^6.0.7",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.1",
