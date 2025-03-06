@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { IconLock, IconLogin2, IconUser, IconX } from '@tabler/icons-react';
 import {
   Button,
@@ -24,8 +23,6 @@ export default function Page() {
   const { refetchUser, user } = useAppContext();
 
   const xIcon = <IconX size={20} />;
-
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
