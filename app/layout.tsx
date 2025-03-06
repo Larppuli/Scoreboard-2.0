@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   icons: {
     apple: [
       {
-        url: "/poiainscoreFavicon.png",
+        url: "/poikainscoreFavicon.png",
         sizes: '192x192',
         type: "image/png"
       }
