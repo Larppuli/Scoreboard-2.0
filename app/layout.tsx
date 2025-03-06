@@ -5,8 +5,9 @@ import React from "react";
 import { mantineHtmlProps, MantineProvider } from "@mantine/core";
 import { AppProvider } from "@/app/lib/AppContext";
 import AppShellWrapper from "@/components/AppShellWrapper/AppShellWrapper";
+import { Metadata, Viewport } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Poikainscore 2.0",
   description: "Kovaa ajoa ja hurjaa peliä",
   icons: {
@@ -15,31 +16,30 @@ export const metadata = {
         url: "/poikainscoreFavicon.png",
         sizes: "192x192",
         type: "image/png",
-        purpose: "any"
       }
     ],
     apple: [
       {
         url: "/poikainscoreFavicon.png",
-        sizes: "180x180", 
+        sizes: "192x192", 
         type: "image/png",
-        purpose: "apple-touch-icon"
       }
     ]
   }
 };
 
-
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
-        <link rel="shortcut icon" href="/poikainscoreFavicon.png" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
       </head>
       <body>
         <MantineProvider>
