@@ -48,8 +48,7 @@ export default function Page() {
       const data = await response.json();
 
       refetchUser();
-      console.log('redirecting to /profile')
-      router.replace('/profile');
+      window.location.href = '/profile';
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -67,14 +66,6 @@ export default function Page() {
       return () => clearTimeout(timer);
     }
   }, [error]);
-
-  useEffect(() => {
-    console.log('1 user', user);
-    if (user) {
-      console.log('2 user', user);
-      router.replace('/profile');
-    }
-  }, [user, router]);
 
   return (
     <Container size="xs" px="md" py="xl">
