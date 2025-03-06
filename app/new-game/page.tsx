@@ -8,10 +8,11 @@ import DateSelection from '@/components/NewGamePage/DateSelection';
 import ParticipantsSelection from '@/components/NewGamePage/ParticipantsSelection';
 import SportSelection from '@/components/NewGamePage/SportSelection';
 import WinnerSelection from '@/components/NewGamePage/WinnerSelection';
+import { DateTime } from 'luxon';
 
 export default function Page() {
   const { users, sports, userObjects, addGame } = useAppContext();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<DateTime | null>(null);
   const [selectedParticipants, setSelectedParticipants] = useState<string[]>([]);
   const [selectedWinner, setSelectedWinner] = useState<string>('');
   const [selectedSport, setSelectedSport] = useState<string | null>('');
@@ -32,7 +33,7 @@ export default function Page() {
     }
   }, [selectedDate, selectedParticipants, selectedWinner, selectedSport]);
 
-  const handleDateChange = (date: Date | null) => {
+  const handleDateChange = (date: DateTime | null) => {
     setSelectedDate(date);
   };
 
@@ -60,7 +61,7 @@ export default function Page() {
     }
 
     const gameObject = {
-      date: selectedDate.toISOString(),
+      date: selectedDate.toString(),
       participants: selectedParticipants,
       winner: selectedWinner,
       sport: selectedSport,
