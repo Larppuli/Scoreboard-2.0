@@ -70,7 +70,10 @@ export default function Page() {
 
   return (
     <Container size="xs" px="md" py="xl">
-      <Stack align="stretch">
+      <Text ta={'center'} size='35px' fw={700}>
+        Sign up
+      </Text>
+      <Stack align="stretch" mt={'5vh'}>
         <Stack>
           <Fieldset
             variant="default"
