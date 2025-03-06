@@ -66,7 +66,10 @@ export default function Page() {
 
   return (
     <Container size="xs" px="md" py="xl">
-      <Stack align="stretch">
+      <Text ta={'center'} size='35px' fw={700}>
+        Login
+      </Text>
+      <Stack align="stretch" mt={'6vh'}>
         <Stack>
           <Fieldset radius="md" pt="md" bg="#252525" bd="1px solid #333" disabled={loading}>
             <form onSubmit={handleSubmit}>

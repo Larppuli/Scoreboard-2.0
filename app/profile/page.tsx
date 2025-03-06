@@ -77,7 +77,7 @@ export default function Page() {
       <LoadingOverlay
         visible={loading}
         zIndex={1000}
-        overlayProps={{ color: 'black', radius: 'sm', blur: 4 }}
+        overlayProps={{ color: '#3a3a3a', radius: 'sm', blur: 4 }}
         loaderProps={{ color: 'red', type: 'bars' }}
       />
       <Stack align="center">
