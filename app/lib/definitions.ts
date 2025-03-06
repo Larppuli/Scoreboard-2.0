@@ -1,5 +1,6 @@
 import { JWTPayload } from 'jose';
 import { z } from 'zod';
+import { DateTime } from 'luxon';
 
 // Session Payload for JWT
 export interface SessionPayload extends JWTPayload {
@@ -57,8 +58,8 @@ export interface ImageUploadProps {
 }
 
 export interface DateSelectProps {
-  selectedDate: Date | null;
-  handleDateChange: (date: Date) => void;
+  selectedDate: DateTime | null;
+  handleDateChange: (date: DateTime) => void;
 }
 
 export interface ParticipantsSelectProps {
