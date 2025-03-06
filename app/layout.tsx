@@ -11,13 +11,13 @@ export const metadata = {
   description: "Kovaa ajoa ja hurjaa peliä",
   icons: [
     {
-      src: "/poikainscoreFavicon.png",
+      url: "/poikainscoreFavicon.png",
       sizes: "192x192",
       type: "image/png",
       purpose: "any"
     },
     {
-      src: "/poikainscoreFavicon.png",
+      url: "/poikainscoreFavicon.png",
       sizes: "180x180", 
       type: "image/png",
       purpose: "apple-touch-icon"
