@@ -5,9 +5,8 @@ import { DateTime } from 'luxon';
 
 export default function DateSelection({ selectedDate, handleDateChange }: DateSelectProps) {
   const icon = <IconCalendar size={20} />;
-  const today = DateTime.now().startOf('day'); // Using Luxon to get current date
+  const today = DateTime.now().startOf('day'); 
 
-  // Convert selectedDate to JS Date if it's a DateTime object for Mantine's DateInput
   const displayDate = selectedDate instanceof DateTime ? selectedDate.toJSDate() : selectedDate;
 
   return (
@@ -17,7 +16,6 @@ export default function DateSelection({ selectedDate, handleDateChange }: DateSe
       value={displayDate}
       onChange={(value) => {
         if (value) {
-          // Convert the selected JS Date back to Luxon DateTime
           const luxonDate = DateTime.fromJSDate(value);
           handleDateChange(luxonDate);
         }
@@ -25,15 +23,15 @@ export default function DateSelection({ selectedDate, handleDateChange }: DateSe
       placeholder="Give the game a date"
       size="md"
       radius="md"
-      maxDate={today.toJSDate()} // Convert Luxon DateTime to JS Date for maxDate
+      maxDate={today.toJSDate()}
       onFocus={(e) => e.target.blur()}
       styles={{
         input: {
-          backgroundColor: '#1e1e2e',
+          backgroundColor: '#1e1e1e',
           color: '#ffffff',
           fontSize: '16px',
           textAlign: 'center',
-          border: '1px solid #363636',
+          border: 0,
           borderRadius: '5px',
           height: '50px',
         },

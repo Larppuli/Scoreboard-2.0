@@ -47,18 +47,18 @@ export default function WinnerSelection({
       comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
       styles={{
         input: {
-          backgroundColor: '#1e1e2e',
+          backgroundColor: '#1e1e1e',
           color: '#ffffff',
           fontSize: '16px',
-          border: '1px solid #363636',
+          border: 0,
           borderRadius: '5px',
           minHeight: '50px',
           textAlign: 'center',
         },
         dropdown: {
-          backgroundColor: '#2e2e3e',
+          backgroundColor: '#1e1e1e',
           color: '#ffffff',
-          border: '1px solid #363636',
+          border: 0,
           borderRadius: '5px',
         },
         option: {
@@ -66,6 +66,12 @@ export default function WinnerSelection({
           '&:hover': {
             backgroundColor: '#313142',
           },
+          '&:click': {
+            backgroundColor: '#3d3d3d',
+          },
+          '&:focus': {
+            backgroundColor: '#3d3d3d',
+          }
         },
       }}
     />
