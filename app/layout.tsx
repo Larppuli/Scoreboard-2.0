@@ -3,32 +3,38 @@ import "@mantine/dates/styles.css";
 
 import React from "react";
 import { mantineHtmlProps, MantineProvider } from "@mantine/core";
+import { Metadata, Viewport } from 'next';
 import { AppProvider } from "@/app/lib/AppContext";
 import AppShellWrapper from "@/components/AppShellWrapper/AppShellWrapper";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Poikainscore 2.0",
   description: "Kovaa ajoa ja hurjaa peliä",
+  generator: "Next.js",
+  creator: "Lauri Talvitie",
+  icons: {
+    apple: [
+      {
+        url: "/poiainscoreFavicon.png",
+        sizes: '192x192',
+        type: "image/png"
+      }
+    ]
+  },
 };
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
-        <link rel="shortcut icon" href="/poikainscoreFavicon.png" />
-
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/poikainscoreFavicon.png"
-        />
-        
-        <link rel="manifest" href="/manifest.ts" />
-        
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
       </head>
       <body>
         <MantineProvider>
