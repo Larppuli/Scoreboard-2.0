@@ -31,7 +31,7 @@ export default function Page() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+  
     try {
       const response = await fetch('/api/login', {
         method: 'POST',
@@ -39,22 +39,25 @@ export default function Page() {
         body: JSON.stringify({ emailOrUsername, password }),
         credentials: 'include',
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.errors?.error || 'Login failed');
       }
-
-      const data = await response.json();
-
-      router.push('/profile');
-      refetchUser();
+  
+      console.log('Login successful! Refetching user...');
+  
+      await refetchUser(); // Wait for user data to update
+      console.log('User refetched, redirecting...');
+  
+      router.replace('/profile'); // Ensure the navigation happens
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
   };
+  
 
   // Clear error after 3 seconds
   useEffect(() => {
