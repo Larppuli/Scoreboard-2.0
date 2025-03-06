@@ -9,20 +9,24 @@ import AppShellWrapper from "@/components/AppShellWrapper/AppShellWrapper";
 export const metadata = {
   title: "Poikainscore 2.0",
   description: "Kovaa ajoa ja hurjaa peliä",
-  icons: [
-    {
-      url: "/poikainscoreFavicon.png",
-      sizes: "192x192",
-      type: "image/png",
-      purpose: "any"
-    },
-    {
-      url: "/poikainscoreFavicon.png",
-      sizes: "180x180", 
-      type: "image/png",
-      purpose: "apple-touch-icon"
-    }
-  ]
+  icons: {
+    icon: [
+      {
+        url: "/poikainscoreFavicon.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any"
+      }
+    ],
+    apple: [
+      {
+        url: "/poikainscoreFavicon.png",
+        sizes: "180x180", 
+        type: "image/png",
+        purpose: "apple-touch-icon"
+      }
+    ]
+  }
 };
 
 
