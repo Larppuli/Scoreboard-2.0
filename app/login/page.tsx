@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { IconLock, IconLogin2, IconUser, IconX } from '@tabler/icons-react';
 import {
   Button,
@@ -21,11 +20,9 @@ export default function Page() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { refetchUser } = useAppContext();
+  const { refetchUser, user } = useAppContext();
 
   const xIcon = <IconX size={20} />;
-
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +34,7 @@ export default function Page() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ emailOrUsername, password }),
+        credentials: 'include',
       });
 
       if (!response.ok) {
@@ -46,8 +44,8 @@ export default function Page() {
 
       const data = await response.json();
 
-      router.push('/profile');
       refetchUser();
+      window.location.href = '/profile';
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
