@@ -10,15 +10,24 @@ export const metadata = {
   title: "Poikainscore 2.0",
   description: "Kovaa ajoa ja hurjaa peliä",
   icons: {
-    apple: [
+    icon: [
       {
         url: "/poikainscoreFavicon.png",
         sizes: '192x192',
         type: "image/png"
       }
-    ]
-  },
+    ],
+    apple: 
+    [
+      {
+      url: "/poikainscoreFavicon.png",
+      sizes: '192x192',
+      type: "image/png"
+      }
+    ],
+  }
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
