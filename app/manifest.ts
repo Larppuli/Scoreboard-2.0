@@ -10,5 +10,12 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: 'portrait',
     scope: '/',
     start_url: '/profile',
+    icons: [
+      {
+        src: '/poikainscoreFavicon.png',
+        sizes: '192x192',
+        type: 'image/png',
+      }
+    ],
   };
 }

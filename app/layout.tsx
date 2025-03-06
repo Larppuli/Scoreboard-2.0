@@ -12,7 +12,7 @@ export const metadata = {
   icons: {
     apple: [
       {
-        src: "/poikainscoreFavicon.png",
+        url: "/poikainscoreFavicon.png",
         sizes: '192x192',
         type: "image/png"
       }
