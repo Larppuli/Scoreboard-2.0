@@ -21,7 +21,7 @@ export default function Page() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { refetchUser } = useAppContext();
+  const { refetchUser, user } = useAppContext();
 
   const xIcon = <IconX size={20} />;
 
@@ -31,7 +31,7 @@ export default function Page() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-  
+
     try {
       const response = await fetch('/api/login', {
         method: 'POST',
@@ -39,28 +39,22 @@ export default function Page() {
         body: JSON.stringify({ emailOrUsername, password }),
         credentials: 'include',
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.errors?.error || 'Login failed');
       }
-  
-      console.log('Login successful! Refetching user...');
-  
-      await refetchUser(); // Wait for user data to update
-      console.log('User refetched, redirecting...');
-  
-      setTimeout(() => {
-        router.replace('/profile'); // Force navigation
-      }, 100); // Delay redirect slightly to ensure state updates
-  
+
+      const data = await response.json();
+
+      router.replace('/profile');
+      refetchUser();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
   };
-  
 
   // Clear error after 3 seconds
   useEffect(() => {
@@ -72,6 +66,12 @@ export default function Page() {
       return () => clearTimeout(timer);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (user) {
+      router.replace('/profile');
+    }
+  }, [user, router]);
 
   return (
     <Container size="xs" px="md" py="xl">
