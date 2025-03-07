@@ -12,9 +12,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sports, setSports] = useState<string[] | null>(null);
   const [users, setUsers] = useState<User[] | null>(null);
   const [games, setGames] = useState<Game[] | null>(null);
-  const [userObjects, setUserObjects] = useState<
-    Record<string, { image: string; fullName: string }>
-  >({});
+  const [userObjects, setUserObjects] = useState<UserObject[]>([]);
 
   const timestamp = new Date().getTime();
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
@@ -100,16 +98,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     const defaultPfpUrl = `https://res.cloudinary.com/${cloudName}/image/upload/v1741022251265/DefaultPFP`;
 
-    const updatedUsers: Record<string, UserObject> = {};
+    const updatedUsers: UserObject[] = [];
 
     users.forEach((user) => {
       const primaryUrl = `https://res.cloudinary.com/${cloudName}/image/upload/v${timestamp}/profilepictures/profile_picture_${user._id}`;
 
-      updatedUsers[user.userName] = {
+      updatedUsers.push( 
+        {
+        userName: user.userName,
         image: primaryUrl,
         fullName: `${user.firstName} ${user.lastName}`,
         _id: user._id,
-      };
+        }
+      )
     });
 
     const checkImageValidity = async (url: string): Promise<boolean> => {
@@ -122,13 +123,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
 
     const validatedUsers = await Promise.all(
-      Object.entries(updatedUsers).map(async ([name, data]) => {
+      updatedUsers.map(async (data) => {
         const isValid = await checkImageValidity(data.image);
-        return [name, { ...data, image: isValid ? data.image : defaultPfpUrl }];
+        return { 
+          ...data,
+          image: isValid ? data.image : defaultPfpUrl
+        };
       })
     );
-
-    setUserObjects(Object.fromEntries(validatedUsers));
+    setUserObjects(validatedUsers)
   };
 
   // Initial fetch on app open

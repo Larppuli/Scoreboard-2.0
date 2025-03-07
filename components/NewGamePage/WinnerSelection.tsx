@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { IconLaurelWreath1 } from '@tabler/icons-react';
 import { Avatar, Group, Select, SelectProps, Text } from '@mantine/core';
 import { WinnerSelectProps } from '@/app/lib/definitions';
@@ -22,17 +22,22 @@ export default function WinnerSelection({
     handleWinnerChange(value || '');
   };
 
-  const renderSelectOption: SelectProps['renderOption'] = ({ option }) => (
-    <Group gap="sm">
-      <Avatar src={userObjects[option.value]?.image} size={36} radius="xl" />
-      <div>
-        <Text size="sm">{option.value}</Text>
-        <Text size="xs" opacity={0.5}>
-          {userObjects[option.value]?.fullName}
-        </Text>
-      </div>
-    </Group>
-  );
+  const renderSelectOption: SelectProps['renderOption'] = ({ option }) => {
+    const user = userObjects.find((user) => user._id === option.value);
+  
+    return (
+      <Group gap="sm">
+        <Avatar src={user?.image} size={36} radius="xl" />
+        <div>
+          <Text size="sm">{user?.userName}</Text>
+          <Text size="xs" opacity={0.5}>
+            {user?.fullName}
+          </Text>
+        </div>
+      </Group>
+    );
+  };
+  
 
   return (
     <Select
@@ -40,7 +45,10 @@ export default function WinnerSelection({
       mt={'15px'}
       leftSection={<IconLaurelWreath1 size={20} />}
       renderOption={renderSelectOption}
-      data={participants}
+      data={userObjects.map((user) => ({
+        value: user._id,
+        label: user.userName,
+      }))}
       value={selectedWinner}
       onChange={handleChange}
       placeholder="Select winner"

@@ -7,17 +7,22 @@ export default function ParticipantsSelect({
   handleParticipantsChange,
   userObjects,
 }: ParticipantsSelectProps) {
-  const renderMultiSelectOption: MultiSelectProps['renderOption'] = ({ option }) => (
-    <Group gap="sm">
-      <Avatar src={userObjects[option.value]?.image} size={36} radius="xl" />
-      <div>
-        <Text size="sm">{option.value}</Text>
-        <Text size="xs" opacity={0.5}>
-          {userObjects[option.value]?.fullName}
-        </Text>
-      </div>
-    </Group>
-  );
+
+  const renderMultiSelectOption:MultiSelectProps['renderOption'] = ({ option }) => {
+    const user = userObjects.find((user) => user._id === option.value);
+  
+    return (
+      <Group gap="sm">
+        <Avatar src={user?.image} size={36} radius="xl" />
+        <div>
+          <Text size="sm">{user?.userName}</Text>
+          <Text size="xs" opacity={0.5}>
+            {user?.fullName}
+          </Text>
+        </div>
+      </Group>
+    );
+  };
 
   return (
     <MultiSelect
@@ -25,7 +30,10 @@ export default function ParticipantsSelect({
       mt={'15px'}
       renderOption={renderMultiSelectOption}
       leftSection={<IconUsersGroup size={20} />}
-      data={Object.keys(userObjects)}
+      data={userObjects.map((user) => ({
+        value: user._id,
+        label: user.userName,
+      }))}
       value={selectedParticipants}
       onChange={handleParticipantsChange}
       placeholder={selectedParticipants.length === 0 ? 'Select participants' : ''}

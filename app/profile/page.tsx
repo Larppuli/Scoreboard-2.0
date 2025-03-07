@@ -10,35 +10,37 @@ import ProfileCard from '@/components/ProfilePage/ProfileCard';
 export default function Page() {
   const { user, loading, userObjects, games, fetchUserObjects } = useAppContext();
 
-  const userAvatar =
-    user?._id && userObjects && userObjects[user.userName]
-      ? userObjects[user.userName].image
-      : null;
+  const userAvatar = user?._id 
+  ? userObjects.find((u) => u._id === user._id)?.image || null
+  : null;
+
 
   const gameCount = useMemo(() => {
-    if (!user?.userName || !Array.isArray(games)) return 0;
-    return games.filter((game) => game.participants.includes(user.userName)).length || 0;
+    if (!user?._id || !Array.isArray(games)) return 0;
+    return games.filter((game) => game.participants.includes(user._id)).length || 0;
   }, [games, user]);
 
   const winCount = useMemo(() => {
-    if (!user?.userName || !Array.isArray(games)) return 0;
-    return games.filter((game) => game.winner.includes(user.userName)).length || 0;
+    if (!user?._id || !Array.isArray(games)) return 0;
+    return games.filter((game) => game.winner.includes(user._id)).length || 0;
   }, [games, user]);
 
   const daysSinceLastGame = useMemo(() => {
-    if (!user?.userName || !Array.isArray(games)) return null;
-
+    if (!user?._id || !Array.isArray(games)) return null;
+  
     const userGames = games
-      .filter((game) => game.participants.includes(user.userName))
+      .filter((game) => game.participants.includes(user._id)) // ✅ Match by _id
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-    if (!userGames[0]) return null;
-
+  
+    if (userGames.length === 0) return null;
+  
     const lastGameDate = new Date(userGames[0].date);
     const today = new Date();
     const diffTime = Math.abs(today.getTime() - lastGameDate.getTime());
+  
     return Math.floor(diffTime / (1000 * 60 * 60 * 24));
   }, [games, user]);
+  
 
   const handleImageUpload = () => {
     fetchUserObjects();
@@ -47,16 +49,16 @@ export default function Page() {
   const pointsArray: number[] = [];
   let cumulativePoints = 0;
 
-  if (user?.userName && Array.isArray(games)) {
+  if (user?._id && Array.isArray(games)) {
     games
       .slice()
       .reverse()
       .forEach((game) => {
-        if (game.participants.includes(user.userName)) {
+        if (game.participants.includes(user._id)) {
           if (
             Array.isArray(game.winner)
-              ? game.winner.includes(user.userName)
-              : game.winner === user.userName
+              ? game.winner.includes(user._id)
+              : game.winner === user._id
           ) {
             cumulativePoints += game.participants.length * 2;
           } else {
@@ -101,7 +103,7 @@ export default function Page() {
         />
         <PointsCard
           pointsArray={pointsArray.length ? pointsArray : [0]}
-          userObjects={userObjects || {}}
+          userObjects={userObjects || []}
         />
       </Stack>
     </Stack>

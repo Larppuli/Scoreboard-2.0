@@ -57,8 +57,8 @@ export default function PointsCard({ pointsArray }: PointsCardProps) {
       ?.slice()
       .reverse()
       .forEach((game: any) => {
-        if (game.participants.includes(user.userName)) {
-          if (game.winner === user.userName) {
+        if (game.participants.includes(user._id)) {
+          if (game.winner === user._id) {
             cumulativePoints += game.participants.length * 2;
           } else {
             cumulativePoints -= 5 - game.participants.length;
