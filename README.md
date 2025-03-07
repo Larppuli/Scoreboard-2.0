@@ -1,37 +1,27 @@
-# Mantine Next.js template
+# Scoreboard 2.0
 
-This is a template for [Next.js](https://nextjs.org/) app router + [Mantine](https://mantine.dev/).
-If you want to use pages router instead, see [next-pages-template](https://github.com/mantinedev/next-pages-template).
+This Progressive Web Application helps to save and keep track of different sports and games played with your friends.
 
-## Features
+## Features 
+- User authentication.
+- Save games to database.
+- Calculate statistics related to saved games.
+- Changing of profile picture.
 
-This template comes with the following features:
+## Future improvements
+- Support to change password and username
+- Graphs and charts to visualize games
+- Possibility to visit other players' profiles
 
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Jest](https://jestjs.io/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+## Technologies Used
+- **Framework**: [Next.js](https://nextjs.org/) (App Router), built on [React](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) for type-safe development
+- **Backend**: Next.js API Routes for server-side logic
+- **UI Library**: [Mantine UI](https://mantine.dev/) for component styling and design
+- **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas) (cloud-hosted NoSQL database)
+- **Progressive Web Application ([PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps))**: Installable on Android and iOS devices, with full-screen support
+- **Image hosting**: [Cloudinary](https://cloudinary.com/) for storing profile pictures
+- **Validation**: [Zod](https://github.com/colinhacks/zod) for runtime validation
 
-## npm scripts
-
-### Build and dev scripts
-
-- `dev` – start dev server
-- `build` – bundle application for production
-- `analyze` – analyzes application bundle with [@next/bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)
-
-### Testing scripts
-
-- `typecheck` – checks TypeScript types
-- `lint` – runs ESLint
-- `prettier:check` – checks files with Prettier
-- `jest` – runs jest tests
-- `jest:watch` – starts jest watch
-- `test` – runs `jest`, `prettier:check`, `lint` and `typecheck` scripts
-
-### Other scripts
-
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
+## Views of the Application
+![image](https://github.com/user-attachments/assets/d5f95516-7dd4-40d0-bab6-b1d33d9282fc)
