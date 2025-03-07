@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconLaurelWreath1 } from '@tabler/icons-react';
 import { Avatar, Group, Select, SelectProps, Text } from '@mantine/core';
 import { WinnerSelectProps } from '@/app/lib/definitions';
@@ -22,8 +22,10 @@ export default function WinnerSelection({
     handleWinnerChange(value || '');
   };
 
+  const filteredUserObjects = userObjects.filter((user) => participants.includes(user._id));
+
   const renderSelectOption: SelectProps['renderOption'] = ({ option }) => {
-    const user = userObjects.find((user) => user._id === option.value);
+    const user = filteredUserObjects.find((user) => user._id === option.value);
   
     return (
       <Group gap="sm">
@@ -45,7 +47,7 @@ export default function WinnerSelection({
       mt={'15px'}
       leftSection={<IconLaurelWreath1 size={20} />}
       renderOption={renderSelectOption}
-      data={userObjects.map((user) => ({
+      data={filteredUserObjects.map((user) => ({
         value: user._id,
         label: user.userName,
       }))}
