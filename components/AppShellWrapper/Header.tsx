@@ -3,13 +3,16 @@
 import React from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { IconLogout } from '@tabler/icons-react';
-import { AppShell, Avatar, Button, Container, Stack, Title } from '@mantine/core';
+import { AppShell, Avatar, Button, Container, Title } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 
 function Header() {
   const pathname = usePathname();
   const { userObjects, user, clearContext, games } = useAppContext();
-  const userAvatar = user?._id ? userObjects[user.userName]?.image : null;
+  const userAvatar = user?._id 
+  ? userObjects.find((u) => u._id === user._id)?.image || null
+  : null;
+
 
   const router = useRouter();
 

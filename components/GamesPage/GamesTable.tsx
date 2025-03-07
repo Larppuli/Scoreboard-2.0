@@ -2,7 +2,7 @@ import { Stack, Table } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 
 export default function GamesTable() {
-  const { games } = useAppContext();
+  const { games, users } = useAppContext();
 
   const formatDate = ({ dateString }: { dateString: string }) => {
     const date = new Date(dateString);
@@ -14,17 +14,24 @@ export default function GamesTable() {
   };
 
   const formatParticipants = (participants: string[]) => {
-    return participants.join(', ');
+    return participants
+      .map((id) => users?.find((user) => user._id === id)?.firstName || 'Unknown')
+      .join(', ');
   };
-
+  
+  const formatWinner = (winnerId: string) => {
+    return users?.find((user) => user._id === winnerId)?.firstName || 'Unknown';
+  };
+  
   const rows = (games ?? []).map((element) => (
     <Table.Tr key={element._id}>
       <Table.Td>{formatDate({ dateString: element.date })}</Table.Td>
       <Table.Td>{formatParticipants(element.participants)}</Table.Td>
       <Table.Td>{element.sport}</Table.Td>
-      <Table.Td>{element.winner}</Table.Td>
+      <Table.Td>{formatWinner(element.winner)}</Table.Td>
     </Table.Tr>
   ));
+  
 
   return (
     <Stack h="80vh" style={{ overflowY: 'auto', borderRadius: '12px' }}>

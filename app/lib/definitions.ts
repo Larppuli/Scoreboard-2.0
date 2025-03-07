@@ -65,13 +65,13 @@ export interface DateSelectProps {
 export interface ParticipantsSelectProps {
   participants: string[];
   selectedParticipants: string[];
-  userObjects: Record<string, { image: string; fullName: string }>;
+  userObjects: UserObject[];
   handleParticipantsChange: (participants: string[]) => void;
 }
 
 export interface WinnerSelectProps {
   participants: string[];
-  userObjects: Record<string, { image: string; fullName: string }>;
+  userObjects: UserObject[];
   handleWinnerChange: (winner: string) => void;
 }
 
@@ -95,7 +95,7 @@ export interface AppContextType {
   users: User[] | null;
   sports: string[] | null;
   games: Game[] | null;
-  userObjects: Record<string, { image: string; fullName: string }>;
+  userObjects: UserObject[];
   addGame: (game: Game) => void;
   setUser: (user: User | null) => void;
   clearContext: () => void;
@@ -106,6 +106,7 @@ export interface AppContextType {
 }
 
 export interface UserObject {
+  userName: string;
   image: string;
   fullName: string;
   _id: string;
@@ -120,7 +121,7 @@ export interface ProfileCardProps {
 
 export interface PointsCardProps {
   pointsArray: number[];
-  userObjects: Record<string, { image: string; fullName: string }>;
+  userObjects: UserObject[];
 }
 
 export interface CompareModalProps {
