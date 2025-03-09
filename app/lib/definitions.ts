@@ -117,6 +117,7 @@ export interface ProfileCardProps {
   winCount: number;
   lossCount: number;
   daysSinceLastGame: number | null;
+  meanGameSize: number | null;
 }
 
 export interface PointsCardProps {
