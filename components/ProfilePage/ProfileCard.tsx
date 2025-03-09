@@ -4,6 +4,7 @@ import {
   IconPlayFootball,
   IconSquareRoundedPercentage,
   IconTrophy,
+  IconUsersGroup
 } from '@tabler/icons-react';
 import CountUp from 'react-countup';
 import { Group, Stack, Text } from '@mantine/core';
@@ -14,6 +15,7 @@ export default function ProfileCard({
   winCount,
   lossCount,
   daysSinceLastGame,
+  meanGameSize
 }: ProfileCardProps) {
   return (
     <Stack
@@ -58,6 +60,17 @@ export default function ProfileCard({
             decimals={1}
           />
           %
+        </Text>
+      </Group>
+      <Group gap="xs">
+        <IconUsersGroup size={30} color={'#8800ff'} />
+        <Text size="xl" c={'#8800ff'} fw={500}>
+          Mean game size:{' '}
+          <CountUp
+            end={meanGameSize || 0}
+            duration={1}
+            decimals={1}
+          />
         </Text>
       </Group>
     </Stack>
