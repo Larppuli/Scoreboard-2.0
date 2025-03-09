@@ -81,7 +81,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       if (response.ok) {
         let games = await response.json();
 
-        games.sort((a: Game, b: Game) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        games.reverse().sort((a: Game, b: Game) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
         setGames(games);
       } else {

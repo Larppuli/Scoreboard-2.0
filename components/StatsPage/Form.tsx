@@ -31,8 +31,6 @@ export default function Form({ id }: { id: string }) {
             <Text 
                 size={'12px'} 
                 c="white"
-                mr={isWinner ? '0.2px' : '0.6px'}
-                mb={2}
                 >{`${isWinner ? 'W' : 'L'}`}</Text>
           </Box>
         );
