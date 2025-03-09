@@ -43,12 +43,12 @@ export default function Leaguetable() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.3 }}
     >
-      <Table.Td style={{ borderTop: '1px solid rgb(68, 68, 68)' }} fw={600}>{user.firstName}</Table.Td>
-      <Table.Td style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.matchesPlayed}</Table.Td>
-      <Table.Td style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.wins}</Table.Td>
-      <Table.Td style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.losses}</Table.Td>
-      <Table.Td style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.points}</Table.Td>
-      <Table.Td style={{ borderTop: '1px solid rgb(68, 68, 68)',  align: 'center' }}>
+      <Table.Td  style={{ borderTop: '1px solid rgb(68, 68, 68)' }} fw={600}>{user.firstName}</Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.matchesPlayed}</Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.wins}</Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.losses}</Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.points}</Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)',  align: 'center' }}>
         <Form id={user._id} />
       </Table.Td>
     </motion.tr>
