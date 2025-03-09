@@ -14,7 +14,6 @@ export default function Page() {
   ? userObjects.find((u) => u._id === user._id)?.image || null
   : null;
 
-
   const gameCount = useMemo(() => {
     if (!user?._id || !Array.isArray(games)) return 0;
     return games.filter((game) => game.participants.includes(user._id)).length || 0;
@@ -25,12 +24,21 @@ export default function Page() {
     return games.filter((game) => game.winner.includes(user._id)).length || 0;
   }, [games, user]);
 
+  const meanGameSize = () => {
+    if (!user?._id || !Array.isArray(games)) return null;
+
+    const userGames = games.filter((game) => game.participants.includes(user._id))
+    let totalParticipants = 0;
+    userGames.forEach((game) => {
+      totalParticipants += game.participants.length;
+    })
+    return totalParticipants / userGames.length;
+  };
+
   const daysSinceLastGame = useMemo(() => {
     if (!user?._id || !Array.isArray(games)) return null;
   
-    const userGames = games
-      .filter((game) => game.participants.includes(user._id)) // ✅ Match by _id
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const userGames = games.filter((game) => game.participants.includes(user._id))
   
     if (userGames.length === 0) return null;
   
@@ -100,6 +108,7 @@ export default function Page() {
           winCount={winCount}
           lossCount={gameCount - winCount}
           daysSinceLastGame={daysSinceLastGame || 0}
+          meanGameSize={meanGameSize() || 0}
         />
         <PointsCard
           pointsArray={pointsArray.length ? pointsArray : [0]}
