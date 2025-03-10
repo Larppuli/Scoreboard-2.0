@@ -6,6 +6,7 @@ import { useAppContext } from '@/app/lib/AppContext';
 import ImageUpload from '@/components/ProfilePage/ImageUpload';
 import PointsCard from '@/components/ProfilePage/PointsCard';
 import ProfileCard from '@/components/ProfilePage/ProfileCard';
+import ExpectedWinPercent from '@/components/ProfilePage/ExpectedWinPercent';
 
 export default function Page() {
   const { user, loading, userObjects, games, fetchUserObjects } = useAppContext();
@@ -109,6 +110,10 @@ export default function Page() {
           lossCount={gameCount - winCount}
           daysSinceLastGame={daysSinceLastGame || 0}
           meanGameSize={meanGameSize() || 0}
+        />
+                <ExpectedWinPercent 
+          meanGameSize={meanGameSize() || 0} 
+          winPercent={(winCount / gameCount) * 100} 
         />
         <PointsCard
           pointsArray={pointsArray.length ? pointsArray : [0]}
