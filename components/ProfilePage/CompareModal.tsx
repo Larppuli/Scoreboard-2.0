@@ -8,8 +8,16 @@ export const CompareModal = ({ opened, setOpened, onUserSelect }: CompareModalPr
   const filteredUsers = users?.filter((u) => u._id !== user?._id);
 
   return (
-    <Modal opened={opened} onClose={() => setOpened(false)} title="Compare Points With" centered>
-      <Stack mt="20px">
+    <Modal 
+      opened={opened} 
+      onClose={() => setOpened(false)} 
+      title="Compare Points With" centered
+      styles={{
+        header: { backgroundColor: 'bg="#141414"' },
+        body: { backgroundColor: 'bg="#141414"' },
+      }}
+      >
+      <Stack>
         {filteredUsers?.map((userObj) => (
           <Button key={userObj._id} variant="light" onClick={() => onUserSelect(userObj)}>
             <Group>

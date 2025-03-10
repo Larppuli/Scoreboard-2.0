@@ -2,7 +2,6 @@ import {
   IconCalendar,
   IconMoodLookDown,
   IconPlayFootball,
-  IconSquareRoundedPercentage,
   IconTrophy,
   IconUsersGroup
 } from '@tabler/icons-react';
@@ -51,20 +50,8 @@ export default function ProfileCard({
         </Text>
       </Group>
       <Group gap="xs">
-        <IconSquareRoundedPercentage size={30} color={'#f1c40f'} />
+        <IconUsersGroup size={30} color={'#f1c40f'} />
         <Text size="xl" c={'#f1c40f'} fw={500}>
-          Win percentage:{' '}
-          <CountUp
-            end={gameCount > 0 ? (winCount / gameCount) * 100 : 0}
-            duration={1}
-            decimals={1}
-          />
-          %
-        </Text>
-      </Group>
-      <Group gap="xs">
-        <IconUsersGroup size={30} color={'#8800ff'} />
-        <Text size="xl" c={'#8800ff'} fw={500}>
           Mean game size:{' '}
           <CountUp
             end={meanGameSize || 0}

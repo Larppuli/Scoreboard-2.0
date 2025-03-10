@@ -138,3 +138,8 @@ export interface SparklineLengthModalProps {
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
   onLengthSelect: (length: number) => void;
 }
+
+export interface ExpectedWinPercentProps {
+  meanGameSize: number;
+  winPercent: number;
+}

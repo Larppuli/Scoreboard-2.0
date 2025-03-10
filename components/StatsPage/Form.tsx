@@ -18,8 +18,8 @@ export default function Form({ id }: { id: string }) {
         return (
           <Box 
             key={index}
-            w={'18px'} 
-            h={'18px'}
+            w={'20px'} 
+            h={'20px'}
             style={{
                 borderRadius: '4px',
                 backgroundColor: gameResultColor,
@@ -29,7 +29,7 @@ export default function Form({ id }: { id: string }) {
               }}
             >
             <Text 
-                size={'12px'} 
+                size={'15px'} 
                 c="white"
                 >{`${isWinner ? 'W' : 'L'}`}</Text>
           </Box>
@@ -39,8 +39,8 @@ export default function Form({ id }: { id: string }) {
       {remainingGames > 0 && Array.from({ length: remainingGames }).map((_, index) => (
         <Box 
           key={`empty-${index}`} 
-          w={'18px'} 
-          h={'18px'} 
+          w={'23px'} 
+          h={'23px'} 
           style={{
               borderRadius: '4px',
               backgroundColor: 'grey',
