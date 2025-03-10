@@ -11,7 +11,15 @@ export const SparklineLengthModal = ({
   const sparklineLengths = [5, 10, 15, 20, 25, 30];
 
   return (
-    <Modal opened={opened} onClose={() => setOpened(false)} title="Amount Of Games" centered>
+    <Modal 
+      opened={opened} 
+      onClose={() => setOpened(false)} 
+      title="Amount Of Games" centered
+      styles={{
+        header: { backgroundColor: 'bg="#141414"' },
+        body: { backgroundColor: 'bg="#141414"' },
+      }}
+      >
       <Stack mt="20px">
         {sparklineLengths.map((length) => (
           <Button
