@@ -34,9 +34,9 @@ export default function GamesTable() {
   
 
   return (
-    <Stack h="80vh" style={{ overflowY: 'auto', borderRadius: '12px' }}>
-      <Table stickyHeader bg="#141414" style={{ borderRadius: '12px' }}>
-        <Table.Thead bg="#141414" c="#949494">
+    <Stack h="80vh" style={{ overflowY: 'auto', borderRadius: '5px' }}>
+      <Table bg="#141414" style={{ borderRadius: '5px' }}>
+        <Table.Thead bg="#141414" c="#e2e2e2">
           <Table.Tr>
             <Table.Th>Date</Table.Th>
             <Table.Th>Players</Table.Th>
@@ -44,7 +44,7 @@ export default function GamesTable() {
             <Table.Th>Winner</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody c="#949494">{rows}</Table.Tbody>
+        <Table.Tbody c="#e2e2e2">{rows}</Table.Tbody>
       </Table>
     </Stack>
   );
