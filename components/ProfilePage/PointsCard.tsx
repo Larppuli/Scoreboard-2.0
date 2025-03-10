@@ -150,6 +150,7 @@ export default function PointsCard({ pointsArray }: PointsCardProps) {
               color="#ffd100"
               fillOpacity={0}
               strokeWidth={1.5}
+              areaProps={areaProps}
               style={{
                 position: 'absolute',
                 top: 0,
