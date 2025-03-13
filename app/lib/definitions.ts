@@ -143,3 +143,19 @@ export interface ExpectedWinPercentProps {
   meanGameSize: number;
   winPercent: number;
 }
+
+export interface LeaguatableProps {
+  users: User[];
+  games: Game[];
+}
+
+export interface OverallStatsProps {
+  games: Game[];
+}
+
+export interface SportCardProps {
+  gameNum: number;
+  sport: string;
+  width?: string;
+  minWidth?: string;
+}
