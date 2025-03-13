@@ -15,7 +15,7 @@ export default function ExpectedWinPercent({ meanGameSize, winPercent }: Expecte
             w={'47%'} 
             align='center' 
             bg={'#141414'}
-            style={{ borderRadius: '8px' }} >
+            style={{ borderRadius: '5px' }} >
             <Text c={'white'} fw={700} ta={'center'} >
                 Expected win percentage
             </Text>
@@ -39,7 +39,7 @@ export default function ExpectedWinPercent({ meanGameSize, winPercent }: Expecte
             w={'47%'}
             align='center' 
             bg={'#141414'}
-            style={{ borderRadius: '8px' }} >
+            style={{ borderRadius: '5px' }} >
             <Text c={'white'} fw={700} ta={'center'} >
                 Actual win percentage
             </Text>

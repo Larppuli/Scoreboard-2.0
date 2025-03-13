@@ -114,7 +114,7 @@ export default function Page() {
         bg={'#141414'}
         w={'90vw'}
         mt={'4vh'}
-        style={{ borderRadius: '12px' }}
+        style={{ borderRadius: '5px' }}
       >
         <DateSelection selectedDate={selectedDate} handleDateChange={handleDateChange} />
         <ParticipantsSelection
@@ -123,7 +123,6 @@ export default function Page() {
           userObjects={userObjects}
           handleParticipantsChange={handleParticipantsChange}
         />
-
         <WinnerSelection
           participants={selectedParticipants}
           userObjects={userObjects}

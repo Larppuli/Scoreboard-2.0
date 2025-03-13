@@ -1,15 +1,12 @@
 import { Stack, Table } from '@mantine/core';
-import { useAppContext } from '@/app/lib/AppContext';
 import Form from './Form';
-import { motion } from 'framer-motion';
+import { LeaguatableProps } from '@/app/lib/definitions';
 
-export default function Leaguetable() {
-  const { users, games } = useAppContext();
-
+export default function Leaguetable({ users, games }: LeaguatableProps) {
   const userStats = users?.map((user) => {
     let cumulativePoints = 0;
     const selectedUserPoints: number[] = [];
-    
+
     const userGames = games?.filter((game) => game.participants.includes(user._id));
 
     userGames?.slice().reverse().forEach((game: any) => {
@@ -37,25 +34,30 @@ export default function Leaguetable() {
   const sortedUserStats = userStats?.sort((a, b) => b.points - a.points);
 
   const rows = (sortedUserStats ?? []).map((user, index) => (
-    <motion.tr
-      key={user._id}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05, duration: 0.3 }}
-    >
-      <Table.Td  style={{ borderTop: '1px solid rgb(68, 68, 68)' }} fw={600}>{user.firstName}</Table.Td>
-      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.matchesPlayed}</Table.Td>
-      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.wins}</Table.Td>
-      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.losses}</Table.Td>
-      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align='center' fw={600}>{user.points}</Table.Td>
-      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)',  align: 'center' }}>
+    <tr key={user._id}>
+      <Table.Td style={{ borderTop: '1px solid rgb(68, 68, 68)' }} fw={600}>
+        {user.firstName}
+      </Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align="center" fw={600}>
+        {user.matchesPlayed}
+      </Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align="center" fw={600}>
+        {user.wins}
+      </Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align="center" fw={600}>
+        {user.losses}
+      </Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)' }} align="center" fw={600}>
+        {user.points}
+      </Table.Td>
+      <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)', align: 'center' }}>
         <Form id={user._id} />
       </Table.Td>
-    </motion.tr>
+    </tr>
   ));
 
   return (
-    <Stack h="70vh" style={{ overflowY: 'auto', borderRadius: '5px' }}>
+    <Stack style={{ overflowY: 'auto', borderRadius: '5px' }}>
       <Table bg="#141414" style={{ borderRadius: '5px' }}>
         <Table.Thead bg="#141414" c="#e2e2e2">
           <Table.Tr>
