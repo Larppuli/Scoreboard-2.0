@@ -111,10 +111,12 @@ export default function Page() {
           daysSinceLastGame={daysSinceLastGame || 0}
           meanGameSize={meanGameSize() || 0}
         />
-                <ExpectedWinPercent 
-          meanGameSize={meanGameSize() || 0} 
-          winPercent={(winCount / gameCount) * 100} 
-        />
+        <Stack w={'80vw'}>
+          <ExpectedWinPercent 
+            meanGameSize={meanGameSize() || 0} 
+            winPercent={(winCount / gameCount) * 100} 
+          />
+        </Stack>
         <PointsCard
           pointsArray={pointsArray.length ? pointsArray : [0]}
           userObjects={userObjects || []}
