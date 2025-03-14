@@ -159,3 +159,14 @@ export interface SportCardProps {
   width?: string;
   minWidth?: string;
 }
+
+export interface PersonCardProps {
+  userObjects: UserObject[];
+  games: Game[];
+}
+
+export interface AccordionLabelProps {
+  label: string;
+  image: string;
+  description: string;
+}
