@@ -5,7 +5,7 @@ export default function ExpectedWinPercent({ meanGameSize, winPercent }: Expecte
   return (
     <Group
         mt="10px"
-        w={"80vw"}
+        w={"100%"}
         align="flex-start"
         justify='space-between'
     >
