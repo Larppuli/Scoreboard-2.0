@@ -160,7 +160,7 @@ export interface SportCardProps {
   minWidth?: string;
 }
 
-export interface PersonCardProps {
+export interface PersonAccordionProps {
   userObjects: UserObject[];
   games: Game[];
 }
