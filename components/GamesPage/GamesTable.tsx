@@ -1,8 +1,72 @@
+import { useState } from 'react';
 import { Stack, Table } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { ColDef, themeQuartz, colorSchemeDark } from 'ag-grid-community';
+
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 export default function GamesTable() {
   const { games, users } = useAppContext();
+  const [colDefs, setColDefs] = useState<ColDef[]>([
+    { 
+      headerName: 'Date', 
+      resizable: false,
+      field: 'date', 
+      width: 80, 
+      cellStyle: { 
+        padding: '0px', 
+        textAlign: "center", 
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center",
+      } 
+    },
+    { 
+      headerName: 'Participants', 
+      resizable: false,
+      field: 'participants', 
+      width: 110, 
+      autoHeight: true, 
+      cellStyle: { 
+        whiteSpace: "normal", 
+        wordBreak: "break-word", 
+        padding: '5px',
+        textAlign: "center",
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center" ,
+         lineHeight: "1.5"
+      } 
+    },
+    { 
+      headerName: 'Sport', 
+      resizable: false,
+      field: 'sport', 
+      width: 80, 
+      cellStyle: { 
+        padding: '0px', 
+        textAlign: "center", 
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center" 
+      } 
+    },
+    { 
+      headerName: 'Winner', 
+      resizable: false,
+      field: 'winner', 
+      width: 80, 
+      cellStyle: { 
+        padding: '0px',
+        textAlign: "center", 
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center" 
+      } 
+    },
+  ]);
 
   const formatDate = ({ dateString }: { dateString: string }) => {
     const date = new Date(dateString);
@@ -22,30 +86,22 @@ export default function GamesTable() {
   const formatWinner = (winnerId: string) => {
     return users?.find((user) => user._id === winnerId)?.firstName || 'Unknown';
   };
-  
-  const rows = (games ?? []).map((element) => (
-    <Table.Tr key={element._id}>
-      <Table.Td>{formatDate({ dateString: element.date })}</Table.Td>
-      <Table.Td>{formatParticipants(element.participants)}</Table.Td>
-      <Table.Td>{element.sport}</Table.Td>
-      <Table.Td>{formatWinner(element.winner)}</Table.Td>
-    </Table.Tr>
-  ));
+  const rowData = (Array.isArray(games) ? games : []).map((game) => ({
+    date: formatDate({ dateString: game.date }),
+    participants: formatParticipants(game.participants),
+    sport: game.sport,
+    winner: formatWinner(game.winner)
+  }));
   
 
   return (
-    <Stack h="80vh" style={{ overflowY: 'auto', borderRadius: '5px' }}>
-      <Table bg="#141414" style={{ borderRadius: '5px' }}>
-        <Table.Thead bg="#141414" c="#e2e2e2">
-          <Table.Tr>
-            <Table.Th>Date</Table.Th>
-            <Table.Th>Players</Table.Th>
-            <Table.Th>Sport</Table.Th>
-            <Table.Th>Winner</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody c="#e2e2e2">{rows}</Table.Tbody>
-      </Table>
+    <Stack h="79vh" w={'100%'} style={{ overflowY: 'auto', borderRadius: '5px' }}>
+      <AgGridReact
+            theme={themeQuartz.withPart(colorSchemeDark)}
+            rowData={rowData}
+            columnDefs={colDefs}
+            rowHeight={60}
+        />
     </Stack>
   );
 }
