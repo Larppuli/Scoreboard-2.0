@@ -28,6 +28,7 @@
     "@next/bundle-analyzer": "^15.1.5",
     "@tabler/icons-react": "^3.28.1",
     "@types/mongodb": "^4.0.7",
+    "ag-grid-react": "^33.1.1",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.5.1",
     "dayjs": "^1.11.13",

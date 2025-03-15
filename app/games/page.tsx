@@ -1,12 +1,12 @@
 'use client';
 
-import { Container } from '@mantine/core';
+import { Stack } from '@mantine/core';
 import GamesTable from '@/components/GamesPage/GamesTable';
 
 export default function Page() {
   return (
-    <Container p={0} w={'90vw'}>
+    <Stack>
       <GamesTable />
-    </Container>
+    </Stack>
   );
 }
