@@ -5330,6 +5330,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ag-charts-types@npm:11.1.1":
+  version: 11.1.1
+  resolution: "ag-charts-types@npm:11.1.1"
+  checksum: 10c0/740cfb501db3b6a9d19333f7e92fa4fac4fbf4cba45921f9d040608a82a5382a61150d0c1231147aaf6ab0a554457fda09957719da777f1c93b3e6e4afa8229f
+  languageName: node
+  linkType: hard
+
+"ag-grid-community@npm:33.1.1":
+  version: 33.1.1
+  resolution: "ag-grid-community@npm:33.1.1"
+  dependencies:
+    ag-charts-types: "npm:11.1.1"
+  checksum: 10c0/cff694ede89e6ed4d577ee86df1a3b468f345a8cdf9404122e3ef632af8084133cf88f2a5b66f039183e955861070ba010b9b9ba1b64dd80faeb6c55b447b839
+  languageName: node
+  linkType: hard
+
+"ag-grid-react@npm:^33.1.1":
+  version: 33.1.1
+  resolution: "ag-grid-react@npm:33.1.1"
+  dependencies:
+    ag-grid-community: "npm:33.1.1"
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/c0537b03e8bfa45e39834071e6a5f95e0cd0d5043b82d2fc747c0f03589bbfaa0f3918611f9def312e14d8f349db90b7df3f334b591275b2c59087f5446f3a59
+  languageName: node
+  linkType: hard
+
 "agent-base@npm:6":
   version: 6.0.2
   resolution: "agent-base@npm:6.0.2"
@@ -11375,6 +11404,7 @@ __metadata:
     "@types/mongodb": "npm:^4.0.7"
     "@types/node": "npm:^22.10.7"
     "@types/react": "npm:19.0.7"
+    ag-grid-react: "npm:^33.1.1"
     babel-loader: "npm:^9.2.1"
     bcryptjs: "npm:^3.0.2"
     cloudinary: "npm:^2.5.1"
