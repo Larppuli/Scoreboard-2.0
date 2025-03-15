@@ -29,8 +29,8 @@ export default function ExpectedWinPercent({ meanGameSize, winPercent }: Expecte
                 emptySegmentColor='#36383a'
                 size={150}
                 thickness={20}
-                value={(100 / meanGameSize)}
-                label={`${(100 / meanGameSize).toFixed(1)}`}
+                value={meanGameSize ? (100 / meanGameSize) : 0}
+                label={meanGameSize ? `${(100 / meanGameSize).toFixed(1)}` : '0.0'}
             />
         </Stack>
         <Stack

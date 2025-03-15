@@ -39,8 +39,8 @@ export default function Form({ id }: { id: string }) {
       {remainingGames > 0 && Array.from({ length: remainingGames }).map((_, index) => (
         <Box 
           key={`empty-${index}`} 
-          w={'23px'} 
-          h={'23px'} 
+          w={'20px'} 
+          h={'20px'} 
           style={{
               borderRadius: '4px',
               backgroundColor: 'grey',
@@ -49,7 +49,7 @@ export default function Form({ id }: { id: string }) {
               justifyContent: 'center',
             }}
         >
-          <Text size={'12px'} c="white">?</Text>
+          <Text size={'15px'} c="white">?</Text>
         </Box>
       ))}
     </Group>
