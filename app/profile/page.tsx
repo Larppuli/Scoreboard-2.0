@@ -1,7 +1,8 @@
 'use client';
 
 import { useMemo } from 'react';
-import { AspectRatio, Image, LoadingOverlay, Stack, Text } from '@mantine/core';
+import Link from 'next/link';
+import { AspectRatio, Image, LoadingOverlay, Stack, Text, Button } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 import ImageUpload from '@/components/ProfilePage/ImageUpload';
 import PointsCard from '@/components/ProfilePage/PointsCard';
@@ -89,8 +90,11 @@ export default function Page() {
 
   return (
     <Stack>
+      <Link href={'/profile/achievements'} style={{ width: '100px' }}>
+        <Button bg={'#141414'} c={'white'} p={0} w={110}>Achievements</Button>
+      </Link>
       <Stack align="center">
-        <AspectRatio pt={'35px'}>
+        <AspectRatio>
           <Image
             src={userAvatar}
             alt="Profile Picture"

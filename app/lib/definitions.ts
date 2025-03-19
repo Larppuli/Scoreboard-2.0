@@ -94,7 +94,7 @@ export interface AppContextType {
   loading: boolean;
   users: User[] | null;
   sports: string[] | null;
-  games: Game[] | null;
+  games: Game[];
   userObjects: UserObject[];
   addGame: (game: Game) => void;
   setUser: (user: User | null) => void;
@@ -169,4 +169,16 @@ export interface AccordionLabelProps {
   label: string;
   image: string;
   description: string;
+}
+
+export interface TierData {
+  description: string;
+  nextTier: number;
+}
+
+export interface AchievementCardProps {
+  title: string;
+  tierData: TierData[];
+  tier: number;
+  currentProgress?: number;
 }

@@ -14,8 +14,16 @@ function BottomNavigation() {
       label: 'New game',
       path: '/new-game',
     },
-    { icon: <IconList size={24} />, label: 'Games', path: '/games' },
-    { icon: <IconUserCircle size={24} />, label: 'Profile', path: '/profile' },
+    { 
+      icon: <IconList size={24} />, 
+      label: 'Games', 
+      path: '/games' 
+    },
+    { 
+      icon: <IconUserCircle size={24} />, 
+      label: 'Profile', 
+      path: '/profile' 
+    },
   ];
 
   return (
