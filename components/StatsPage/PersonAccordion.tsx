@@ -23,7 +23,7 @@ export default function PersonAccordion({ userObjects, games }: PersonAccordionP
     if (!id || !Array.isArray(games)) return null;
 
     const userGames = games.filter((game) => game.participants.includes(id));
-    if (userGames.length === 0) return null; // Avoid division by zero
+    if (userGames.length === 0) return null;
 
     let totalParticipants = userGames.reduce((sum, game) => sum + game.participants.length, 0);
     
@@ -66,7 +66,14 @@ export default function PersonAccordion({ userObjects, games }: PersonAccordionP
   });
 
   return (
-    <Accordion mt="10px" chevronPosition="right" variant="contained">
+    <Accordion   
+      styles={{
+        chevron: { color: '#b9b9b9' },
+      }} 
+      mt="10px" 
+      chevronPosition="right" 
+      variant="contained"
+    >
       {items}
     </Accordion>
   );
