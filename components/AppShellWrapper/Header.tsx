@@ -34,6 +34,7 @@ function Header() {
     '/login': 'Login',
     '/signup': 'Sign up',
     '/profile': 'Profile',
+    '/profile/achievements': 'Achievements',
   };
 
   return (
