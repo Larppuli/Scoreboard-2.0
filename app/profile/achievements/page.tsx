@@ -110,7 +110,7 @@ export default function Page() {
     const totalTiersAchieved = achievements.reduce((sum, achievement) => sum + achievement.tier, 0);
 
     return (
-        <Stack align='center'>
+        <Stack mt={-10} align='center'>
             <Group justify='space-between' w='90%' mt={20} pos="relative">
                 <Link href={'/profile'}>
                     <IconArrowLeft size={30} color={'#7b7b7b'} />
@@ -127,7 +127,6 @@ export default function Page() {
                     <IconStarFilled size={20} color={'#ffcc00'} />
                 </Group>
             </Group>
-
             {achievements.map((achievement) => (
                 <AchievementCard 
                     key={achievement.title}
