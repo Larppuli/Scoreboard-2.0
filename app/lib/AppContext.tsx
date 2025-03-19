@@ -11,7 +11,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [fetchTrigger, setFetchTrigger] = useState<number>(0);
   const [sports, setSports] = useState<string[] | null>(null);
   const [users, setUsers] = useState<User[] | null>(null);
-  const [games, setGames] = useState<Game[] | null>(null);
+  const [games, setGames] = useState<Game[]>([]);
   const [userObjects, setUserObjects] = useState<UserObject[]>([]);
 
   const timestamp = new Date().getTime();
