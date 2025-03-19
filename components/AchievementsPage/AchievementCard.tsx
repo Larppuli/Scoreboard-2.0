@@ -6,7 +6,7 @@ export default function AchievementCard({ title, tierData, tier, currentProgress
   const progressPercentage = ((currentProgress ?? 0) / tierData[tier]?.nextTier) * 100;
 
   const colorTheme = {
-    border: tierData[tier] ? '#bcbcbc' : '#05ff00',
+    border: tierData[tier] ? '#909090' : '#05ff00',
     background: tierData[tier] ? 'rgba(112, 112, 112, 0.3)' : 'rgba(0, 255, 13, 0.12)',
   }
 
@@ -38,7 +38,7 @@ export default function AchievementCard({ title, tierData, tier, currentProgress
                 {currentProgress ?? 0}/{tierData[tier]?.nextTier}
                 </Text>
             </Text>
-            <Progress mt={1} h={10} color={'#ffcc00'} value={progressPercentage} w={100} />
+            <Progress mt={1} h={10} color={'#ffcc00'} value={progressPercentage} w={100} styles={{ root: { backgroundColor: '#565656' } }} />
             </Group>
         ) : (
             <Text  c={'#bebebe'} size="12px">Finished</Text>
