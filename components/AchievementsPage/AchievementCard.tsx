@@ -52,8 +52,8 @@ export default function AchievementCard({ title, tierData, tier, currentProgress
           <Text c={'#bebebe'} size="12px" mt={0}>
             Next Tier:
           </Text>
-          <Progress.Root h={14} w={150} style={{ borderRadius: '7px' }}>
-            <Progress.Section value={progressPercentage} color={'#ffcc00'}>
+          <Progress.Root h={14} w={150} style={{ borderRadius: '7px',  backgroundColor: '#444444' }}>
+            <Progress.Section value={progressPercentage} color={'#ffcc00'} >
               <Progress.Label c={'#232323'} style={{ fontSize: '12px', fontWeight: 'bold' }}>
                 {currentProgress ?? 0}/{currentTierData.nextTier}
               </Progress.Label>
