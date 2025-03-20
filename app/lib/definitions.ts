@@ -182,4 +182,6 @@ export interface AchievementCardProps {
   tier: number;
   currentProgress?: number;
   icon: any;
+  showProgress: boolean;
+  isLegend: boolean;
 }
