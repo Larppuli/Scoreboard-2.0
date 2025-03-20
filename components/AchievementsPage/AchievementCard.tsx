@@ -1,8 +1,9 @@
 import { Stack, Text, Group, Progress } from '@mantine/core';
 import { AchievementCardProps } from '@/app/lib/definitions';
-import { IconStarFilled, IconFlower } from '@tabler/icons-react';
+import { IconStarFilled } from '@tabler/icons-react';
+import React from 'react';
 
-export default function AchievementCard({ title, tierData, tier, currentProgress }: AchievementCardProps) {
+export default function AchievementCard({ title, tierData, tier, currentProgress, icon }: AchievementCardProps) {
   const isFinalTier = tier >= tierData.length;
   const currentTierData = tierData[tier] ?? null;
   const previousTierData = tier > 0 ? tierData[tier - 1] : null;
@@ -27,7 +28,7 @@ export default function AchievementCard({ title, tierData, tier, currentProgress
       style={{ borderRadius: '10px', border: `1px solid ${colorTheme.border}` }}
     >
       <Stack justify='center' w={40} h={'100%'} bg={colorTheme.background} style={{ borderRadius: '6px' }}>
-        <IconFlower size={40} color={colorTheme.border} />
+      {React.cloneElement(icon, { color: colorTheme.border })}
       </Stack>
       <Stack w={'80%'}>
         <Group justify='space-between'>
