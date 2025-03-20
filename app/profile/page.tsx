@@ -90,9 +90,6 @@ export default function Page() {
 
   return (
     <Stack>
-      <Link href={'/profile/achievements'} style={{ width: '100px' }}>
-        <Button bg={'#141414'} c={'white'} p={0} w={110}>Achievements</Button>
-      </Link>
       <Stack align="center">
         <AspectRatio>
           <Image
@@ -108,6 +105,9 @@ export default function Page() {
         <Text mt={'-10px'} size="35px" fw={'bold'} c={'white'}>
           {user?.userName}
         </Text>
+        <Link href={'/profile/achievements'} style={{ width: '140px', marginTop: '13px' }}>
+          <Button bg={'#141414'} c={'white'} h={40} w={140}>Achievements</Button>
+        </Link>
         <ProfileCard
           gameCount={gameCount}
           winCount={winCount}
