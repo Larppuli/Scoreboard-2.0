@@ -3,7 +3,7 @@
 import { Stack, Text, Group } from '@mantine/core';
 import { useAppContext } from '@/app/lib/AppContext';
 import AchievementCard from '@/components/AchievementsPage/AchievementCard';
-import { IconStarFilled, IconArrowLeft } from '@tabler/icons-react';
+import { IconStarFilled, IconArrowLeft, IconFlower, IconTrophy, IconPlayFootball, IconMoodLookDown, IconBrandInstagram, IconCircles, IconSportBillard, IconBallFootball, IconStars } from '@tabler/icons-react';
 import Link from 'next/link';
 
 export default function Page() {
@@ -28,7 +28,8 @@ export default function Page() {
                 { description: 'Play 100 games', nextTier: 1000 }
             ],
             tier: userGames?.length >= 100 ? 4 : userGames?.length >= 70 ? 3 : userGames?.length >= 40 ? 2 : userGames?.length >= 20 ? 1 : 0,
-            currentProgress: userGames?.length
+            currentProgress: userGames?.length,
+            icon: <IconPlayFootball size={40} />
         },
         {
             title: 'Win Conqueror',
@@ -39,7 +40,8 @@ export default function Page() {
                 { description: 'Win 80 games', nextTier: 80 }
             ],
             tier: gamesWon?.length >= 80 ? 4 : gamesWon?.length >= 40 ? 3 : gamesWon?.length >= 20 ? 2 : gamesWon?.length >= 10 ? 1 : 0,
-            currentProgress: gamesWon?.length
+            currentProgress: gamesWon?.length,
+            icon: <IconTrophy size={40} />
         },
         {
             title: 'Total Loser',
@@ -50,7 +52,8 @@ export default function Page() {
                 { description: 'Lose 120 games', nextTier: 120 }
             ],
             tier: gamesLost?.length >= 120 ? 4 : gamesLost?.length >= 90 ? 3 : gamesLost?.length >= 60 ? 2 : gamesLost?.length >= 30 ? 1 : 0,
-            currentProgress: gamesLost?.length
+            currentProgress: gamesLost?.length,
+            icon: <IconMoodLookDown size={40} />
         },
         {
             title: 'Influencer',
@@ -59,6 +62,7 @@ export default function Page() {
             ],
             tier: userObject?.image.includes('DefaultPFP') ? 0 : 1,
             currentProgress: userObject?.image.includes('DefaultPFP') ? 0 : 1,
+            icon: <IconBrandInstagram size={40} />
         },
         {
             title: 'Petanque Mastery',
@@ -69,7 +73,8 @@ export default function Page() {
                 { description: 'Win 40 petanque games', nextTier: 40 }
             ],
             tier: petanquesWon?.length >= 40 ? 4 : petanquesWon?.length >= 20 ? 3 : petanquesWon?.length >= 10 ? 2 : petanquesWon?.length >= 5 ? 1 : 0,
-            currentProgress: petanquesWon?.length
+            currentProgress: petanquesWon?.length,
+            icon: <IconCircles size={40} color={'#909090'} />
         },
         {
             title: 'Snooker Maestro',
@@ -80,7 +85,8 @@ export default function Page() {
                 { description: 'Win 40 snooker games', nextTier: 40 }
             ],
             tier: snookersWon?.length >= 40 ? 4 : snookersWon?.length >= 20 ? 3 : snookersWon?.length >= 10 ? 2 : snookersWon?.length >= 5 ? 1 : 0,
-            currentProgress: snookersWon?.length
+            currentProgress: snookersWon?.length,
+            icon: <IconSportBillard size={40} color={'#909090'} />
         },
         {
             title: 'Dr. Lingardinho',
@@ -91,7 +97,8 @@ export default function Page() {
                 { description: 'Win 40 football games', nextTier: 40 }
             ],
             tier: footballsWon?.length >= 40 ? 4 : footballsWon?.length >= 20 ? 3 : footballsWon?.length >= 10 ? 2 : footballsWon?.length >= 5 ? 1 : 0,
-            currentProgress: footballsWon?.length
+            currentProgress: footballsWon?.length,
+            icon: <IconBallFootball size={40} color={'#909090'} />
         },
         {
             title: 'Multitalent',
@@ -102,7 +109,8 @@ export default function Page() {
                 { description: 'Play 7 different sports', nextTier: 7 }
             ],
             tier: differentSports?.length >= 7 ? 4 : differentSports?.length >= 5 ? 3 : differentSports?.length >= 3 ? 2 : differentSports?.length >= 1 ? 1 : 0,
-            currentProgress: differentSports?.length
+            currentProgress: differentSports?.length,
+            icon: <IconStars size={40} color={'#909090'} />
         },
     ];
 
@@ -134,6 +142,7 @@ export default function Page() {
                     tierData={achievement.tierData} 
                     tier={achievement.tier}
                     currentProgress={achievement.currentProgress}
+                    icon={achievement.icon}
                 />
             ))}
         </Stack>

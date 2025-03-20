@@ -181,4 +181,5 @@ export interface AchievementCardProps {
   tierData: TierData[];
   tier: number;
   currentProgress?: number;
+  icon: any;
 }
