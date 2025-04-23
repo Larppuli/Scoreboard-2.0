@@ -1,7 +1,19 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '@/app/lib/db';
 
-export async function GET() {
+const ALLOWED_ORIGINS = [process.env.NEXT_PUBLIC_API_URL || ''];
+
+export async function GET(req: Request) {
+  const origin = req.headers.get('origin') || '';
+  const referer = req.headers.get('referer') || '';
+
+  const isAllowed =
+    ALLOWED_ORIGINS.some((allowed) => origin.startsWith(allowed) || referer.startsWith(allowed));
+
+  if (!isAllowed) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  }
+
   try {
     const db = await connectDB();
     const users = await db.collection('users').find({}).toArray();
