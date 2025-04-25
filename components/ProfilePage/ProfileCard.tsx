@@ -20,7 +20,7 @@ export default function ProfileCard({
     <Stack
       mt="20px"
       p="lg"
-      w="80vw"
+      w={'100%'}
       align="flex-start"
       bg={'#141414'}
       style={{ borderRadius: '5px' }}
