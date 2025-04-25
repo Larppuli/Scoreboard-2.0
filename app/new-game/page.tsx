@@ -112,7 +112,7 @@ export default function Page() {
         align="center"
         p={'18px'}
         bg={'#141414'}
-        w={'90vw'}
+        w={'100%'}
         mt={'4vh'}
         style={{ borderRadius: '5px' }}
       >
