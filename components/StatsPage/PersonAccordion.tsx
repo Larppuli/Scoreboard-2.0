@@ -69,10 +69,12 @@ export default function PersonAccordion({ userObjects, games }: PersonAccordionP
     <Accordion   
       styles={{
         chevron: { color: '#b9b9b9' },
+        control: { 
+          backgroundColor: '#141414',
+        },
       }} 
       mt="10px" 
       chevronPosition="right" 
-      variant="contained"
     >
       {items}
     </Accordion>
