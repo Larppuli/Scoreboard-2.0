@@ -26,6 +26,7 @@ export default function AchievementCard({ title, tierData, tier, currentProgress
       p={10}
       align="center"
       w={'90%'}
+      maw={450}
       style={{ borderRadius: '10px', border: `1px solid ${colorTheme.border}` }}
     >
       <Stack justify='center' w={40} h={'100%'} bg={colorTheme.background} style={{ borderRadius: '6px' }}>
