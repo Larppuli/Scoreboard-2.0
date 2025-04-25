@@ -74,7 +74,7 @@ function DesktopNavigation() {
                         value={item.path[0]}
                         leftSection={<Icon size={30} color={isActive ? '#ff0052' : '#f0f0f0'} />}
                     >
-                        <Text size="m">{item.label}</Text>
+                        <Text c={'white'} size="m">{item.label}</Text>
                     </Tabs.Tab>
                 );
                 })}
