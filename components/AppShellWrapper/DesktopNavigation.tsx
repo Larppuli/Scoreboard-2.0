@@ -1,7 +1,6 @@
 'use client';
 
-import classes from './Demo.module.css';
-import { Group, Tabs, Text, Button } from '@mantine/core';
+import { Group, Tabs, Text, Button, Image } from '@mantine/core';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   IconChartBar,
@@ -44,7 +43,7 @@ function DesktopNavigation() {
 
   return (
     <Group 
-        bg="#08141c"
+        bg="#0c1d27"
         align='center'
         style={{
             position: 'sticky',
@@ -53,15 +52,25 @@ function DesktopNavigation() {
             borderBottom: '1px solid #0d273b',
           }}
     >
-        <Text c={'white'} className={audiowide.className} size='30px' mx={'4vw'}>
+      <Group>
+        <Image
+            src="/poikainscoreFavicon.png"
+            alt="Logo"
+            width={50}
+            height={50}
+            style={{ marginLeft: '20px' }}
+        />
+        <Text c={'white'} className={audiowide.className} size='30px'>
             Poikainscore
         </Text>
+      </Group>
         <Tabs 
             value={pathname} 
             onChange={handleChange} 
-            bg="#08141c"
+            bg="#0c1d27"
             color='#ff0052'
             variant="none"
+            ml={70}
         >
             <Tabs.List>
                 {navItems.map((item) => {
