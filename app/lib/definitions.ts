@@ -87,6 +87,7 @@ export interface Game {
   participants: string[];
   winner: string;
   sport: string;
+  autodartsId?: string;
 }
 
 export interface AppContextType {
@@ -184,4 +185,17 @@ export interface AchievementCardProps {
   icon: any;
   showProgress: boolean;
   isLegend: boolean;
+}
+
+export interface AutodartsGameProps {
+  gameId: string;
+  gameDate: string;
+  players: AutodartsPlayer[];
+  winner: string;
+  variant: string;
+}
+
+export interface AutodartsPlayer {
+  id: string;
+  name: string;
 }
