@@ -1,20 +1,23 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Stack, Title } from '@mantine/core';
+import { Stack, Title, LoadingOverlay } from '@mantine/core';
 import AutodartsGame from '@/components/AutodartsPage/AutodartsGame';
 import { useAppContext } from '@/app/lib/AppContext';
 
 export default function App() {
   const [autodartsGames, setAutodartsGames] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const { userObjects, games } = useAppContext();
 
   useEffect(() => {
     fetch('/api/autodarts')
       .then(res => res.json())
       .then(setAutodartsGames)
-      .catch(err => setAutodartsGames({ error: err.message }));
+      .catch(err => setAutodartsGames({ error: err.message }))
+      .finally(() => setLoading(false));
   }, []);
+  
 
   const playerExists = (name: string) => {
     const normalizedInput = name.toLowerCase().replace(/\s+/g, '');
@@ -35,6 +38,13 @@ export default function App() {
 
   return (
     <Stack align="center" justify="center" mt={20}>
+        <LoadingOverlay
+            visible={loading}
+            zIndex={1000}
+            overlayProps={{ bg: 'rgba(0, 0, 0, 0.5)' }}
+            loaderProps={{ color: 'red' }}
+            />
+
       {validGames?.length === 0 ? (
         <Title size={16} c="gray">
           No games to export
