@@ -2,6 +2,7 @@ import { Card, Image, Text, Button, Group, Badge } from '@mantine/core';
 import React from 'react';
 import { AutodartsGameProps, AutodartsPlayer } from '@/app/lib/definitions';
 import { useAppContext } from '@/app/lib/AppContext';
+import { DateTime } from 'luxon';
 
 export default function AutodartsGame({ gameId, gameDate, players, winner, variant }: AutodartsGameProps) {
     const { userObjects, addGame } = useAppContext();
@@ -45,43 +46,43 @@ export default function AutodartsGame({ gameId, gameDate, players, winner, varia
     const handleMatchImport = async () => {
         const participantIds = formParticipantIdList(players);
         const winnerId = formParticipantIdList([players[Number(winner)]])[0];
-
+      
+        const luxonDate = DateTime.fromISO(gameDate)
+          .setZone('Europe/Helsinki')
+          .set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
+          .toISO() ?? '';
+      
         const gameObject = {
-            date: gameDate,
-            participants: participantIds,
-            winner: winnerId,
-            autodartsId: gameId,
-            sport: 'Darts',
-         };
-
+          date: luxonDate,
+          participants: participantIds,
+          winner: winnerId,
+          autodartsId: gameId,
+          sport: 'Darts',
+        };
+      
         try {
+          const response = await fetch('/api/games', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(gameObject),
+          });
       
-            const response = await fetch('/api/games', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(gameObject),
-            });
+          if (!response.ok) throw new Error('Failed to import game');
       
-            if (!response.ok) {
-              throw new Error('Failed to import game');
-            }
+          const responseData = await response.json();
+          addGame({
+            autodartsId: gameId,
+            _id: responseData.insertedId,
+            date: luxonDate,
+            participants: gameObject.participants,
+            winner: gameObject.winner,
+            sport: 'Darts',
+          });
       
-            const responseData = await response.json();
-            addGame({
-                autodartsId: gameId,
-                _id: responseData.insertedId,
-                date: gameObject.date,
-                participants: gameObject.participants,
-                winner: gameObject.winner,
-                sport: 'Darts',
-            });
-      
-          } catch (error) {
-            console.error('Error importing game:', error);
-          }
-    }
+        } catch (error) {
+          console.error('Error importing game:', error);
+        }
+      };      
 
     return (
         <Card shadow="sm" padding="lg" radius="md" withBorder w={310}>
