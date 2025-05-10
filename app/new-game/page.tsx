@@ -9,6 +9,7 @@ import ParticipantsSelection from '@/components/NewGamePage/ParticipantsSelectio
 import SportSelection from '@/components/NewGamePage/SportSelection';
 import WinnerSelection from '@/components/NewGamePage/WinnerSelection';
 import { DateTime } from 'luxon';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const { users, sports, userObjects, addGame } = useAppContext();
@@ -22,6 +23,8 @@ export default function Page() {
 
   const checkIcon = <IconCheck size={20} />;
 
+  const router = useRouter();
+
   const userArray = users?.map((user) => user.userName) || [];
   const sportsArray = sports ? sports.map((sport) => ({ value: sport, label: sport })) : [];
 
@@ -32,6 +35,10 @@ export default function Page() {
       setDisabled(true);
     }
   }, [selectedDate, selectedParticipants, selectedWinner, selectedSport]);
+
+  const handleClick = () => {
+    router.push('/autodarts');
+  };
 
   const handleDateChange = (date: DateTime | null) => {
     setSelectedDate(date);
@@ -180,6 +187,7 @@ export default function Page() {
           </Notification>
         )}
       </Transition>
+      <Button onClick={handleClick} variant='subtle'>Import from Autodarts</Button>
     </Stack>
   );
 }
