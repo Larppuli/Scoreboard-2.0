@@ -94,7 +94,7 @@ export default function AutodartsGame({ gameId, gameDate, players, winner, varia
                 />
             </Card.Section>
             <Group justify="space-between" mt="md" mb="xs">
-                <Text c={'#acacac'} fw={500}>{formatDate(gameDate.slice(0, 10))}</Text>
+                <Text c={'#acacac'} fw={700}>{formatDate(gameDate.slice(0, 10))}</Text>
                 <Badge color="green">{variant}</Badge>
             </Group>
             <Text size="sm" c="dimmed">
