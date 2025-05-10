@@ -85,15 +85,14 @@ export default function AutodartsGame({ gameId, gameDate, players, winner, varia
       };      
 
     return (
-        <Card shadow="sm" padding="lg" radius="md" withBorder w={310}>
+        <Card shadow="sm" padding="lg" radius="md" withBorder w={310} bg={'#2f2f2f'} style={{ border: '1px solid #525252' }}>
             <Card.Section>
                 <Image
-                src="/AutodartsLogo.jpg"
-                height={80}
-                alt="Autodarts logo"
+                    src="/AutodartsLogo.jpg"
+                    height={80}
+                    alt="Autodarts logo"
                 />
             </Card.Section>
-
             <Group justify="space-between" mt="md" mb="xs">
                 <Text fw={500}>{formatDate(gameDate.slice(0, 10))}</Text>
                 <Badge color="green">{variant}</Badge>
