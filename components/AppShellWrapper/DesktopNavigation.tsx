@@ -14,7 +14,7 @@ import { audiowide } from '@/app/fonts';
 
 const navItems = [
   { icon: IconChartBar, label: 'Stats', path: ['/'] },
-  { icon: IconSquareRoundedPlus, label: 'New game', path: ['/new-game'] },
+  { icon: IconSquareRoundedPlus, label: 'New game', path: ['/new-game', '/autodarts'] },
   { icon: IconList, label: 'Games', path: ['/games'] },
   { icon: IconUserCircle, label: 'Profile', path: ['/profile', '/profile/achievements'] },
 ];

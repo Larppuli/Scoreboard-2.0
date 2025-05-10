@@ -12,17 +12,17 @@ function BottomNavigation() {
     {
       icon: <IconSquareRoundedPlus size={24} />,
       label: 'New game',
-      path: '/new-game',
+      path: ['/new-game', '/autodarts'],
     },
     { 
       icon: <IconList size={24} />, 
       label: 'Games', 
-      path: '/games' 
+      path: ['/games'] 
     },
     { 
       icon: <IconUserCircle size={24} />, 
       label: 'Profile', 
-      path: '/profile' 
+      path: ['/profile', '/profile/achievements'] 
     },
   ];
 
@@ -30,9 +30,9 @@ function BottomNavigation() {
     <AppShell.Footer bg="#08141c" style={{ borderTop: '1px solid #081c2c' }}>
       <Group grow h="100px">
         {navItems.map((item) => (
-          <Link href={item.path} key={item.label}>
+          <Link href={item.path[0]} key={item.label}>
             <Button mb="40px" p={0} w="23vw" bg="inherit" h="50px">
-              <Stack align="center" gap="7px" c={pathname === item.path ? '#ff0052' : '#f0f0f0'}>
+              <Stack align="center" gap="7px" c={item.path.includes(pathname) ? '#ff0052' : '#f0f0f0'}>
                 {item.icon}
                 <Text size="xs">{item.label}</Text>
               </Stack>
