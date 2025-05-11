@@ -51,7 +51,7 @@ export default function Leaguetable({ users, games }: LeaguatableProps) {
         {user.points}
       </Table.Td>
       <Table.Td px={0} style={{ borderTop: '1px solid rgb(68, 68, 68)', align: 'center' }}>
-        <Form id={user._id} />
+        <Form id={user._id} games={games} />
       </Table.Td>
     </tr>
   ));
@@ -61,12 +61,12 @@ export default function Leaguetable({ users, games }: LeaguatableProps) {
       <Table bg="#141414" style={{ borderRadius: '5px' }}>
         <Table.Thead bg="#141414" c="#e2e2e2">
           <Table.Tr>
-            <Table.Th>PLAYER</Table.Th>
-            <Table.Th ta="center">MP</Table.Th>
-            <Table.Th ta="center">W</Table.Th>
-            <Table.Th ta="center">L</Table.Th>
-            <Table.Th ta="center">PTS</Table.Th>
-            <Table.Th ta="center">FORM</Table.Th>
+          <Table.Th>PLAYER</Table.Th>
+            <Table.Th ta="center" style={{ padding: 0 }}>MP</Table.Th>
+            <Table.Th ta="center" style={{ padding: 0 }}>W</Table.Th>
+            <Table.Th ta="center" style={{ padding: 0 }}>L</Table.Th>
+            <Table.Th ta="center" style={{ padding: 0 }}>PTS</Table.Th>
+            <Table.Th ta="center" style={{ padding: 0 }}>FORM</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody c="#e2e2e2">{rows}</Table.Tbody>
