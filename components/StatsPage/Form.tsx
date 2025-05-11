@@ -1,8 +1,7 @@
 import { Group, Box, Text } from '@mantine/core';
-import { useAppContext } from '@/app/lib/AppContext';
+import { FormProps } from '@/app/lib/definitions'; 
 
-export default function Form({ id }: { id: string }) {
-  const { games } = useAppContext();
+export default function Form({ id, games }: FormProps) {
 
   const userGames = games?.filter((game) => game.participants.includes(id));
 
