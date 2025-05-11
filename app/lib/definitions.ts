@@ -49,8 +49,8 @@ export interface User {
   userName: string;
   firstName: string;
   lastName: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
 }
 
 export interface ImageUploadProps {
@@ -198,4 +198,9 @@ export interface AutodartsGameProps {
 export interface AutodartsPlayer {
   id: string;
   name: string;
+}
+
+export interface FormProps {
+  id: string;
+  games: Game[];
 }
