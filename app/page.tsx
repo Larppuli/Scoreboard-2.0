@@ -7,8 +7,6 @@ import OverallStats from '@/components/StatsPage/OverallStats';
 import { useAppContext } from '@/app/lib/AppContext';
 import PersonAccordion from '@/components/StatsPage/PersonAccordion';
 
-// <PersonAccordion games={games ?? []} userObjects={userObjects ?? []}/>
-
 export default function HomePage() {
   const { users, games, userObjects } = useAppContext();
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
@@ -70,6 +68,7 @@ export default function HomePage() {
         />
       <Leaguetable users={formattedSelectedUsers ?? []} games={filteredGames ?? []}/>
       <OverallStats games={games ?? []}/>
+      <PersonAccordion games={games ?? []} userObjects={userObjects ?? []}/>
     </Stack>
   );
 }
