@@ -44,16 +44,17 @@ export default function HomePage() {
         mb={10}
         value={selectedUsers}
         onChange={handleUserChange}
+        comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
         styles={{
           input: {
-            backgroundColor: '#1e1e1e',
+            backgroundColor: '#141414',
             color: '#ffffff',
             alignContent: 'center',
             border: 0,
             borderRadius: '5px',
           },
           dropdown: {
-            backgroundColor: '#1e1e1e',
+            backgroundColor: '#141414',
             color: '#ffffff',
             border: 0,
             borderRadius: '5px',
