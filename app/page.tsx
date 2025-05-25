@@ -29,6 +29,7 @@ export default function HomePage() {
       userName: user?.userName ?? "Unknown",
       firstName: user?.firstName ?? "Unknown",
       lastName: user?.lastName ?? "Unknown",
+      admin: user?.admin ?? false,
     };
   });
 
