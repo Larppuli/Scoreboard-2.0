@@ -121,131 +121,175 @@ export default function AdminPanel() {
 
   return (
     <Stack>
-    <Stack
-        align="center"
-        p={'18px'}
-        bg={'#141414'}
-        w={'100%'}
-        mt={'4vh'}
-        style={{ borderRadius: '5px' }}      
-    >
-        <Group w={'100%'} justify="center">
-            <TextInput
-                w={'70%'}
-                size='md'
-                name="refreshToken"
-                placeholder="Autodarts Refresh Token"
-                onChange={handleRefreshTokenChange}
-                value={refreshToken}
-                styles={(theme) => ({
-                input: {
-                    backgroundColor: theme.colors.dark[6],
-                    color: theme.colors.gray[0],
-                    borderColor: theme.colors.dark[5],
-                },
-                })}
-            />
-            <Button
-                size="md"
-                w={60}
-                variant="outline"
-                color="red"
-                loading={tokenButtonLoading}
-                disabled={refreshToken.length < 20}
-                onClick={() => {
-                    handleRefreshTokenSubmit();
-                }}
-            >
-                <IconRefresh size={20} />
-            </Button>
-        </Group>
-        <Group w={'100%'} justify="center">
-            <TextInput
-                w={'70%'}
-                size='md'
-                name="newSport"
-                placeholder="Add New Sport"
-                value={sport}
-                onChange={handleSportChange}
-                styles={(theme) => ({
+        <Stack
+            align="center"
+            p={'18px'}
+            bg={'#141414'}
+            w={'100%'}
+            mt={'4vh'}
+            style={{ borderRadius: '5px' }}      
+        >
+            <Group w={'100%'} justify="center">
+                <TextInput
+                    w={'70%'}
+                    size='md'
+                    name="refreshToken"
+                    placeholder="Autodarts Refresh Token"
+                    onChange={handleRefreshTokenChange}
+                    value={refreshToken}
+                    styles={(theme) => ({
                     input: {
                         backgroundColor: theme.colors.dark[6],
                         color: theme.colors.gray[0],
                         borderColor: theme.colors.dark[5],
                     },
+                    })}
+                />
+                <Button
+                    size="md"
+                    w={60}
+                    variant="outline"
+                    color="red"
+                    styles={{
+                        root: {
+                        backgroundColor: refreshToken.length < 20 ? '#2c2c2c' : undefined,
+                        color: refreshToken.length < 20 ? '#5f5f5f' : undefined,
+                        '&:disabled': {
+                            backgroundColor: '#4a4a4',
+                        },
+                        },
+                    }}
+                    loading={tokenButtonLoading}
+                    disabled={refreshToken.length < 20}
+                    onClick={() => {
+                        handleRefreshTokenSubmit();
+                    }}
+                >
+                    <IconRefresh size={20} />
+                </Button>
+            </Group>
+            <Group w={'100%'} justify="center">
+                <TextInput
+                    w={'70%'}
+                    size='md'
+                    name="newSport"
+                    placeholder="Add New Sport"
+                    value={sport}
+                    onChange={handleSportChange}
+                    styles={(theme) => ({
+                        input: {
+                            backgroundColor: theme.colors.dark[6],
+                            color: theme.colors.gray[0],
+                            borderColor: theme.colors.dark[5],
+                        },
+                    })}
+                />
+                <Button
+                    size="md"
+                    w={60}
+                    variant="outline"
+                    loading={sportButtonLoading}
+                    color="red"
+                    styles={{
+                        root: {
+                        backgroundColor: sport.length < 2 ? '#2c2c2c' : undefined,
+                        color: sport.length < 2 ? '#5f5f5f' : undefined,
+                        '&:disabled': {
+                            backgroundColor: '#4a4a4',
+                        },
+                        },
+                    }}
+                    disabled={sport.length < 2}
+                    onClick={() => {
+                        handleSportSubmit(sport);
+                    }}
+                >
+                    <IconCirclePlus size={20} />
+                </Button>
+            </Group>
+            <Select
+                placeholder="Select User"
+                w={150}
+                size='md'
+                onChange={handleUserSelect}
+                value={selectedUser}
+                comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
+                styles={(theme) => ({
+                    input: {
+                        backgroundColor: theme.colors.dark[6],
+                        color: theme.colors.gray[0],
+                        borderColor: theme.colors.dark[5],
+                        fontSize: '16px',
+                        border: 0,
+                        borderRadius: '5px',
+                        minHeight: '50px',
+                        textAlign: 'center',
+                    },
+                    dropdown: {
+                    backgroundColor: '#1e1e1e',
+                    color: '#ffffff',
+                    border: 0,
+                    borderRadius: '5px',
+                    },
+                    option: {
+                    color: '#ffffff',
+                    '&:hover': {
+                        backgroundColor: '#313142',
+                    },
+                    },
                 })}
+                data={users? users.map(user => ({
+                    value: user._id,
+                    label: user.userName,
+                })) : []}   
             />
-            <Button
-                size="md"
-                w={60}
-                variant="outline"
-                loading={sportButtonLoading}
-                color="red"
-                disabled={sport.length < 2}
-                onClick={() => {
-                    handleSportSubmit(sport);
-                }}
-            >
-                <IconCirclePlus size={20} />
-            </Button>
-        </Group>
-        <Select
-            placeholder="Select User"
-            w={150}
-            size='md'
-            onChange={handleUserSelect}
-            value={selectedUser}
-            comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
-            styles={(theme) => ({
-                input: {
-                    backgroundColor: theme.colors.dark[6],
-                    color: theme.colors.gray[0],
-                    borderColor: theme.colors.dark[5],
-                },
-                })}
-            data={users? users.map(user => ({
-                value: user._id,
-                label: user.userName,
-            })) : []}   
-        />
-        {selectedUser && (
-            <Stack w={'100%'} justify="center" align="center">
-                <Text fw={700} size="xl" ta="center">
-                    Edit data of _id {selectedUser}
-                </Text>
-                <Group w={'100%'} justify="center">
-                    <TextInput
-                        w={'70%'}
-                        size='md'
-                        name="newPassword"
-                        placeholder="Change Password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        styles={(theme) => ({
-                            input: {
-                                backgroundColor: theme.colors.dark[6],
-                                color: theme.colors.gray[0],
-                                borderColor: theme.colors.dark[5],
-                            },
-                        })}
-                    />
-                    <Button
-                        size="md"
-                        w={60}
-                        variant="outline"
-                        loading={passwordButtonLoading}
-                        color="red"
-                        disabled={password.length < 6}
-                        onClick={() => {
-                            handlePasswordSubmit(password);
-                        }}
-                    >
-                        <IconDeviceFloppy size={20} />
-                    </Button>
-                </Group>
-            </Stack>
-        )}
-    </Stack>
+            {selectedUser && (
+                <Stack w={'100%'} justify="center" align="center">
+                    <Text fw={700} c={'red'} size="xl" ta="center">
+                        Edit data of _id {selectedUser}
+                    </Text>
+                    <Group w={'100%'} justify="center">
+                        <TextInput
+                            w={'70%'}
+                            size='md'
+                            name="newPassword"
+                            placeholder="Change Password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            styles={(theme) => ({
+                                input: {
+                                    backgroundColor: theme.colors.dark[6],
+                                    color: theme.colors.gray[0],
+                                    borderColor: theme.colors.dark[5],
+                                },
+                            })}
+                        />
+                        <Button
+                            size="md"
+                            w={60}
+                            variant="outline"
+                            loading={passwordButtonLoading}
+                            color="red"
+                            styles={{
+                                root: {
+                                backgroundColor: password.length < 6 ? '#2c2c2c' : undefined,
+                                color: password.length < 6 ? '#5f5f5f' : undefined,
+                                '&:disabled': {
+                                    backgroundColor: '#4a4a4',
+                                },
+                                },
+                            }}
+                            disabled={password.length < 6}
+                            onClick={() => {
+                                handlePasswordSubmit(password);
+                            }}
+                        >
+                            <IconDeviceFloppy size={20} />
+                        </Button>
+                    </Group>
+                </Stack>
+            )}
+        </Stack>
         <Transition mounted={showTransition} transition="fade" duration={400} timingFunction="ease">
         {(styles) => (
             <Notification
