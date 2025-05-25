@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/app/lib/db';
 
+const collectionName = process.env.MONGODB_COLLECTION || 'games_test';
+
 export async function GET() {
   try {
     const db = await connectDB();
-    const games = await db.collection('games').find({}).toArray();
+    const games = await db.collection(collectionName).find({}).toArray();
 
     return NextResponse.json(games);
   } catch (error) {
@@ -22,7 +24,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const result = await db.collection('games').insertOne(gameData);
+    const result = await db.collection(collectionName).insertOne(gameData);
 
     return NextResponse.json(
       { success: true, message: 'Game saved', insertedId: result.insertedId },
