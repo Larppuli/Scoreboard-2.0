@@ -46,16 +46,17 @@ export default function HomePage() {
         value={selectedUsers}
         onChange={handleUserChange}
         comboboxProps={{ transitionProps: { transition: 'scale-y', duration: 200 } }}
-        styles={{
+        styles={(theme) => ({
           input: {
-            backgroundColor: '#141414',
-            color: '#ffffff',
+            backgroundColor: theme.colors.dark[6],
+            color: theme.colors.gray[0],
+            borderColor: theme.colors.dark[5],
             alignContent: 'center',
             border: 0,
             borderRadius: '5px',
           },
           dropdown: {
-            backgroundColor: '#141414',
+            backgroundColor: '#1e1e1e',
             color: '#ffffff',
             border: 0,
             borderRadius: '5px',
@@ -66,7 +67,7 @@ export default function HomePage() {
               backgroundColor: '#313142',
             },
           },
-        }}
+        })}
         />
       <Leaguetable users={formattedSelectedUsers ?? []} games={filteredGames ?? []}/>
       <OverallStats games={games ?? []}/>
