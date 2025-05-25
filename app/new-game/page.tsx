@@ -161,6 +161,7 @@ export default function Page() {
           Save game
         </Button>
       </Stack>
+      <Button onClick={handleClick} variant='subtle'>Import from Autodarts</Button>
       <Transition mounted={showTransition} transition="fade" duration={400} timingFunction="ease">
         {(styles) => (
           <Notification
@@ -187,7 +188,6 @@ export default function Page() {
           </Notification>
         )}
       </Transition>
-      <Button onClick={handleClick} variant='subtle'>Import from Autodarts</Button>
     </Stack>
   );
 }
