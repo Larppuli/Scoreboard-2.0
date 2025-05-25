@@ -1,7 +1,10 @@
-export async function GET() {
-  try {
-    const refreshToken = process.env.AUTODARTS_REFRESH_TOKEN;
+import { getRefreshToken } from '@/app/lib/db';
 
+export async function GET() {
+  
+  const refreshToken = await getRefreshToken();
+
+  try {
     const tokenRes = await fetch('https://login.autodarts.io/realms/autodarts/protocol/openid-connect/token', {
       method: 'POST',
       headers: {
