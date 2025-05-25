@@ -8,7 +8,7 @@ import { useAppContext } from '@/app/lib/AppContext';
 
 function Header() {
   const pathname = usePathname();
-  const { userObjects, user, clearContext, games } = useAppContext();
+  const { userObjects, user, clearContext } = useAppContext();
   const userAvatar = user?._id 
   ? userObjects.find((u) => u._id === user._id)?.image || null
   : null;
@@ -35,6 +35,7 @@ function Header() {
     '/signup': 'Sign up',
     '/profile': 'Profile',
     '/profile/achievements': 'Achievements',
+    '/adminpanel': 'Admin panel',
   };
 
   return (

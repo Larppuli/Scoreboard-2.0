@@ -108,6 +108,11 @@ export default function Page() {
         <Link href={'/profile/achievements'} style={{ width: '140px', marginTop: '13px' }}>
           <Button bg={'#141414'} c={'white'} h={40} w={140}>Achievements</Button>
         </Link>
+        {user?.admin && (
+          <Link href={'/adminpanel'} style={{ width: '140px' }}>
+            <Button bg={'#141414'} c={'white'} h={40} w={140}>Admin Panel</Button>
+          </Link>
+        )}
         <ProfileCard
           gameCount={gameCount}
           winCount={winCount}
