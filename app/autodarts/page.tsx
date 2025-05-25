@@ -50,7 +50,7 @@ export default function App() {
         </Text>
       ) : validGames?.length === 0 ? (
         <Title size={16} c="gray">
-          No games to export
+          No games to import
         </Title>
       ) : (
         validGames?.map((game: any) => (
