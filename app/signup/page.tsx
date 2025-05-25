@@ -33,6 +33,7 @@ export default function Page() {
       email: formData.get('email') as string,
       password: formData.get('password') as string,
       confirmPassword: formData.get('confirmPassword') as string,
+      admin: false,
     };
 
     if (data.password !== data.confirmPassword) {
