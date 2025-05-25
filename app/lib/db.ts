@@ -1,4 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb';
+import bcrypt from 'bcryptjs';
 
 const uri = process.env.MONGODB_URI || '';
 const client = new MongoClient(uri);
@@ -36,4 +37,10 @@ export async function updateUserAttribute(userId: string, attribute: string, val
     .updateOne({ _id: new ObjectId(userId) }, { $set: { [attribute]: value } });
 
   return result.modifiedCount > 0;
+}
+
+export async function getRefreshToken() {
+  const db = await connectDB();
+  const tokenDoc = await db.collection('autodarts_token').findOne({});
+  return tokenDoc?.refreshToken || null;
 }
