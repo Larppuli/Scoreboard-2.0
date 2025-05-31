@@ -16,7 +16,12 @@ import {
     IconStars,
     IconCalendarWeek,
     IconUsersGroup,
-    IconSparkles
+    IconSparkles,
+    IconTarget,
+    IconFeatherFilled,
+    IconPingPong,
+    IconPlayCard
+
  } from '@tabler/icons-react';
 import Link from 'next/link';
 
@@ -30,6 +35,10 @@ export default function Page() {
     const petanquesWon = games?.filter((game) => game.winner === user?._id && game.sport === 'Petanque');
     const snookersWon = games?.filter((game) => game.winner === user?._id && game.sport === 'Snooker');
     const footballsWon = games?.filter((game) => game.winner === user?._id && game.sport === 'Football');
+    const dartsWon = games?.filter((game) => game.winner === user?._id && game.sport === 'Darts');
+    const badmintonsWon = games?.filter((game) => game.winner === user?._id && game.sport === 'Badminton');
+    const padelsWon = games?.filter((game) => game.winner === user?._id && game.sport === 'Padel');
+    const cardgamesWon = games?.filter((game) => game.winner === user?._id && game.sport === 'Card games');
     const differentSportsWonSet = new Set(gamesWon?.map((game) => game.sport))
     const differentSportsWonArray = Array.from(differentSportsWonSet);
     const gameMonths = new Set(games?.map((game) => new Date(game.date).getMonth()));
@@ -102,7 +111,7 @@ export default function Page() {
             isLegend: false
         },
         {
-            title: 'Petanque Mastery',
+            title: 'Petanque Hefe',
             tierData: [
                 { description: 'Win 5 petanque games', nextTier: 5 },
                 { description: 'Win 10 petanque games', nextTier: 10 },
@@ -120,7 +129,7 @@ export default function Page() {
             isLegend: false
         },
         {
-            title: 'Snooker Maestro',
+            title: 'Snooker King',
             tierData: [
                 { description: 'Win 5 snooker games', nextTier: 5 },
                 { description: 'Win 10 snooker games', nextTier: 10 },
@@ -152,6 +161,78 @@ export default function Page() {
                 : 0,
             currentProgress: footballsWon?.length,
             icon: <IconBallFootball size={40} color={'#909090'} />,
+            showProgress: true,
+            isLegend: false
+        },
+        {
+            title: 'Badminton Daddy',
+            tierData: [
+                { description: 'Win 5 badminton games', nextTier: 5 },
+                { description: 'Win 10 badminton games', nextTier: 10 },
+                { description: 'Win 20 badminton games', nextTier: 20 },
+                { description: 'Win 40 badminton games', nextTier: 40 }
+            ],
+            tier: badmintonsWon?.length >= 40 ? 4 
+                : badmintonsWon?.length >= 20 ? 3 
+                : badmintonsWon?.length >= 10 ? 2 
+                : badmintonsWon?.length >= 5 ? 1 
+                : 0,
+            currentProgress: badmintonsWon?.length,
+            icon: <IconFeatherFilled size={40} color={'#909090'} />,
+            showProgress: true,
+            isLegend: false
+        },
+        {
+            title: 'Darts Icon',
+            tierData: [
+                { description: 'Win 5 darts games', nextTier: 5 },
+                { description: 'Win 10 darts games', nextTier: 10 },
+                { description: 'Win 20 darts games', nextTier: 20 },
+                { description: 'Win 40 darts games', nextTier: 40 }
+            ],
+            tier: dartsWon?.length >= 40 ? 4 
+                : dartsWon?.length >= 20 ? 3 
+                : dartsWon?.length >= 10 ? 2 
+                : dartsWon?.length >= 5 ? 1 
+                : 0,
+            currentProgress: dartsWon?.length,
+            icon: <IconTarget size={40} color={'#909090'} />,
+            showProgress: true,
+            isLegend: false
+        },
+        {
+            title: 'Cardistry Champ',
+            tierData: [
+                { description: 'Win 5 card games', nextTier: 5 },
+                { description: 'Win 10 card games', nextTier: 10 },
+                { description: 'Win 20 card games', nextTier: 20 },
+                { description: 'Win 40 card games', nextTier: 40 }
+            ],
+            tier: cardgamesWon?.length >= 40 ? 4 
+                : cardgamesWon?.length >= 20 ? 3 
+                : cardgamesWon?.length >= 10 ? 2 
+                : cardgamesWon?.length >= 5 ? 1 
+                : 0,
+            currentProgress: cardgamesWon?.length,
+            icon: <IconPlayCard size={40} color={'#909090'} />,
+            showProgress: true,
+            isLegend: false
+        },
+        {
+            title: 'Padel Maestro',
+            tierData: [
+                { description: 'Win 5 padel games', nextTier: 5 },
+                { description: 'Win 10 padel games', nextTier: 10 },
+                { description: 'Win 20 padel games', nextTier: 20 },
+                { description: 'Win 40 padel games', nextTier: 40 }
+            ],
+            tier: padelsWon?.length >= 40 ? 4 
+                : padelsWon?.length >= 20 ? 3 
+                : padelsWon?.length >= 10 ? 2 
+                : padelsWon?.length >= 5 ? 1 
+                : 0,
+            currentProgress: padelsWon?.length,
+            icon: <IconPingPong size={40} color={'#909090'} />,
             showProgress: true,
             isLegend: false
         },
