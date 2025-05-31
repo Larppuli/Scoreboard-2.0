@@ -5,9 +5,10 @@ This Progressive Web Application helps to save and keep track of different sport
 ## Features 
 - User authentication.
 - Save games to database.
-- Calculate statistics related to saved games.
-- Changing of profile picture.
-- Importing games from [Autodarts](https://play.autodarts.io/).
+- Analyze and display statistics based on saved games.
+- Allow users to change their profile picture.
+- Importing games from [Autodarts](https://play.autodarts.io/) using a refresh token.
+- Unlock and track in-app achievements based on gameplay milestones.
 
 ## Technologies Used
 - **Framework**: [Next.js](https://nextjs.org/) (App Router), built on [React](https://react.dev/)
