@@ -7,11 +7,7 @@ This Progressive Web Application helps to save and keep track of different sport
 - Save games to database.
 - Calculate statistics related to saved games.
 - Changing of profile picture.
-
-## Future improvements
-- Support to change password and username
-- Graphs and charts to visualize games
-- Possibility to visit other players' profiles
+- Importing games from [Autodarts](https://play.autodarts.io/).
 
 ## Technologies Used
 - **Framework**: [Next.js](https://nextjs.org/) (App Router), built on [React](https://react.dev/)
