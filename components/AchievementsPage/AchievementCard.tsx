@@ -30,30 +30,30 @@ export default function AchievementCard({ title, tierData, tier, currentProgress
       style={{ borderRadius: '10px', border: `1px solid ${colorTheme.border}` }}
     >
       <Stack justify='center' w={40} h={'100%'} bg={colorTheme.background} style={{ borderRadius: '6px' }}>
-      {React.cloneElement(icon, { color: colorTheme.border })}
+        {React.cloneElement(icon, { color: colorTheme.border })}
       </Stack>
-      <Stack w={'80%'}>
+      <Stack w={'75%'}>
         <Group justify='space-between'>
-          <Text mt={0} c={'white'} fw={700} size="16px">
+          <Text mt={0} c={'white'} fw={700} size="14px">
             {title}
           </Text>
           <Group m={0} gap={0}>
               {tierData.map((_, i) => (
-                <IconStarFilled key={i} size={18} color={i < tier && isLegend ? '#6e00ff' : i < tier  ? '#ffcc00' : '#9c9c9c' } />
+                <IconStarFilled key={i} size={16} color={i < tier && isLegend ? '#6e00ff' : i < tier  ? '#ffcc00' : '#9c9c9c' } />
               ))}
           </Group>
         </Group>
-        <Text mt={-10} c={'white'} fw={500} size="14px">
+        <Text mt={-10} c={'white'} fw={500} size="12px">
           {currentTierData ? currentTierData.description : previousTierData?.description}
         </Text>
         <Group mt={-10} >
           <Group w={'100%'} justify='space-between' gap={5}>
           {currentTierData && showProgress ? (
         <Group w={'100%'} justify="space-between">
-          <Text c={'#bebebe'} size="12px" mt={0}>
+          <Text c={'#bebebe'} size="10px" mt={0}>
             Next Tier:
           </Text>
-          <Progress.Root h={14} w={150} style={{ borderRadius: '7px',  backgroundColor: '#444444' }}>
+          <Progress.Root h={14} w={'50%'} style={{ borderRadius: '7px',  backgroundColor: '#444444' }}>
             <Progress.Section value={progressPercentage} color={'#ffcc00'} >
               <Progress.Label c={'#232323'} style={{ fontSize: '12px', fontWeight: 'bold' }}>
                 {currentProgress ?? 0}/{currentTierData.nextTier}
