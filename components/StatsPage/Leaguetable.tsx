@@ -57,7 +57,14 @@ export default function Leaguetable({ users, games }: LeaguatableProps) {
   ));
 
   return (
-    <Stack style={{ overflowY: 'auto', borderRadius: '5px' }}>
+    <Stack 
+      style={{ overflowY: 'auto', 
+        borderRadius: '12px', 
+        background: 'rgba(20, 20, 20, 0.9)', 
+        border: '1px solid #333',
+        boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.5)'
+      }}
+    >
       <Table bg="#141414" style={{ borderRadius: '5px' }}>
         <Table.Thead bg="#141414" c="#e2e2e2">
           <Table.Tr>
