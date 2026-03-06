@@ -36,8 +36,6 @@ export default function HomePage() {
     game.participants.every((participant) => selectedUsers.includes(participant))
   );
 
-  console.log(reports)
-
   return (
     <Stack gap={1}>
       <MultiSelect
