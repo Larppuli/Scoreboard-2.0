@@ -5,10 +5,9 @@ import { Stack, MultiSelect } from "@mantine/core";
 import Leaguetable from "@/components/StatsPage/Leaguetable";
 import OverallStats from '@/components/StatsPage/OverallStats';
 import { useAppContext } from '@/app/lib/AppContext';
-import PersonAccordion from '@/components/StatsPage/PersonAccordion';
-
+import Reports from '@/components/StatsPage/Reports';
 export default function HomePage() {
-  const { users, games, userObjects } = useAppContext();
+  const { users, games, reports } = useAppContext();
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
 
   // Sync selectedUsers with first 4 users when users are load
@@ -36,6 +35,8 @@ export default function HomePage() {
   const filteredGames = games?.filter((game) =>
     game.participants.every((participant) => selectedUsers.includes(participant))
   );
+
+  console.log(reports)
 
   return (
     <Stack gap={1}>
@@ -70,8 +71,8 @@ export default function HomePage() {
         })}
         />
       <Leaguetable users={formattedSelectedUsers ?? []} games={filteredGames ?? []}/>
+      <Reports reports={reports ?? []}/>
       <OverallStats games={games ?? []}/>
-      <PersonAccordion games={games ?? []} userObjects={userObjects ?? []}/>
     </Stack>
   );
 }
