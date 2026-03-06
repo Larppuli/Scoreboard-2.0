@@ -38,7 +38,11 @@
     "jsonwebtoken": "^9.0.2",
     "luxon": "^3.5.0",
     "mongodb": "^6.13.1",
+<<<<<<< HEAD
     "next": "^15.5.6",
+=======
+    "next": "15.1.11",
+>>>>>>> f61a71c0a9c2a1ae2e86393bb9c9501c7d93e60c
     "next-cloudinary": "^6.16.0",
     "react": "19.0.0",
     "react-countup": "^6.5.3",
