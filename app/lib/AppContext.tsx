@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { AppContextType, Game, User, UserObject } from './definitions';
+import { AppContextType, Game, ReportProps, User, UserObject } from './definitions';
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -13,6 +13,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [users, setUsers] = useState<User[] | null>(null);
   const [games, setGames] = useState<Game[]>([]);
   const [userObjects, setUserObjects] = useState<UserObject[]>([]);
+  const [reports, setReports] = useState<ReportProps[]>([]);
 
   const timestamp = new Date().getTime();
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
@@ -134,6 +135,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setUserObjects(validatedUsers)
   };
 
+const fetchReports = async () => {
+  try {
+    const response = await fetch('/api/reports');
+    if (response.ok) {
+      const data = await response.json();
+      setReports(data);
+    } else {
+      // Set to empty array if API fails to avoid permanent null
+      setReports([]);
+    }
+  } catch (error) {
+    console.error('Error fetching reports:', error);
+    setReports([]);
+  }
+};
+
   // Initial fetch on app open
   useEffect(() => {
     fetchUser();
@@ -141,6 +158,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     fetchSports();
     fetchGames();
     fetchUserObjects();
+    fetchReports();
   }, []);
 
   useEffect(() => {
@@ -188,6 +206,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     addGame,
     userObjects,
     fetchUserObjects,
+    reports,
+    setReports
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
