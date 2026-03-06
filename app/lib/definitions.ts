@@ -98,6 +98,7 @@ export interface AppContextType {
   sports: string[] | null;
   games: Game[];
   userObjects: UserObject[];
+  reports: ReportProps[];
   addGame: (game: Game) => void;
   setUser: (user: User | null) => void;
   clearContext: () => void;
@@ -105,6 +106,7 @@ export interface AppContextType {
   setSports: (sports: string[] | null) => void;
   setUsers: (users: User[] | null) => void;
   fetchUserObjects: () => void;
+  setReports: React.Dispatch<React.SetStateAction<ReportProps[]>>;
 }
 
 export interface UserObject {
@@ -204,4 +206,16 @@ export interface AutodartsPlayer {
 export interface FormProps {
   id: string;
   games: Game[];
+}
+
+export interface ReportProps {
+  _id: string;
+  year: number,
+  month: number,
+  title: string,
+  content: string;
+}
+
+export interface ReportCardProps {
+  reports: ReportProps[];
 }
