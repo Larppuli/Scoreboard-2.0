@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/app/lib/db';
-import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const gamesCollection = process.env.MONGODB_COLLECTION || 'games';
 const usersCollection = 'users'; 
@@ -94,7 +94,6 @@ export async function POST(request: NextRequest) {
           );
 
           results.push({ period: datePrefix, status: 'Success' });
-          await delay(30000); 
         } catch (aiError) {
           console.error(`Error for ${datePrefix}:`, aiError);
           results.push({ period: datePrefix, status: 'Error' });
