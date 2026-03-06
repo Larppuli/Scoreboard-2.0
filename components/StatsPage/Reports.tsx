@@ -10,10 +10,67 @@ import {
   ThemeIcon, 
   Paper,
   Badge,
-  Divider
+  Divider,
+  Box
 } from '@mantine/core';
 import { IconNews, IconChevronDown, IconChevronUp, IconMicrophone2 } from '@tabler/icons-react';
 import { ReportProps } from '@/app/lib/definitions';
+
+function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPeriod: (m: number, y: number) => string }) {
+  const [itemOpened, setItemOpened] = useState(false);
+
+  return (
+    <Box
+      style={{
+        border: '1px solid #333',
+        borderRadius: '5px',
+        background: itemOpened ? 'rgba(40, 40, 40, 0.4)' : 'transparent',
+        transition: 'background 200ms ease',
+        overflow: 'hidden'
+      }}
+    >
+      <UnstyledButton 
+        onClick={() => setItemOpened((o) => !o)} 
+        p="sm" 
+        w="100%"
+        style={{ '&:hover': { background: 'rgba(255, 255, 255, 0.03)' } }}
+      >
+        <Flex align="center" justify="space-between" gap="xs">
+          <Badge  w={120} color="yellow" variant="outline" size="sm" radius="sm">
+            {formatPeriod(report.month, report.year)}
+          </Badge>
+          
+          <Flex align="center" gap="sm">
+            <IconMicrophone2 size={14} color="#555" />
+            {itemOpened ? <IconChevronUp size={16} color="#f1c40f" /> : <IconChevronDown size={16} color="grey" />}
+          </Flex>
+        </Flex>
+      </UnstyledButton>
+
+      <Collapse in={itemOpened} transitionDuration={200}>
+        <Box p="md" pt={0}>
+          <Divider mb="sm" color="#333" />
+          
+          <Text c="#f1c40f" fw={700} size="md" mb="xs">
+            "{report.title}"
+          </Text>
+
+          <Text 
+            c="#b2b2b2" 
+            size="sm" 
+            lh={1.6} 
+            style={{ 
+              fontStyle: 'italic',
+              whiteSpace: 'pre-line'
+            }}
+          >
+            {report.content}
+          </Text>
+        </Box>
+      </Collapse>
+    </Box>
+  );
+}
 
 export default function Reports({ reports }: { reports: ReportProps[] }) {
   const [opened, setOpened] = useState(false);
@@ -58,36 +115,10 @@ export default function Reports({ reports }: { reports: ReportProps[] }) {
         mt="sm"
         transitionDuration={300}
         transitionTimingFunction="ease-in-out"
-        >
-        <Stack gap="lg">
+      >
+        <Stack gap="sm">
           {reports.map((report) => (
-            <div key={report._id}>
-              <Stack gap="xs">
-                <Flex align="center" gap="xs">
-                  <Badge color="yellow" variant="outline" size="sm" radius="sm">
-                    {formatPeriod(report.month, report.year)}
-                  </Badge>
-                  <Divider size="xs" style={{ flex: 1 }} color="#333" />
-                  <IconMicrophone2 size={14} color="#555" />
-                </Flex>
-                
-                <Text c="#f1c40f" fw={700} size="md">
-                  "{report.title}"
-                </Text>
-                
-                <Text 
-                  c="#b2b2b2" 
-                  size="sm" 
-                  lh={1.6} 
-                  style={{ 
-                    fontStyle: 'italic',
-                    whiteSpace: 'pre-line'
-                  }}
-                >
-                  {report.content}
-                </Text>
-              </Stack>
-            </div>
+            <ReportItem key={report._id} report={report} formatPeriod={formatPeriod} />
           ))}
         </Stack>
       </Collapse>
