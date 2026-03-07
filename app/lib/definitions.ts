@@ -214,6 +214,7 @@ export interface ReportProps {
   month: number,
   title: string,
   content: string;
+  author: string;
 }
 
 export interface ReportCardProps {
