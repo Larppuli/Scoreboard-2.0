@@ -25,6 +25,7 @@ function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPerio
         border: '1px solid #333',
         borderRadius: '5px',
         background: itemOpened ? 'rgba(40, 40, 40, 0.4)' : 'transparent',
+        // This handles the background fade
         transition: 'background 200ms ease',
         overflow: 'hidden'
       }}
@@ -36,13 +37,32 @@ function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPerio
         style={{ '&:hover': { background: 'rgba(255, 255, 255, 0.03)' } }}
       >
         <Flex align="center" justify="space-between" gap="xs">
-          <Badge  w={120} color="yellow" variant="outline" size="sm" radius="sm">
-            {formatPeriod(report.month, report.year)}
-          </Badge>
+          <Flex align="center" gap="sm">
+            <Badge w={120} color="yellow" variant="outline" size="sm" radius="sm">
+              {formatPeriod(report.month, report.year)}
+            </Badge>
+            
+            <Text 
+              size="xs" 
+              c={itemOpened ? "#f1c40f" : "#555"} 
+              fs="italic"
+            >
+              — {report.author}
+            </Text>
+          </Flex>
           
           <Flex align="center" gap="sm">
-            <IconMicrophone2 size={14} color="#555" />
-            {itemOpened ? <IconChevronUp size={16} color="#f1c40f" /> : <IconChevronDown size={16} color="grey" />}
+            <IconMicrophone2 
+              size={14} 
+              color={itemOpened ? "#f1c40f" : "#555"} 
+            />
+            
+            <Box style={{ 
+              display: 'flex', 
+              color: itemOpened ? "#f1c40f" : "grey" 
+            }}>
+              {itemOpened ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+            </Box>
           </Flex>
         </Flex>
       </UnstyledButton>
@@ -66,6 +86,14 @@ function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPerio
           >
             {report.content}
           </Text>
+
+          {report.author && (
+            <Flex justify="flex-end" mt="md">
+              <Text size="xs" c="dimmed" style={{ letterSpacing: '0.5px' }}>
+                REPORT BY: <span style={{ color: '#888', fontWeight: 600 }}>{report.author.toUpperCase()}</span>
+              </Text>
+            </Flex>
+          )}
         </Box>
       </Collapse>
     </Box>
