@@ -8,6 +8,12 @@ export default function ExpectedWinPercent({ meanGameSize, winPercent }: Expecte
         w={"100%"}
         align="flex-start"
         justify='space-between'
+        style={{ overflowY: 'auto', 
+            borderRadius: '12px', 
+            background: 'rgba(20, 20, 20, 0.9)', 
+            border: '1px solid #333',
+            boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.5)'
+        }}
     >
         <Stack
             pb={'10px'}

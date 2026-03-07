@@ -25,7 +25,6 @@ function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPerio
         border: '1px solid #333',
         borderRadius: '5px',
         background: itemOpened ? 'rgba(40, 40, 40, 0.4)' : 'transparent',
-        // This handles the background fade
         transition: 'background 200ms ease',
         overflow: 'hidden'
       }}

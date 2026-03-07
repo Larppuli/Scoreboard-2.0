@@ -23,7 +23,12 @@ export default function ProfileCard({
       w={'100%'}
       align="flex-start"
       bg={'#141414'}
-      style={{ borderRadius: '5px' }}
+      style={{ overflowY: 'auto', 
+        borderRadius: '12px', 
+        background: 'rgba(20, 20, 20, 0.9)', 
+        border: '1px solid #333',
+        boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.5)'
+      }}
     >
       <Group gap="xs">
         <IconCalendar size={30} color={'white'} />
