@@ -215,6 +215,7 @@ export interface ReportProps {
   title: string,
   content: string;
   author: string;
+  comments: any[];
 }
 
 export interface ReportCardProps {
