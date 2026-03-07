@@ -42,7 +42,6 @@ export default function HomePage() {
       <MultiSelect
         data={users?.map(user => ({ value: user._id, label: user.firstName }))}
         placeholder={selectedUsers.length === 0 ? "Select players to compare..." : ""}
-        mb={10}
         value={selectedUsers}
         onChange={handleUserChange}
         comboboxProps={{ 
@@ -51,6 +50,7 @@ export default function HomePage() {
         }}
         styles={{
           input: {
+            borderRadius: '12px',
             backgroundColor: '#141414',
             color: '#e2e2e2',
             border: '1px solid #333',

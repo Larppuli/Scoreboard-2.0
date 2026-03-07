@@ -30,7 +30,6 @@ export default function Leaguetable({ users, games }: LeaguatableProps) {
     };
   });
 
-  // Sort users by points in descending order
   const sortedUserStats = userStats?.sort((a, b) => b.points - a.points);
 
   const rows = (sortedUserStats ?? []).map((user, index) => (
@@ -57,7 +56,8 @@ export default function Leaguetable({ users, games }: LeaguatableProps) {
   ));
 
   return (
-    <Stack 
+    <Stack
+      mt={10}
       style={{ overflowY: 'auto', 
         borderRadius: '12px', 
         background: 'rgba(20, 20, 20, 0.9)', 

@@ -15,7 +15,7 @@ export default function OverallStats({ games }: OverallStatsProps) {
       mt="20px"
       bg={'#141414'}
       py={'10px'}
-            style={{ overflowY: 'auto', 
+      style={{ overflowY: 'auto', 
         borderRadius: '12px', 
         background: 'rgba(20, 20, 20, 0.9)', 
         border: '1px solid #333',

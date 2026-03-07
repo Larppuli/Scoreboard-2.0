@@ -121,7 +121,13 @@ export default function Page() {
         bg={'#141414'}
         w={'100%'}
         mt={'4vh'}
-        style={{ borderRadius: '5px' }}
+        style={{ 
+          borderRadius: '12px', 
+          background: 'rgba(20, 20, 20, 0.9)', 
+          border: '1px solid #333',
+          boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.5)',
+          backdropFilter: 'blur(10px)'
+        }}
       >
         <DateSelection selectedDate={selectedDate} handleDateChange={handleDateChange} />
         <ParticipantsSelection

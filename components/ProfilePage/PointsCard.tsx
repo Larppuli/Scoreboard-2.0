@@ -119,7 +119,15 @@ export default function PointsCard({ pointsArray }: PointsCardProps) {
   };
 
   return (
-    <Stack mt="10px" w={'100%'} bg={'#141414'} style={{ borderRadius: '5px' }}>
+    <Stack 
+      mt="10px" w={'100%'} 
+      bg={'#141414'}       
+      style={{ overflowY: 'auto', 
+        borderRadius: '12px', 
+        background: 'rgba(20, 20, 20, 0.9)', 
+        border: '1px solid #333',
+        boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.5)'
+      }}>
       <Stack gap={0}>
         <Stack gap={0}>
           <Text size="14px" mt={'10px'} c={'#a9a9a9'} fw={500} ml="10px">

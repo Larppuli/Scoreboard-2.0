@@ -22,7 +22,7 @@ export default function DateSelection({ selectedDate, handleDateChange }: DateSe
       }}
       placeholder="Give the game a date"
       size="md"
-      radius="md"
+      radius="sm"
       maxDate={today.toJSDate()}
       onFocus={(e) => e.target.blur()}
       styles={{
@@ -31,8 +31,9 @@ export default function DateSelection({ selectedDate, handleDateChange }: DateSe
           color: '#ffffff',
           fontSize: '16px',
           textAlign: 'center',
-          border: 0,
-          borderRadius: '5px',
+          border: '1px solid #333',
+          boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.5)',
+          backdropFilter: 'blur(10px)',
           height: '50px',
         },
       }}
