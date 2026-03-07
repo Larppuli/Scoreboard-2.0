@@ -11,13 +11,22 @@ import {
   Paper,
   Badge,
   Divider,
-  Box
+  Box,
+  Avatar
 } from '@mantine/core';
-import { IconNews, IconChevronDown, IconChevronUp, IconMicrophone2 } from '@tabler/icons-react';
+import { 
+  IconNews, 
+  IconChevronDown, 
+  IconChevronUp, 
+  IconMicrophone2, 
+  IconMessageCircle 
+} from '@tabler/icons-react';
 import { ReportProps } from '@/app/lib/definitions';
 
 function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPeriod: (m: number, y: number) => string }) {
   const [itemOpened, setItemOpened] = useState(false);
+  
+  const dynamicComments = report.comments || [];
 
   return (
     <Box
@@ -45,6 +54,7 @@ function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPerio
               size="xs" 
               c={itemOpened ? "#f1c40f" : "#555"} 
               fs="italic"
+              style={{ transition: 'color 200ms ease' }}
             >
               — {report.author}
             </Text>
@@ -54,10 +64,12 @@ function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPerio
             <IconMicrophone2 
               size={14} 
               color={itemOpened ? "#f1c40f" : "#555"} 
+              style={{ transition: 'color 200ms ease' }}
             />
             
             <Box style={{ 
               display: 'flex', 
+              transition: 'color 200ms ease',
               color: itemOpened ? "#f1c40f" : "grey" 
             }}>
               {itemOpened ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
@@ -86,12 +98,28 @@ function ReportItem({ report, formatPeriod }: { report: ReportProps; formatPerio
             {report.content}
           </Text>
 
-          {report.author && (
-            <Flex justify="flex-end" mt="md">
-              <Text size="xs" c="dimmed" style={{ letterSpacing: '0.5px' }}>
-                REPORT BY: <span style={{ color: '#888', fontWeight: 600 }}>{report.author.toUpperCase()}</span>
-              </Text>
-            </Flex>
+          {dynamicComments.length > 0 && (
+            <Stack gap="xs" mt="xl" p="sm" style={{ background: 'rgba(0,0,0,0.2)', borderRadius: '4px' }}>
+              <Flex align="center" gap="xs">
+                <IconMessageCircle size={14} color="#f1c40f" />
+                <Text size="xs" fw={700} c="#f1c40f" style={{ letterSpacing: '1px' }}>
+                  Comments ({dynamicComments.length})
+                </Text>
+              </Flex>
+              
+              <Divider color="#222" />
+              
+              {dynamicComments.map((comment, i) => (
+                <Box key={i} mb="xs">
+                  <Flex gap="xs" align="flex-start">
+                    <Stack gap={0}>
+                      <Text size="11px" fw={700} c="#e2e2e2">{comment.user}</Text>
+                      <Text mt={5} size="11px" c="#888" style={{ fontStyle: 'italic' }}>"{comment.text}"</Text>
+                    </Stack>
+                  </Flex>
+                </Box>
+              ))}
+            </Stack>
           )}
         </Box>
       </Collapse>
@@ -133,7 +161,9 @@ export default function Reports({ reports }: { reports: ReportProps[] }) {
               </Text>
             </Stack>
           </Flex>
-          {opened ? <IconChevronUp color="grey" /> : <IconChevronDown color="grey" />}
+          <Box style={{ color: 'grey', display: 'flex' }}>
+            {opened ? <IconChevronUp /> : <IconChevronDown />}
+          </Box>
         </Flex>
       </UnstyledButton>
 
@@ -144,9 +174,13 @@ export default function Reports({ reports }: { reports: ReportProps[] }) {
         transitionTimingFunction="ease-in-out"
       >
         <Stack gap="sm">
-          {reports.map((report) => (
-            <ReportItem key={report._id} report={report} formatPeriod={formatPeriod} />
-          ))}
+          {reports && reports.length > 0 ? (
+            reports.map((report) => (
+              <ReportItem key={report._id} report={report} formatPeriod={formatPeriod} />
+            ))
+          ) : (
+            <Text c="dimmed" ta="center" size="sm" py="xl">No reports available yet.</Text>
+          )}
         </Stack>
       </Collapse>
     </Paper>
